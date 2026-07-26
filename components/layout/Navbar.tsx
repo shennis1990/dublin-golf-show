@@ -57,13 +57,10 @@ export function Navbar() {
           href="#top"
           className="group relative z-10 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
         >
-          <span className="font-display text-[15px] font-bold uppercase leading-none tracking-[0.04em] text-white md:text-lg">
+          <span className="font-display text-lg font-bold uppercase leading-none tracking-[0.04em] text-white md:text-xl">
             Dublin Golf Show <span className="text-accent">2027</span>
           </span>
           <span className="mt-1.5 block h-px w-full bg-gradient-to-r from-accent via-white/70 to-transparent transition-opacity duration-500 group-hover:opacity-80" />
-          <span className="mt-1.5 block font-display text-[9px] font-medium uppercase tracking-[0.12em] text-white/55 md:text-[10px]">
-            Ireland&apos;s Festival of Golf
-          </span>
         </a>
 
         <div className="hidden items-center gap-10 lg:flex">
