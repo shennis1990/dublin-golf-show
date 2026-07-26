@@ -1,14 +1,48 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, type FormEvent, type ReactNode } from "react";
 import { Button } from "@/components/ui/Button";
 import { Contour } from "@/components/ui/Contour";
 import { Container } from "@/components/ui/Container";
 
-const socials = [
-  { label: "Instagram", href: "https://www.instagram.com/" },
-  { label: "X", href: "https://x.com/" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/" },
+const socials: Array<{ label: string; href: string; icon: ReactNode }> = [
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" aria-hidden className="h-5 w-5">
+        <rect
+          x="3.5"
+          y="3.5"
+          width="17"
+          height="17"
+          rx="5"
+          stroke="currentColor"
+          strokeWidth="1.5"
+        />
+        <circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.5" />
+        <circle cx="17.2" cy="6.8" r="1" fill="currentColor" />
+      </svg>
+    ),
+  },
+  {
+    label: "X",
+    href: "https://x.com/",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className="h-5 w-5">
+        <path d="M13.682 10.622 20.24 3h-1.554l-5.693 6.618L8.45 3H3.25l6.876 10.007L3.25 21h1.554l6.012-6.989L15.8 21h5.2l-7.318-10.378Zm-2.126 2.471-.697-.997L4.864 4.17h2.387l4.473 6.4.697.997 5.901 8.44h-2.387l-4.379-6.914Z" />
+      </svg>
+    ),
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/",
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className="h-5 w-5">
+        <path d="M6.94 8.5H4.05V20h2.89V8.5ZM5.5 7.17a1.68 1.68 0 1 0 0-3.36 1.68 1.68 0 0 0 0 3.36ZM20 20h-2.88v-5.6c0-1.33-.02-3.05-1.86-3.05-1.86 0-2.15 1.45-2.15 2.95V20H10.2V8.5h2.77v1.57h.04c.39-.73 1.33-1.5 2.74-1.5 2.93 0 3.47 1.93 3.47 4.44V20Z" />
+      </svg>
+    ),
+  },
 ];
 
 export function Footer() {
@@ -82,7 +116,7 @@ export function Footer() {
               <p className="text-[11px] font-medium uppercase tracking-[0.28em] text-white/40">
                 Social
               </p>
-              <ul className="mt-3 flex flex-wrap gap-5 sm:justify-end">
+              <ul className="mt-4 flex flex-wrap gap-3 sm:justify-end">
                 {socials.map((social) => (
                   <li key={social.label}>
                     <a
@@ -90,9 +124,9 @@ export function Footer() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${social.label} (opens in a new tab)`}
-                      className="rounded-sm text-sm font-light text-white/60 transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/60 transition-all duration-300 hover:-translate-y-0.5 hover:border-white/30 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
                     >
-                      {social.label}
+                      {social.icon}
                     </a>
                   </li>
                 ))}
