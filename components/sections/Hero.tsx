@@ -26,7 +26,10 @@ export function Hero() {
   }, []);
 
   return (
-    <section id="top" className="relative flex min-h-[100svh] items-end overflow-hidden pb-24 pt-32 md:items-center md:pb-0 md:pt-20">
+    <section
+      id="top"
+      className="relative flex min-h-[100svh] items-end overflow-hidden pb-28 pt-28 md:items-center md:pb-[18vh] md:pt-24"
+    >
       <div ref={layerRef} className="absolute inset-0 scale-105 will-change-transform">
         <Image
           src="/images/hero-hall.png"
@@ -35,50 +38,51 @@ export function Hero() {
           priority
           fetchPriority="high"
           sizes="100vw"
-          className="object-cover object-center"
+          className="object-cover object-center brightness-[0.72] contrast-[1.05] saturate-[0.92] blur-[2px] scale-105"
         />
       </div>
 
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,17,28,0.55)_0%,rgba(10,17,28,0.72)_45%,rgba(10,17,28,0.92)_100%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(10,17,28,0.55)_100%)]" />
+      {/* Stronger dark wash for type contrast */}
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,17,28,0.72)_0%,rgba(10,17,28,0.78)_40%,rgba(10,17,28,0.94)_100%)]" />
+      {/* Soft emerald lift behind the focal area */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_45%,rgba(0,154,109,0.14)_0%,transparent_52%)]" />
+      {/* Edge vignette */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_28%,rgba(10,17,28,0.55)_72%,rgba(10,17,28,0.88)_100%)]" />
       <div className="contour-drift absolute inset-0" aria-hidden>
-        <Contour opacity={0.22} />
+        <Contour opacity={0.12} />
       </div>
 
-      <Container className="relative z-10 w-full">
+      <Container className="relative z-10 w-full md:-translate-y-8 lg:-translate-y-12">
         <div className="max-w-4xl">
-          <p className="mb-5 font-display text-sm font-semibold uppercase tracking-[0.14em] text-white/70 md:text-base">
-            Dublin Golf Show <span className="text-accent">2027</span>
-          </p>
-
-          <h1 className="font-display text-5xl font-bold uppercase leading-[0.9] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-[5.75rem]">
+          <h1 className="font-display text-[3.4rem] font-bold uppercase leading-[0.9] tracking-tight text-white sm:text-[4.05rem] md:text-[5.05rem] lg:text-[6.5rem]">
             Ireland&apos;s Festival of Golf
           </h1>
 
-          <div className="mt-6 h-px w-28 bg-gradient-to-r from-accent via-white/70 to-transparent" />
+          <div className="mt-8 h-px w-36 bg-gradient-to-r from-accent via-accent/70 to-transparent" />
 
-          <p className="mt-7 max-w-xl text-base font-light leading-relaxed text-white/70 md:text-lg">
+          <p className="mt-10 max-w-md text-base font-light leading-relaxed text-white/75 md:mt-11 md:text-lg">
             Ireland&apos;s biggest celebration of golf brings together players, brands,
             destinations and innovators for two unforgettable days at RDS Simmonscourt.
           </p>
 
-          <div className="mt-10 flex flex-wrap gap-4">
-            <RegisterInterestButton>Register Interest</RegisterInterestButton>
-            <PartnerWithUsButton>Partner With Us</PartnerWithUsButton>
+          <div className="mt-12 flex flex-wrap gap-4 md:mt-14">
+            <RegisterInterestButton className="!px-9 !py-4 !text-[14px]">
+              Register Interest
+            </RegisterInterestButton>
+            <PartnerWithUsButton className="!border-white/25 !px-9 !py-4 !text-[14px] hover:!border-accent/60">
+              Partner With Us
+            </PartnerWithUsButton>
           </div>
         </div>
       </Container>
 
       <a
         href="#about"
-        className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-3 text-white/50 transition-colors hover:text-white"
+        className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-3 text-white/45 transition-colors hover:text-white"
         aria-label="Scroll to about"
       >
-        <span className="font-display text-[10px] font-semibold uppercase tracking-[0.14em]">
-          Scroll
-        </span>
         <span className="flex h-10 w-px items-start justify-center overflow-hidden bg-white/20">
-          <span className="scroll-dot block h-2 w-px bg-white" />
+          <span className="scroll-dot block h-2 w-px bg-accent" />
         </span>
       </a>
     </section>
