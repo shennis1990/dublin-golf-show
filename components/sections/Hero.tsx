@@ -55,12 +55,17 @@ export function Hero() {
       <Container className="relative z-10 w-full md:-translate-y-8 lg:-translate-y-12">
         <div className="max-w-4xl">
           <h1 className="font-display text-[3.4rem] font-bold uppercase leading-[0.9] tracking-tight text-white sm:text-[4.05rem] md:text-[5.05rem] lg:text-[6.5rem]">
-            Ireland&apos;s Festival of Golf
+            Dublin Golf Show{" "}
+            <span className="text-accent">2027</span>
           </h1>
 
-          <div className="mt-8 h-px w-36 bg-gradient-to-r from-accent via-accent/70 to-transparent" />
+          <p className="mt-6 font-display text-[1.55rem] font-normal uppercase leading-[1.05] tracking-tight text-white/85 sm:mt-7 sm:text-[1.85rem] md:mt-8 md:text-[2.3rem] lg:text-[2.95rem]">
+            Ireland&apos;s Festival of Golf
+          </p>
 
-          <p className="mt-10 max-w-md text-base font-light leading-relaxed text-white/75 md:mt-11 md:text-lg">
+          <div className="mt-9 h-px w-36 bg-gradient-to-r from-accent via-accent/70 to-transparent md:mt-10" />
+
+          <p className="mt-10 max-w-md text-base font-light leading-relaxed text-white/75 md:mt-12 md:text-lg">
             Ireland&apos;s biggest celebration of golf brings together players, brands,
             destinations and innovators for two unforgettable days at RDS Simmonscourt.
           </p>
