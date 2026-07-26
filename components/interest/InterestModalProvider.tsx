@@ -12,6 +12,7 @@ import {
   type ReactNode,
 } from "react";
 import { Button } from "@/components/ui/Button";
+import { MARKETING_CONSENT_TEXT } from "@/lib/consent";
 
 type InterestModalContextValue = {
   openInterestModal: () => void;
@@ -57,10 +58,12 @@ function InterestModal({
   const titleId = useId();
   const descId = useId();
   const dialogRef = useRef<HTMLDivElement>(null);
-  const nameRef = useRef<HTMLInputElement>(null);
+  const firstNameRef = useRef<HTMLInputElement>(null);
 
-  const [name, setName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
+  const [consent, setConsent] = useState(false);
   const [company, setCompany] = useState(""); // honeypot
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
     "idle",
@@ -72,13 +75,15 @@ function InterestModal({
 
     setStatus("idle");
     setError("");
-    setName("");
+    setFirstName("");
+    setLastName("");
     setEmail("");
+    setConsent(false);
     setCompany("");
 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
-    const t = window.setTimeout(() => nameRef.current?.focus(), 40);
+    const t = window.setTimeout(() => firstNameRef.current?.focus(), 40);
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") onClose();
@@ -96,6 +101,14 @@ function InterestModal({
     event.preventDefault();
     if (status === "loading") return;
 
+    if (!consent) {
+      setStatus("error");
+      setError(
+        "Please confirm you agree to be contacted about tickets and marketing updates.",
+      );
+      return;
+    }
+
     setStatus("loading");
     setError("");
 
@@ -103,7 +116,13 @@ function InterestModal({
       const response = await fetch("/api/register-interest", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, company }),
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email,
+          consent,
+          company,
+        }),
       });
 
       const data = (await response.json().catch(() => ({}))) as {
@@ -211,25 +230,47 @@ function InterestModal({
                 />
               </div>
 
-              <div>
-                <label
-                  htmlFor="interest-name"
-                  className="mb-2 block text-[11px] font-medium uppercase tracking-[0.22em] text-white/45"
-                >
-                  Name
-                </label>
-                <input
-                  ref={nameRef}
-                  id="interest-name"
-                  name="name"
-                  type="text"
-                  required
-                  autoComplete="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="h-12 w-full rounded-full border border-white/15 bg-white/[0.03] px-5 text-sm text-white outline-none transition-colors placeholder:text-white/30 focus:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-                  placeholder="Your name"
-                />
+              <div className="grid gap-4 sm:grid-cols-2">
+                <div>
+                  <label
+                    htmlFor="interest-first-name"
+                    className="mb-2 block text-[11px] font-medium uppercase tracking-[0.22em] text-white/45"
+                  >
+                    First name
+                  </label>
+                  <input
+                    ref={firstNameRef}
+                    id="interest-first-name"
+                    name="firstName"
+                    type="text"
+                    required
+                    autoComplete="given-name"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    className="h-12 w-full rounded-full border border-white/15 bg-white/[0.03] px-5 text-sm text-white outline-none transition-colors placeholder:text-white/30 focus:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                    placeholder="First name"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="interest-last-name"
+                    className="mb-2 block text-[11px] font-medium uppercase tracking-[0.22em] text-white/45"
+                  >
+                    Last name
+                  </label>
+                  <input
+                    id="interest-last-name"
+                    name="lastName"
+                    type="text"
+                    required
+                    autoComplete="family-name"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    className="h-12 w-full rounded-full border border-white/15 bg-white/[0.03] px-5 text-sm text-white outline-none transition-colors placeholder:text-white/30 focus:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                    placeholder="Last name"
+                  />
+                </div>
               </div>
 
               <div>
@@ -251,6 +292,24 @@ function InterestModal({
                   placeholder="you@email.com"
                 />
               </div>
+
+              <label
+                htmlFor="interest-consent"
+                className="flex cursor-pointer items-start gap-3 rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3"
+              >
+                <input
+                  id="interest-consent"
+                  name="consent"
+                  type="checkbox"
+                  required
+                  checked={consent}
+                  onChange={(e) => setConsent(e.target.checked)}
+                  className="mt-1 h-4 w-4 shrink-0 rounded border-white/30 accent-[#009A6D] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                />
+                <span className="text-left text-xs font-light leading-relaxed text-white/60">
+                  {MARKETING_CONSENT_TEXT}
+                </span>
+              </label>
 
               {status === "error" ? (
                 <p className="text-sm text-red-300" role="alert">
