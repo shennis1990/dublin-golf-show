@@ -151,6 +151,20 @@ body {
   }
 }
 
-.contour-drift {
-  animation: contour-drift 28s ease-in-out infinite;
+@keyframes story-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.story-progress {
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  animation-name: story-progress;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
 }

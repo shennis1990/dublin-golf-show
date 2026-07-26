@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 type AnimatedStatProps = {
   value: string;
   label: string;
+  unit?: string;
   className?: string;
 };
 
@@ -20,7 +21,12 @@ function parseTarget(value: string) {
   };
 }
 
-export function AnimatedStat({ value, label, className = "" }: AnimatedStatProps) {
+export function AnimatedStat({
+  value,
+  label,
+  unit,
+  className = "",
+}: AnimatedStatProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [display, setDisplay] = useState(value.startsWith("0") ? value : "0");
   const { target, suffix, decimals } = parseTarget(value);
@@ -72,11 +78,16 @@ export function AnimatedStat({ value, label, className = "" }: AnimatedStatProps
   }, [decimals, suffix, target, value]);
 
   return (
-    <div ref={ref} className={className}>
-      <p className="font-display text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-6xl">
-        {display}
+    <div ref={ref} className={`min-w-0 ${className}`}>
+      <p className="font-display text-[2.35rem] font-bold leading-none tracking-tight text-white sm:text-5xl md:text-[3.25rem] lg:text-5xl xl:text-[3.5rem]">
+        <span className="tabular-nums">{display}</span>
+        {unit ? (
+          <span className="ml-1.5 text-[0.45em] font-semibold uppercase tracking-[0.08em] text-white/70">
+            {unit}
+          </span>
+        ) : null}
       </p>
-      <p className="mt-2 font-display text-xs font-semibold uppercase tracking-[0.12em] text-muted">
+      <p className="mt-3 font-display text-[11px] font-semibold uppercase tracking-[0.14em] text-white/50">
         {label}
       </p>
     </div>

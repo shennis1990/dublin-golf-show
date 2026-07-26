@@ -1,8 +1,8 @@
-import Image from "next/image";
 import { AnimatedStat } from "@/components/ui/AnimatedStat";
 import { Contour } from "@/components/ui/Contour";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
+import { OverviewCarousel } from "@/components/sections/OverviewCarousel";
 
 const zones = [
   "Driving Range",
@@ -28,31 +28,34 @@ export function Overview() {
                 Event Overview
               </p>
               <h2 className="mt-5 font-display text-4xl font-bold uppercase leading-[0.95] tracking-tight text-white md:text-5xl lg:text-6xl">
-                A two-day indoor golf experience, built for scale.
+                Two days closer to the game you love.
               </h2>
             </Reveal>
 
             <Reveal delay={1}>
               <p className="mt-8 text-base font-light leading-[1.85] text-muted md:text-lg">
-                The Dublin Golf Show takes over RDS Simmonscourt for two days — a complete golf
-                ecosystem designed for participation, not just browsing. For attendees, sponsors,
-                exhibitors and media, it is Ireland&apos;s largest gathering around a shared passion
-                for the game.
+                Walk into RDS Simmonscourt and you&apos;re in the middle of it — clubs to try,
+                places to go, coaches to learn from, and a weekend crowd that feels like your
+                favourite golfing friends, gathered in one place.
               </p>
               <p className="mt-5 text-base font-light leading-[1.85] text-muted md:text-lg">
-                Discover new equipment. Book a golf holiday. Improve your game. Meet the
-                personalities shaping the sport. Every visitor arrives ready to engage.
+                Come to hit balls. Come to discover something new. Come to hear the names you
+                follow. Or simply come to spend two days immersed in Ireland&apos;s festival of
+                golf.
               </p>
             </Reveal>
 
-            <Reveal delay={2} className="mt-14 grid grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-6">
-              <AnimatedStat value="25,000+" label="Attendees" />
-              <AnimatedStat value="100+" label="Exhibitors" />
-              <AnimatedStat value="100,000" label="Sq Ft Arena" />
+            <Reveal
+              delay={2}
+              className="mt-16 grid grid-cols-1 gap-10 border-y border-line py-10 sm:grid-cols-3 sm:gap-8 sm:py-12"
+            >
+              <AnimatedStat value="25,000+" label="Visitors" />
+              <AnimatedStat value="100+" label="Brands" />
+              <AnimatedStat value="100,000" unit="sq ft" label="Experience" />
             </Reveal>
 
-            <Reveal delay={3} className="mt-14">
-              <div className="flex flex-wrap gap-x-6 gap-y-3 border-t border-line pt-8">
+            <Reveal delay={3} className="mt-12">
+              <div className="flex flex-wrap gap-x-6 gap-y-3">
                 {zones.map((zone) => (
                   <span
                     key={zone}
@@ -66,25 +69,7 @@ export function Overview() {
           </div>
 
           <Reveal delay={1} className="lg:col-span-7">
-            <div className="group relative aspect-[4/5] overflow-hidden rounded-[1.5rem] md:aspect-[5/4] lg:aspect-[4/5] xl:aspect-[5/6]">
-              <Image
-                src="/images/hall-1.png"
-                alt="Audience gathered for a main stage interview at Dublin Golf Show"
-                fill
-                loading="lazy"
-                sizes="(max-width: 1024px) 100vw, 55vw"
-                className="object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0A111C]/70 via-transparent to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-8 md:p-10">
-                <p className="font-display text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
-                  19–20 June 2027
-                </p>
-                <p className="mt-2 font-display text-2xl font-bold uppercase tracking-tight text-white md:text-3xl">
-                  RDS Simmonscourt, Dublin
-                </p>
-              </div>
-            </div>
+            <OverviewCarousel />
           </Reveal>
         </div>
       </Container>
