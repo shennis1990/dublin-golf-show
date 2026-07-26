@@ -60,6 +60,13 @@ export const metadata: Metadata = {
         alt: "Dublin Golf Show 2027 — Ireland's Festival of Golf",
         type: "image/jpeg",
       },
+      {
+        url: "/og-square.jpg",
+        width: 1200,
+        height: 1200,
+        alt: "Dublin Golf Show 2027 — Ireland's Festival of Golf",
+        type: "image/jpeg",
+      },
     ],
   },
   twitter: {

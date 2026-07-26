@@ -9,9 +9,9 @@ export function JsonLd() {
     email: siteConfig.email,
     logo: {
       "@type": "ImageObject",
-      url: `${siteConfig.url}/icons/android-chrome-512x512.png`,
-      width: 512,
-      height: 512,
+      url: `${siteConfig.url}/images/logo-stacked-square.png`,
+      width: 1200,
+      height: 1200,
     },
     sameAs: [
       siteConfig.social.instagram,

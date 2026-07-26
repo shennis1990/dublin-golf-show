@@ -1,45 +1,80 @@
 import sharp from "sharp";
-import { mkdirSync } from "fs";
+import { copyFileSync, mkdirSync } from "fs";
 import { join } from "path";
 
 const root = process.cwd();
 const publicDir = join(root, "public");
 const iconsDir = join(publicDir, "icons");
 const appDir = join(root, "app");
+const imagesDir = join(publicDir, "images");
 
 mkdirSync(iconsDir, { recursive: true });
+mkdirSync(imagesDir, { recursive: true });
 
-const bg = "#0A111C";
-const accent = "#009A6D";
+const source =
+  process.env.LOGO_SOURCE ||
+  "C:/Users/Shane Ennis/Dropbox/DGS/DGS - Logo - Stacked - No Contour - Square.png";
 
-function svgIcon(size) {
-  const r = Math.round(size * 0.18);
-  const font = Math.round(size * 0.28);
-  return Buffer.from(`<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
-  <rect width="${size}" height="${size}" rx="${r}" fill="${bg}"/>
-  <circle cx="${size / 2}" cy="${size * 0.38}" r="${size * 0.07}" fill="${accent}"/>
-  <text x="50%" y="${size * 0.72}" text-anchor="middle" font-family="Arial Black, Arial, sans-serif" font-size="${font}" font-weight="700" fill="#ffffff">DGS</text>
-</svg>`);
-}
+const logoSquare = join(imagesDir, "logo-stacked-square.png");
+copyFileSync(source, logoSquare);
 
-async function png(size, file) {
-  await sharp(svgIcon(size)).png().toFile(file);
+const bg = { r: 10, g: 17, b: 28, alpha: 1 };
+
+async function iconFromLogo(size, file, paddingRatio = 0.08) {
+  const pad = Math.round(size * paddingRatio);
+  const inner = Math.max(1, size - pad * 2);
+  const resized = await sharp(logoSquare)
+    .resize(inner, inner, { fit: "contain", background: bg })
+    .png()
+    .toBuffer();
+
+  await sharp({
+    create: {
+      width: size,
+      height: size,
+      channels: 4,
+      background: bg,
+    },
+  })
+    .composite([{ input: resized, gravity: "centre" }])
+    .png()
+    .toFile(file);
+
   console.log("wrote", file);
 }
 
-await png(16, join(iconsDir, "favicon-16x16.png"));
-await png(32, join(iconsDir, "favicon-32x32.png"));
-await png(180, join(iconsDir, "apple-touch-icon.png"));
-await png(192, join(iconsDir, "android-chrome-192x192.png"));
-await png(512, join(iconsDir, "android-chrome-512x512.png"));
+// Favicons / app icons from brand logo
+await iconFromLogo(16, join(iconsDir, "favicon-16x16.png"), 0.05);
+await iconFromLogo(32, join(iconsDir, "favicon-32x32.png"), 0.05);
+await iconFromLogo(180, join(iconsDir, "apple-touch-icon.png"), 0.06);
+await iconFromLogo(192, join(iconsDir, "android-chrome-192x192.png"), 0.06);
+await iconFromLogo(512, join(iconsDir, "android-chrome-512x512.png"), 0.06);
+await iconFromLogo(32, join(appDir, "icon.png"), 0.05);
+await iconFromLogo(32, join(publicDir, "favicon.ico"), 0.05);
+await iconFromLogo(180, join(appDir, "apple-icon.png"), 0.06);
 
-await sharp(svgIcon(32)).png().toFile(join(appDir, "icon.png"));
-await sharp(svgIcon(32)).png().toFile(join(publicDir, "favicon.ico"));
-await sharp(svgIcon(180)).png().toFile(join(appDir, "apple-icon.png"));
+// Open Graph / WhatsApp / social — 1200x630 with logo centered on brand background
+const logoForOg = await sharp(logoSquare)
+  .resize(560, 560, { fit: "contain", background: bg })
+  .png()
+  .toBuffer();
 
-await sharp(join(publicDir, "images", "hero-hall.png"))
-  .resize(1200, 630, { fit: "cover", position: "centre" })
-  .jpeg({ quality: 82, mozjpeg: true })
+await sharp({
+  create: {
+    width: 1200,
+    height: 630,
+    channels: 3,
+    background: { r: 10, g: 17, b: 28 },
+  },
+})
+  .composite([{ input: logoForOg, gravity: "centre" }])
+  .jpeg({ quality: 90, mozjpeg: true })
   .toFile(join(publicDir, "og.jpg"));
 
-console.log("Favicons and OG image generated.");
+// Also keep a square OG variant for platforms that prefer 1:1
+await sharp(logoSquare)
+  .resize(1200, 1200, { fit: "cover" })
+  .jpeg({ quality: 90, mozjpeg: true })
+  .toFile(join(publicDir, "og-square.jpg"));
+
+console.log("Brand logo applied to favicons and Open Graph images.");
