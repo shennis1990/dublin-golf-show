@@ -1,9 +1,9 @@
 import Image from "next/image";
-import { Button } from "@/components/ui/Button";
 import { Contour } from "@/components/ui/Contour";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 import { RegisterInterestButton } from "@/components/interest/RegisterInterestButton";
+import { PartnerWithUsButton } from "@/components/partner/PartnerWithUsButton";
 
 export function ChooseExperience() {
   return (
@@ -85,13 +85,9 @@ export function ChooseExperience() {
                   secure category presence, or cover the festival as media — with spaces limited
                   and allocated with intention.
                 </p>
-                <Button
-                  href="mailto:hello@dublingolfshow.ie?subject=Partnership%20Enquiry%20%E2%80%94%20Dublin%20Golf%20Show%202027"
-                  variant="ghost"
-                  className="mt-8"
-                >
+                <PartnerWithUsButton className="mt-8">
                   Partner With Us
-                </Button>
+                </PartnerWithUsButton>
               </div>
             </article>
           </Reveal>

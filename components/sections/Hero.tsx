@@ -2,10 +2,10 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { Button } from "@/components/ui/Button";
 import { Contour } from "@/components/ui/Contour";
 import { Container } from "@/components/ui/Container";
 import { RegisterInterestButton } from "@/components/interest/RegisterInterestButton";
+import { PartnerWithUsButton } from "@/components/partner/PartnerWithUsButton";
 
 export function Hero() {
   const layerRef = useRef<HTMLDivElement>(null);
@@ -64,9 +64,7 @@ export function Hero() {
 
           <div className="mt-10 flex flex-wrap gap-4">
             <RegisterInterestButton>Register Interest</RegisterInterestButton>
-            <Button href="#partner" variant="ghost">
-              Partner With Us
-            </Button>
+            <PartnerWithUsButton>Partner With Us</PartnerWithUsButton>
           </div>
         </div>
       </Container>

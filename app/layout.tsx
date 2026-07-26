@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Barlow_Condensed, Manrope } from "next/font/google";
 import { InterestModalProvider } from "@/components/interest/InterestModalProvider";
+import { PartnerModalProvider } from "@/components/partner/PartnerModalProvider";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { siteConfig } from "@/lib/site";
 import "./globals.css";
@@ -120,7 +121,9 @@ export default function RootLayout({
           Skip to main content
         </a>
         <JsonLd />
-        <InterestModalProvider>{children}</InterestModalProvider>
+        <InterestModalProvider>
+          <PartnerModalProvider>{children}</PartnerModalProvider>
+        </InterestModalProvider>
       </body>
     </html>
   );

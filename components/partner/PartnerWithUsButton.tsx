@@ -1,0 +1,32 @@
+"use client";
+
+import type { ButtonHTMLAttributes, ReactNode } from "react";
+import { Button } from "@/components/ui/Button";
+import { usePartnerModal } from "@/components/partner/PartnerModalProvider";
+
+type PartnerWithUsButtonProps = {
+  children?: ReactNode;
+  variant?: "primary" | "ghost";
+  className?: string;
+} & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children" | "onClick" | "type">;
+
+export function PartnerWithUsButton({
+  children = "Partner With Us",
+  variant = "ghost",
+  className = "",
+  ...props
+}: PartnerWithUsButtonProps) {
+  const { openPartnerModal } = usePartnerModal();
+
+  return (
+    <Button
+      type="button"
+      variant={variant}
+      className={className}
+      onClick={openPartnerModal}
+      {...props}
+    >
+      {children}
+    </Button>
+  );
+}
