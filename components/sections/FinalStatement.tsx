@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/Button";
 import { Contour } from "@/components/ui/Contour";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
+import { RegisterInterestButton } from "@/components/interest/RegisterInterestButton";
 
 export function FinalStatement() {
   return (
@@ -45,9 +46,7 @@ export function FinalStatement() {
           </Reveal>
 
           <Reveal delay={2} className="mt-12 flex flex-wrap items-center justify-center gap-4">
-            <Button href="mailto:hello@dublingolfshow.ie?subject=Register%20Interest%20%E2%80%94%20Dublin%20Golf%20Show%202027">
-              Register Interest
-            </Button>
+            <RegisterInterestButton>Register Interest</RegisterInterestButton>
             <Button
               href="mailto:hello@dublingolfshow.ie?subject=Partnership%20Enquiry%20%E2%80%94%20Dublin%20Golf%20Show%202027"
               variant="ghost"

@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/Button";
 import { Contour } from "@/components/ui/Contour";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
+import { RegisterInterestButton } from "@/components/interest/RegisterInterestButton";
 
 export function ChooseExperience() {
   return (
@@ -49,9 +50,9 @@ export function ChooseExperience() {
                   Hit the driving range. Explore the latest equipment. Learn from the pros. Book
                   your next golf escape. Two days built for people who live and love the game.
                 </p>
-                <Button href="mailto:hello@dublingolfshow.ie?subject=Ticket%20Interest%20%E2%80%94%20Dublin%20Golf%20Show%202027" className="mt-8">
+                <RegisterInterestButton className="mt-8">
                   Notify Me About Tickets
-                </Button>
+                </RegisterInterestButton>
               </div>
             </article>
           </Reveal>

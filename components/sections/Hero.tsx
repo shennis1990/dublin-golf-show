@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Button } from "@/components/ui/Button";
 import { Contour } from "@/components/ui/Contour";
 import { Container } from "@/components/ui/Container";
+import { RegisterInterestButton } from "@/components/interest/RegisterInterestButton";
 
 export function Hero() {
   const layerRef = useRef<HTMLDivElement>(null);
@@ -62,7 +63,7 @@ export function Hero() {
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4">
-            <Button href="#register">Register Interest</Button>
+            <RegisterInterestButton>Register Interest</RegisterInterestButton>
             <Button href="#partner" variant="ghost">
               Partner With Us
             </Button>

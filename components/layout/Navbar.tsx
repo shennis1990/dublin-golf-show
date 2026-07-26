@@ -2,6 +2,8 @@
 
 import { useEffect, useId, useState } from "react";
 import { Button } from "@/components/ui/Button";
+import { RegisterInterestButton } from "@/components/interest/RegisterInterestButton";
+import { useInterestModal } from "@/components/interest/InterestModalProvider";
 
 const links = [
   { href: "#about", label: "About" },
@@ -14,6 +16,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const menuId = useId();
+  const { openInterestModal } = useInterestModal();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -73,9 +76,9 @@ export function Navbar() {
               {link.label}
             </a>
           ))}
-          <Button href="#register" className="!px-6 !py-2.5 !text-[11px]">
+          <RegisterInterestButton className="!px-6 !py-2.5 !text-[11px]">
             Register Interest
-          </Button>
+          </RegisterInterestButton>
         </div>
 
         <button
@@ -117,7 +120,14 @@ export function Navbar() {
               {link.label}
             </a>
           ))}
-          <Button href="#register" className="mt-6" onClick={() => setOpen(false)}>
+          <Button
+            type="button"
+            className="mt-6"
+            onClick={() => {
+              setOpen(false);
+              openInterestModal();
+            }}
+          >
             Register Interest
           </Button>
         </div>
