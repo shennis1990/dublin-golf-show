@@ -1,0 +1,22 @@
+{
+  "name": "Dublin Golf Show",
+  "short_name": "DGS",
+  "description": "Discover Ireland's biggest celebration of golf. Experience leading golf brands, destinations, technology, coaching, travel and live experiences at RDS Simmonscourt in June 2027.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0A111C",
+  "theme_color": "#0A111C",
+  "lang": "en-IE",
+  "icons": [
+    {
+      "src": "/icons/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

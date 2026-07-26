@@ -16,7 +16,7 @@ const zones = [
 export function Overview() {
   return (
     <section id="about" className="relative overflow-hidden py-28 md:py-40">
-      <div className="absolute inset-0">
+      <div className="absolute inset-0" aria-hidden>
         <Contour className="contour-drift" opacity={0.14} />
       </div>
 
@@ -69,8 +69,9 @@ export function Overview() {
             <div className="group relative aspect-[4/5] overflow-hidden rounded-[1.5rem] md:aspect-[5/4] lg:aspect-[4/5] xl:aspect-[5/6]">
               <Image
                 src="/images/hall-1.png"
-                alt="Main stage at Dublin Golf Show"
+                alt="Audience gathered for a main stage interview at Dublin Golf Show"
                 fill
+                loading="lazy"
                 sizes="(max-width: 1024px) 100vw, 55vw"
                 className="object-cover transition-transform duration-[1.4s] ease-out group-hover:scale-105"
               />

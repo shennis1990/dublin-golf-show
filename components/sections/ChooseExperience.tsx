@@ -7,7 +7,7 @@ import { Reveal } from "@/components/ui/Reveal";
 export function ChooseExperience() {
   return (
     <section id="experience" className="relative overflow-hidden pb-28 md:pb-40">
-      <div className="absolute inset-0">
+      <div className="absolute inset-0" aria-hidden>
         <Contour opacity={0.11} />
       </div>
 
@@ -29,8 +29,9 @@ export function ChooseExperience() {
             >
               <Image
                 src="/images/hall-3.png"
-                alt="Golf fans exploring equipment at the show"
+                alt="Visitors examining premium golf clubs on the exhibition floor"
                 fill
+                loading="lazy"
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover transition-transform duration-[1.6s] ease-out group-hover:scale-105"
               />
@@ -62,8 +63,9 @@ export function ChooseExperience() {
             >
               <Image
                 src="/images/hall-floor.png"
-                alt="Exhibition floor at Dublin Golf Show"
+                alt="Guests entering the branded Dublin Golf Show exhibition hall"
                 fill
+                loading="lazy"
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover transition-transform duration-[1.6s] ease-out group-hover:scale-105"
               />

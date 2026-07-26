@@ -6,23 +6,32 @@ import { Reveal } from "@/components/ui/Reveal";
 
 export function FinalStatement() {
   return (
-    <section className="relative overflow-hidden">
+    <section
+      className="relative overflow-hidden"
+      aria-labelledby="final-statement-heading"
+    >
       <div className="absolute inset-0">
         <Image
           src="/images/hall-2.png"
-          alt="The atmosphere of Dublin Golf Show"
+          alt="Wide view of the Dublin Golf Show arena atmosphere"
           fill
+          loading="lazy"
           sizes="100vw"
           className="object-cover"
         />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,17,28,0.75)_0%,rgba(10,17,28,0.82)_50%,rgba(10,17,28,0.94)_100%)]" />
-        <Contour className="contour-drift" opacity={0.18} />
+        <div aria-hidden>
+          <Contour className="contour-drift" opacity={0.18} />
+        </div>
       </div>
 
       <Container className="relative flex min-h-[85vh] items-center py-28 md:py-36">
         <div className="mx-auto max-w-5xl text-center">
           <Reveal>
-            <h2 className="font-display text-5xl font-semibold uppercase leading-[0.92] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl">
+            <h2
+              id="final-statement-heading"
+              className="font-display text-5xl font-semibold uppercase leading-[0.92] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl"
+            >
               The Future of Golf
               <span className="block text-accent">Comes Together.</span>
             </h2>

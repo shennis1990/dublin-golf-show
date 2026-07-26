@@ -29,9 +29,10 @@ export function Hero() {
       <div ref={layerRef} className="absolute inset-0 scale-105 will-change-transform">
         <Image
           src="/images/hero-hall.png"
-          alt="Dublin Golf Show exhibition hall concept"
+          alt="Cinematic view of the Dublin Golf Show exhibition hall at RDS Simmonscourt"
           fill
           priority
+          fetchPriority="high"
           sizes="100vw"
           className="object-cover object-center"
         />
@@ -39,7 +40,7 @@ export function Hero() {
 
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,17,28,0.55)_0%,rgba(10,17,28,0.72)_45%,rgba(10,17,28,0.92)_100%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(10,17,28,0.55)_100%)]" />
-      <div className="contour-drift absolute inset-0">
+      <div className="contour-drift absolute inset-0" aria-hidden>
         <Contour opacity={0.22} />
       </div>
 

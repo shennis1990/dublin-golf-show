@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useId, useState } from "react";
 import { Button } from "@/components/ui/Button";
 
 const links = [
@@ -13,6 +13,7 @@ const links = [
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const menuId = useId();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -28,6 +29,15 @@ export function Navbar() {
     };
   }, [open]);
 
+  useEffect(() => {
+    if (!open) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open]);
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-700 ${
@@ -36,8 +46,14 @@ export function Navbar() {
           : "border-b border-transparent bg-transparent"
       }`}
     >
-      <nav className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between px-6 md:h-20 md:px-10 lg:px-14">
-        <a href="#top" className="relative z-10 group">
+      <nav
+        className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between px-6 md:h-20 md:px-10 lg:px-14"
+        aria-label="Primary"
+      >
+        <a
+          href="#top"
+          className="group relative z-10 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+        >
           <span className="font-display text-[15px] font-semibold uppercase leading-none tracking-[0.06em] text-white md:text-lg">
             Dublin Golf Show <span className="text-accent">2027</span>
           </span>
@@ -52,7 +68,7 @@ export function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="text-[12px] font-medium uppercase tracking-[0.22em] text-white/70 transition-colors duration-300 hover:text-white"
+              className="rounded-sm text-[12px] font-medium uppercase tracking-[0.22em] text-white/70 transition-colors duration-300 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
             >
               {link.label}
             </a>
@@ -64,12 +80,13 @@ export function Navbar() {
 
         <button
           type="button"
-          className="relative z-10 inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-white lg:hidden"
+          className="relative z-10 inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-white transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent lg:hidden"
           aria-expanded={open}
-          aria-label="Toggle menu"
+          aria-controls={menuId}
+          aria-label={open ? "Close menu" : "Open menu"}
           onClick={() => setOpen((v) => !v)}
         >
-          <span className="flex flex-col gap-1.5">
+          <span className="flex flex-col gap-1.5" aria-hidden>
             <span
               className={`block h-px w-4 bg-white transition-transform duration-300 ${open ? "translate-y-[3.5px] rotate-45" : ""}`}
             />
@@ -84,17 +101,18 @@ export function Navbar() {
       </nav>
 
       <div
+        id={menuId}
         className={`border-t border-white/10 bg-[rgba(10,17,28,0.96)] backdrop-blur-2xl lg:hidden ${
           open ? "block" : "hidden"
         }`}
       >
-        <div className="flex flex-col gap-1 px-6 py-8">
+        <div className="flex flex-col gap-1 px-6 py-8" role="navigation" aria-label="Mobile">
           {links.map((link) => (
             <a
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
-              className="rounded-xl px-3 py-3 font-display text-2xl uppercase tracking-[0.08em] text-white"
+              className="rounded-xl px-3 py-3 font-display text-2xl uppercase tracking-[0.08em] text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
               {link.label}
             </a>

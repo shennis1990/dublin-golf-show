@@ -6,9 +6,9 @@ import { Contour } from "@/components/ui/Contour";
 import { Container } from "@/components/ui/Container";
 
 const socials = [
-  { label: "Instagram", href: "#" },
-  { label: "X", href: "#" },
-  { label: "LinkedIn", href: "#" },
+  { label: "Instagram", href: "https://www.instagram.com/" },
+  { label: "X", href: "https://x.com/" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/" },
 ];
 
 export function Footer() {
@@ -50,10 +50,11 @@ export function Footer() {
                 id="footer-email"
                 type="email"
                 required
+                autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email address"
-                className="h-12 flex-1 rounded-full border border-white/15 bg-white/[0.03] px-5 text-sm text-white outline-none transition-colors placeholder:text-white/35 focus:border-accent"
+                className="h-12 flex-1 rounded-full border border-white/15 bg-white/[0.03] px-5 text-sm text-white outline-none transition-colors placeholder:text-white/35 focus:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
               />
               <Button type="submit" className="h-12 shrink-0 !px-7">
                 Subscribe
@@ -86,7 +87,10 @@ export function Footer() {
                   <li key={social.label}>
                     <a
                       href={social.href}
-                      className="text-sm font-light text-white/60 transition-colors hover:text-white"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${social.label} (opens in a new tab)`}
+                      className="rounded-sm text-sm font-light text-white/60 transition-colors hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
                     >
                       {social.label}
                     </a>
