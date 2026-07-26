@@ -81,6 +81,11 @@ export async function POST(request: Request) {
           {
             error:
               "Unable to save your registration right now. Please try again.",
+            code: dbError.code || "SUPABASE_WRITE_FAILED",
+            detail:
+              process.env.NODE_ENV === "development"
+                ? dbError.message
+                : undefined,
           },
           { status: 502 },
         );
