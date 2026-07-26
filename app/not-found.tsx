@@ -20,10 +20,10 @@ export default function NotFound() {
       </div>
 
       <div className="relative z-10 mx-auto w-full max-w-3xl px-6 py-28 text-center md:px-10">
-        <p className="text-[11px] font-medium uppercase tracking-[0.32em] text-accent">
+        <p className="font-display text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
           Out of bounds
         </p>
-        <h1 className="mt-5 font-display text-5xl font-semibold uppercase leading-[0.95] tracking-tight text-white md:text-7xl">
+        <h1 className="mt-5 font-display text-5xl font-bold uppercase leading-[0.95] tracking-tight text-white md:text-7xl">
           This fairway doesn&apos;t exist
         </h1>
         <p className="mx-auto mt-6 max-w-lg text-base font-light leading-relaxed text-muted md:text-lg">
@@ -32,7 +32,7 @@ export default function NotFound() {
         </p>
         <Link
           href="/"
-          className="mt-10 inline-flex items-center justify-center rounded-full bg-accent px-8 py-3.5 text-[13px] font-medium uppercase tracking-[0.18em] text-white transition-all duration-500 hover:-translate-y-0.5 hover:bg-[#00b07c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          className="mt-10 inline-flex items-center justify-center rounded-full bg-accent px-8 py-3.5 font-display text-[13px] font-semibold uppercase tracking-[0.12em] text-white transition-all duration-500 hover:-translate-y-0.5 hover:bg-[#00b07c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
           Back to Homepage
         </Link>

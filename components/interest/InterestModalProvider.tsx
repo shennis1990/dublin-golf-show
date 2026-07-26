@@ -182,12 +182,12 @@ function InterestModal({
 
         {status === "success" ? (
           <div className="pr-6">
-            <p className="text-[11px] font-medium uppercase tracking-[0.32em] text-accent">
+            <p className="font-display text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
               Interest registered
             </p>
             <h2
               id={titleId}
-              className="mt-4 font-display text-3xl font-semibold uppercase leading-none tracking-tight text-white"
+              className="mt-4 font-display text-3xl font-bold uppercase leading-none tracking-tight text-white"
             >
               You&apos;re on the list
             </h2>
@@ -203,12 +203,12 @@ function InterestModal({
           </div>
         ) : (
           <div className="pr-4">
-            <p className="text-[11px] font-medium uppercase tracking-[0.32em] text-accent">
+            <p className="font-display text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
               Register Interest
             </p>
             <h2
               id={titleId}
-              className="mt-4 font-display text-3xl font-semibold uppercase leading-none tracking-tight text-white"
+              className="mt-4 font-display text-3xl font-bold uppercase leading-none tracking-tight text-white"
             >
               Stay close to the fairway
             </h2>
@@ -237,7 +237,7 @@ function InterestModal({
                 <div>
                   <label
                     htmlFor="interest-first-name"
-                    className="mb-2 block text-[11px] font-medium uppercase tracking-[0.22em] text-white/45"
+                    className="mb-2 block font-display text-[11px] font-semibold uppercase tracking-[0.1em] text-white/45"
                   >
                     First name
                   </label>
@@ -258,7 +258,7 @@ function InterestModal({
                 <div>
                   <label
                     htmlFor="interest-last-name"
-                    className="mb-2 block text-[11px] font-medium uppercase tracking-[0.22em] text-white/45"
+                    className="mb-2 block font-display text-[11px] font-semibold uppercase tracking-[0.1em] text-white/45"
                   >
                     Last name
                   </label>
@@ -279,7 +279,7 @@ function InterestModal({
               <div>
                 <label
                   htmlFor="interest-email"
-                  className="mb-2 block text-[11px] font-medium uppercase tracking-[0.22em] text-white/45"
+                  className="mb-2 block font-display text-[11px] font-semibold uppercase tracking-[0.1em] text-white/45"
                 >
                   Email
                 </label>

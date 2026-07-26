@@ -73,10 +73,10 @@ export function AnimatedStat({ value, label, className = "" }: AnimatedStatProps
 
   return (
     <div ref={ref} className={className}>
-      <p className="font-display text-4xl font-semibold tracking-tight text-white md:text-5xl lg:text-6xl">
+      <p className="font-display text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-6xl">
         {display}
       </p>
-      <p className="mt-2 text-xs font-medium uppercase tracking-[0.24em] text-muted">
+      <p className="mt-2 font-display text-xs font-semibold uppercase tracking-[0.12em] text-muted">
         {label}
       </p>
     </div>

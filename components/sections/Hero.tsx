@@ -47,11 +47,11 @@ export function Hero() {
 
       <Container className="relative z-10 w-full">
         <div className="max-w-4xl">
-          <p className="mb-5 font-display text-sm font-medium uppercase tracking-[0.42em] text-white/70 md:text-base">
+          <p className="mb-5 font-display text-sm font-semibold uppercase tracking-[0.14em] text-white/70 md:text-base">
             Dublin Golf Show <span className="text-accent">2027</span>
           </p>
 
-          <h1 className="font-display text-5xl font-semibold uppercase leading-[0.9] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-[5.75rem]">
+          <h1 className="font-display text-5xl font-bold uppercase leading-[0.9] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-[5.75rem]">
             Ireland&apos;s Festival of Golf
           </h1>
 
@@ -74,7 +74,9 @@ export function Hero() {
         className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-3 text-white/50 transition-colors hover:text-white"
         aria-label="Scroll to about"
       >
-        <span className="text-[10px] uppercase tracking-[0.32em]">Scroll</span>
+        <span className="font-display text-[10px] font-semibold uppercase tracking-[0.14em]">
+          Scroll
+        </span>
         <span className="flex h-10 w-px items-start justify-center overflow-hidden bg-white/20">
           <span className="scroll-dot block h-2 w-px bg-white" />
         </span>

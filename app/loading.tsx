@@ -7,7 +7,7 @@ export default function Loading() {
       aria-label="Loading Dublin Golf Show"
     >
       <div className="flex flex-col items-center gap-4">
-        <span className="font-display text-sm font-semibold uppercase tracking-[0.28em] text-white/70">
+        <span className="font-display text-sm font-bold uppercase tracking-[0.14em] text-white/70">
           Dublin Golf Show <span className="text-accent">2027</span>
         </span>
         <span className="h-px w-24 origin-center animate-pulse bg-gradient-to-r from-transparent via-accent to-transparent" />

@@ -57,11 +57,11 @@ export function Navbar() {
           href="#top"
           className="group relative z-10 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
         >
-          <span className="font-display text-[15px] font-semibold uppercase leading-none tracking-[0.06em] text-white md:text-lg">
+          <span className="font-display text-[15px] font-bold uppercase leading-none tracking-[0.04em] text-white md:text-lg">
             Dublin Golf Show <span className="text-accent">2027</span>
           </span>
           <span className="mt-1.5 block h-px w-full bg-gradient-to-r from-accent via-white/70 to-transparent transition-opacity duration-500 group-hover:opacity-80" />
-          <span className="mt-1.5 block text-[9px] font-medium uppercase tracking-[0.28em] text-white/55 md:text-[10px]">
+          <span className="mt-1.5 block font-display text-[9px] font-medium uppercase tracking-[0.12em] text-white/55 md:text-[10px]">
             Ireland&apos;s Festival of Golf
           </span>
         </a>
@@ -71,7 +71,7 @@ export function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="rounded-sm text-[12px] font-medium uppercase tracking-[0.22em] text-white/70 transition-colors duration-300 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+              className="rounded-sm font-display text-[12px] font-semibold uppercase tracking-[0.1em] text-white/70 transition-colors duration-300 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
             >
               {link.label}
             </a>
@@ -115,7 +115,7 @@ export function Navbar() {
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
-              className="rounded-xl px-3 py-3 font-display text-2xl uppercase tracking-[0.08em] text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              className="rounded-xl px-3 py-3 font-display text-2xl font-bold uppercase tracking-[0.04em] text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
               {link.label}
             </a>

@@ -69,10 +69,10 @@ export function Footer() {
       <Container className="relative">
         <div className="grid gap-16 lg:grid-cols-[1.2fr_0.8fr] lg:gap-24">
           <div>
-            <p className="text-[11px] font-medium uppercase tracking-[0.32em] text-accent">
+            <p className="font-display text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
               Stay Close
             </p>
-            <h2 className="mt-4 max-w-md font-display text-3xl font-semibold uppercase leading-none tracking-tight text-white md:text-4xl">
+            <h2 className="mt-4 max-w-md font-display text-3xl font-bold uppercase leading-none tracking-tight text-white md:text-4xl">
               Be first to hear
             </h2>
 
@@ -101,7 +101,7 @@ export function Footer() {
 
           <div className="flex flex-col justify-between gap-10 sm:flex-row lg:flex-col lg:items-end lg:text-right">
             <div>
-              <p className="text-[11px] font-medium uppercase tracking-[0.28em] text-white/40">
+              <p className="font-display text-[11px] font-semibold uppercase tracking-[0.12em] text-white/40">
                 Contact
               </p>
               <a
@@ -113,7 +113,7 @@ export function Footer() {
             </div>
 
             <div>
-              <p className="text-[11px] font-medium uppercase tracking-[0.28em] text-white/40">
+              <p className="font-display text-[11px] font-semibold uppercase tracking-[0.12em] text-white/40">
                 Social
               </p>
               <ul className="mt-4 flex flex-wrap gap-3 sm:justify-end">
@@ -136,7 +136,7 @@ export function Footer() {
         </div>
 
         <div className="mt-16 flex flex-col gap-3 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between">
-          <p className="font-display text-xs font-medium uppercase tracking-[0.22em] text-white/50">
+          <p className="font-display text-xs font-semibold uppercase tracking-[0.1em] text-white/50">
             Dublin Golf Show 2027
           </p>
           <p className="text-xs font-light text-white/35">

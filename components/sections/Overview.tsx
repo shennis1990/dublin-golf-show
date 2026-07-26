@@ -24,10 +24,10 @@ export function Overview() {
         <div className="grid items-center gap-16 lg:grid-cols-12 lg:gap-20">
           <div className="lg:col-span-5">
             <Reveal>
-              <p className="text-[11px] font-medium uppercase tracking-[0.32em] text-accent">
+              <p className="font-display text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
                 Event Overview
               </p>
-              <h2 className="mt-5 font-display text-4xl font-semibold uppercase leading-[0.95] tracking-tight text-white md:text-5xl lg:text-6xl">
+              <h2 className="mt-5 font-display text-4xl font-bold uppercase leading-[0.95] tracking-tight text-white md:text-5xl lg:text-6xl">
                 A two-day indoor golf experience, built for scale.
               </h2>
             </Reveal>
@@ -56,7 +56,7 @@ export function Overview() {
                 {zones.map((zone) => (
                   <span
                     key={zone}
-                    className="font-display text-sm font-medium uppercase tracking-[0.18em] text-white/55 transition-colors duration-300 hover:text-accent"
+                    className="font-display text-sm font-semibold uppercase tracking-[0.1em] text-white/55 transition-colors duration-300 hover:text-accent"
                   >
                     {zone}
                   </span>
@@ -77,10 +77,10 @@ export function Overview() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#0A111C]/70 via-transparent to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-8 md:p-10">
-                <p className="text-[11px] font-medium uppercase tracking-[0.28em] text-accent">
+                <p className="font-display text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
                   19–20 June 2027
                 </p>
-                <p className="mt-2 font-display text-2xl font-semibold uppercase tracking-wide text-white md:text-3xl">
+                <p className="mt-2 font-display text-2xl font-bold uppercase tracking-tight text-white md:text-3xl">
                   RDS Simmonscourt, Dublin
                 </p>
               </div>

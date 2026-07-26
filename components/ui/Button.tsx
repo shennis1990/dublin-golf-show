@@ -29,7 +29,7 @@ export function Button({
   className = "",
   ...props
 }: ButtonProps) {
-  const classes = `group relative inline-flex items-center justify-center overflow-hidden rounded-full px-8 py-3.5 text-[13px] font-medium tracking-[0.18em] uppercase transition-all duration-500 ease-out hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${variants[variant]} ${className}`;
+  const classes = `group relative inline-flex items-center justify-center overflow-hidden rounded-full px-8 py-3.5 font-display text-[13px] font-semibold tracking-[0.12em] uppercase transition-all duration-500 ease-out hover:-translate-y-0.5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent ${variants[variant]} ${className}`;
 
   if ("href" in props && props.href) {
     const { href, ...rest } = props;

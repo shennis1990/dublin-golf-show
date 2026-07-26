@@ -31,7 +31,7 @@ export function FinalStatement() {
           <Reveal>
             <h2
               id="final-statement-heading"
-              className="font-display text-5xl font-semibold uppercase leading-[0.92] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl"
+              className="font-display text-5xl font-bold uppercase leading-[0.92] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl"
             >
               The Future of Golf
               <span className="block text-accent">Comes Together.</span>

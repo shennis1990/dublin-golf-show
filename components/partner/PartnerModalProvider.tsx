@@ -144,7 +144,7 @@ function PartnerModal({
     "h-12 w-full rounded-full border border-white/15 bg-white/[0.03] px-5 text-sm text-white outline-none transition-colors placeholder:text-white/30 focus:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
 
   const labelClass =
-    "mb-2 block text-[11px] font-medium uppercase tracking-[0.22em] text-white/45";
+    "mb-2 block font-display text-[11px] font-semibold uppercase tracking-[0.1em] text-white/45";
 
   return (
     <div
@@ -178,12 +178,12 @@ function PartnerModal({
 
         {status === "success" ? (
           <div className="pr-6">
-            <p className="text-[11px] font-medium uppercase tracking-[0.32em] text-accent">
+            <p className="font-display text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
               Enquiry received
             </p>
             <h2
               id={titleId}
-              className="mt-4 font-display text-3xl font-semibold uppercase leading-none tracking-tight text-white"
+              className="mt-4 font-display text-3xl font-bold uppercase leading-none tracking-tight text-white"
             >
               We&apos;ll be in touch
             </h2>
@@ -199,12 +199,12 @@ function PartnerModal({
           </div>
         ) : (
           <div className="pr-4">
-            <p className="text-[11px] font-medium uppercase tracking-[0.32em] text-accent">
+            <p className="font-display text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
               Partner With Us
             </p>
             <h2
               id={titleId}
-              className="mt-4 font-display text-3xl font-semibold uppercase leading-none tracking-tight text-white"
+              className="mt-4 font-display text-3xl font-bold uppercase leading-none tracking-tight text-white"
             >
               Showcase your brand
             </h2>

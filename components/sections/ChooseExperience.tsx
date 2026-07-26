@@ -14,10 +14,10 @@ export function ChooseExperience() {
 
       <Container className="relative">
         <Reveal className="mb-14 max-w-3xl md:mb-20">
-          <p className="text-[11px] font-medium uppercase tracking-[0.32em] text-accent">
+          <p className="font-display text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
             Choose Your Experience
           </p>
-          <h2 className="mt-5 font-display text-4xl font-semibold uppercase leading-[0.95] tracking-tight text-white md:text-5xl lg:text-6xl">
+          <h2 className="mt-5 font-display text-4xl font-bold uppercase leading-[0.95] tracking-tight text-white md:text-5xl lg:text-6xl">
             Two ways into Ireland&apos;s Festival of Golf
           </h2>
         </Reveal>
@@ -40,10 +40,10 @@ export function ChooseExperience() {
               <div className="absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100 bg-[radial-gradient(ellipse_at_bottom,rgba(0,154,109,0.18),transparent_55%)]" />
 
               <div className="relative z-10 p-8 md:p-12 lg:p-14">
-                <p className="text-[11px] font-medium uppercase tracking-[0.32em] text-accent">
+                <p className="font-display text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
                   For Golf Fans
                 </p>
-                <h3 className="mt-4 max-w-md font-display text-4xl font-semibold uppercase leading-[0.95] tracking-tight text-white md:text-5xl">
+                <h3 className="mt-4 max-w-md font-display text-4xl font-bold uppercase leading-[0.95] tracking-tight text-white md:text-5xl">
                   Join Ireland&apos;s Festival of Golf
                 </h3>
                 <p className="mt-5 max-w-md text-sm font-light leading-relaxed text-white/70 md:text-base">
@@ -74,10 +74,10 @@ export function ChooseExperience() {
               <div className="absolute inset-0 opacity-0 transition-opacity duration-700 group-hover:opacity-100 bg-[radial-gradient(ellipse_at_bottom,rgba(0,154,109,0.18),transparent_55%)]" />
 
               <div className="relative z-10 p-8 md:p-12 lg:p-14">
-                <p className="text-[11px] font-medium uppercase tracking-[0.32em] text-accent">
+                <p className="font-display text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
                   For Brands, Sponsors, Exhibitors & Media
                 </p>
-                <h3 className="mt-4 max-w-md font-display text-4xl font-semibold uppercase leading-[0.95] tracking-tight text-white md:text-5xl">
+                <h3 className="mt-4 max-w-md font-display text-4xl font-bold uppercase leading-[0.95] tracking-tight text-white md:text-5xl">
                   Showcase Your Brand
                 </h3>
                 <p className="mt-5 max-w-md text-sm font-light leading-relaxed text-white/70 md:text-base">
