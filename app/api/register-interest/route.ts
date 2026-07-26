@@ -8,6 +8,10 @@ const NOTIFY_EMAIL =
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+const MIN_FILL_MS = 2_500;
+const MAX_SUBMISSIONS_PER_IP_PER_HOUR = 5;
+const EMAIL_NOTIFY_COOLDOWN_MS = 24 * 60 * 60 * 1_000;
+
 export async function POST(request: Request) {
   try {
     const body = (await request.json()) as {
@@ -16,11 +20,22 @@ export async function POST(request: Request) {
       email?: string;
       company?: string;
       consent?: boolean;
+      openedAt?: number;
     };
 
     // Honeypot — bots fill hidden fields
     if (body.company?.trim()) {
       return NextResponse.json({ ok: true });
+    }
+
+    // Minimum time between opening the form and submitting
+    const openedAt =
+      typeof body.openedAt === "number" ? body.openedAt : Number.NaN;
+    if (!Number.isFinite(openedAt) || Date.now() - openedAt < MIN_FILL_MS) {
+      return NextResponse.json(
+        { error: "Please take a moment to complete the form, then try again." },
+        { status: 400 },
+      );
     }
 
     const firstName = body.firstName?.trim() ?? "";
@@ -59,9 +74,72 @@ export async function POST(request: Request) {
     }
 
     const consentAt = new Date().toISOString();
+    const ipAddress = getClientIp(request);
+
+    let shouldNotify = true;
 
     try {
       const supabase = getSupabaseAdmin();
+
+      const hourAgo = new Date(Date.now() - 60 * 60 * 1000).toISOString();
+      const { count, error: rateCountError } = await supabase
+        .from("interest_rate_events")
+        .select("id", { count: "exact", head: true })
+        .eq("ip_address", ipAddress)
+        .gte("created_at", hourAgo);
+
+      if (rateCountError) {
+        console.error("Rate count error:", rateCountError);
+        return NextResponse.json(
+          {
+            error:
+              "Unable to save your registration right now. Please try again.",
+          },
+          { status: 502 },
+        );
+      }
+
+      if ((count ?? 0) >= MAX_SUBMISSIONS_PER_IP_PER_HOUR) {
+        return NextResponse.json(
+          {
+            error:
+              "Too many submissions from this connection. Please try again later.",
+          },
+          { status: 429 },
+        );
+      }
+
+      const { error: rateInsertError } = await supabase
+        .from("interest_rate_events")
+        .insert({
+          ip_address: ipAddress,
+          email,
+        });
+
+      if (rateInsertError) {
+        console.error("Rate insert error:", rateInsertError);
+        return NextResponse.json(
+          {
+            error:
+              "Unable to save your registration right now. Please try again.",
+          },
+          { status: 502 },
+        );
+      }
+
+      const { data: existing } = await supabase
+        .from("interest_leads")
+        .select("last_notified_at")
+        .eq("email", email)
+        .maybeSingle();
+
+      if (existing?.last_notified_at) {
+        const lastNotified = new Date(existing.last_notified_at).getTime();
+        if (Date.now() - lastNotified < EMAIL_NOTIFY_COOLDOWN_MS) {
+          shouldNotify = false;
+        }
+      }
+
       const { error: dbError } = await supabase.from("interest_leads").upsert(
         {
           first_name: firstName,
@@ -71,6 +149,7 @@ export async function POST(request: Request) {
           consent_text: MARKETING_CONSENT_TEXT,
           consent_at: consentAt,
           source: "register-interest",
+          ip_address: ipAddress,
         },
         { onConflict: "email" },
       );
@@ -101,10 +180,13 @@ export async function POST(request: Request) {
       );
     }
 
+    if (!shouldNotify) {
+      return NextResponse.json({ ok: true, emailed: false });
+    }
+
     const apiKey = process.env.RESEND_API_KEY;
     if (!apiKey) {
       console.error("RESEND_API_KEY is not configured");
-      // Lead is already stored — still treat as success for the visitor
       return NextResponse.json({ ok: true, emailed: false });
     }
 
@@ -143,8 +225,17 @@ export async function POST(request: Request) {
 
     if (error) {
       console.error("Resend error:", error);
-      // Lead saved — don't fail the user experience on notify-email issues
       return NextResponse.json({ ok: true, emailed: false });
+    }
+
+    try {
+      const supabase = getSupabaseAdmin();
+      await supabase
+        .from("interest_leads")
+        .update({ last_notified_at: new Date().toISOString() })
+        .eq("email", email);
+    } catch (notifyUpdateError) {
+      console.error("Notify timestamp update error:", notifyUpdateError);
     }
 
     return NextResponse.json({ ok: true, emailed: true });
@@ -155,6 +246,19 @@ export async function POST(request: Request) {
       { status: 500 },
     );
   }
+}
+
+function getClientIp(request: Request) {
+  const forwarded = request.headers.get("x-forwarded-for");
+  if (forwarded) {
+    return forwarded.split(",")[0]?.trim() || "unknown";
+  }
+
+  return (
+    request.headers.get("x-real-ip")?.trim() ||
+    request.headers.get("cf-connecting-ip")?.trim() ||
+    "unknown"
+  );
 }
 
 function escapeHtml(value: string) {

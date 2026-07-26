@@ -65,6 +65,7 @@ function InterestModal({
   const [email, setEmail] = useState("");
   const [consent, setConsent] = useState(false);
   const [company, setCompany] = useState(""); // honeypot
+  const [openedAt, setOpenedAt] = useState(0);
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
     "idle",
   );
@@ -80,6 +81,7 @@ function InterestModal({
     setEmail("");
     setConsent(false);
     setCompany("");
+    setOpenedAt(Date.now());
 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
@@ -122,6 +124,7 @@ function InterestModal({
           email,
           consent,
           company,
+          openedAt,
         }),
       });
 
