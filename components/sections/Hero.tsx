@@ -32,11 +32,12 @@ export function Hero() {
     >
       <div ref={layerRef} className="absolute inset-0 scale-105 will-change-transform">
         <Image
-          src="/images/hero-hall.png"
+          src="/images/hero-hall.jpg"
           alt="Cinematic view of the Dublin Golf Show exhibition hall at RDS Simmonscourt"
           fill
           priority
           fetchPriority="high"
+          quality={95}
           sizes="100vw"
           className="object-cover object-[68%_center] brightness-[0.97] contrast-[1.04] saturate-[0.95] md:object-[72%_center]"
         />
