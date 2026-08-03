@@ -45,7 +45,7 @@ html {
   background: var(--accent);
   padding: 0.75rem 1.25rem;
   font-family: var(--font-barlow), "Barlow Condensed", ui-sans-serif, sans-serif;
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -121,15 +121,15 @@ body {
 }
 
 .body-copy {
-  font-size: 1rem;
+  font-size: 1.0625rem;
   font-weight: 300;
-  line-height: 1.9;
+  line-height: 1.95;
   color: var(--muted);
 }
 
 @media (min-width: 768px) {
   .body-copy {
-    font-size: 1.125rem;
+    font-size: 1.1875rem;
   }
 }
 
@@ -157,9 +157,9 @@ body {
 
 .eyebrow {
   font-family: var(--font-barlow), "Barlow Condensed", ui-sans-serif, sans-serif;
-  font-size: 0.6875rem;
+  font-size: 0.875rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--accent);
 }

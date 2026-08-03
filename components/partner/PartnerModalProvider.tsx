@@ -141,10 +141,10 @@ function PartnerModal({
   if (!open) return null;
 
   const inputClass =
-    "h-12 w-full rounded-full border border-white/15 bg-white/[0.03] px-5 text-sm text-white outline-none transition-colors placeholder:text-white/30 focus:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
+    "h-12 w-full rounded-full border border-white/15 bg-white/[0.03] px-5 text-base text-white outline-none transition-colors placeholder:text-white/30 focus:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";
 
   const labelClass =
-    "mb-2 block font-display text-[11px] font-semibold uppercase tracking-[0.1em] text-white/45";
+    "mb-2 block font-display text-[14px] font-semibold uppercase tracking-[0.1em] text-white/45";
 
   return (
     <div
@@ -178,7 +178,7 @@ function PartnerModal({
 
         {status === "success" ? (
           <div className="pr-6">
-            <p className="font-display text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
+            <p className="font-display text-[14px] font-semibold uppercase tracking-[0.12em] text-accent">
               Enquiry received
             </p>
             <h2
@@ -189,7 +189,7 @@ function PartnerModal({
             </h2>
             <p
               id={descId}
-              className="mt-5 text-sm font-light leading-relaxed text-white/70 md:text-base"
+              className="mt-5 text-base font-light leading-[1.9] text-white/70"
             >
               {SUCCESS_MESSAGE}
             </p>
@@ -199,7 +199,7 @@ function PartnerModal({
           </div>
         ) : (
           <div className="pr-4">
-            <p className="font-display text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
+            <p className="font-display text-[14px] font-semibold uppercase tracking-[0.12em] text-accent">
               Partner With Us
             </p>
             <h2
@@ -210,7 +210,7 @@ function PartnerModal({
             </h2>
             <p
               id={descId}
-              className="mt-4 text-sm font-light leading-relaxed text-white/65"
+              className="mt-4 text-base font-light leading-[1.9] text-white/65"
             >
               Tell us about your brand and we&apos;ll follow up on sponsorship, exhibitor
               and media opportunities for Dublin Golf Show 2027.

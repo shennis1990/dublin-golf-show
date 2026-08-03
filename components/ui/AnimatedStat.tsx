@@ -82,12 +82,12 @@ export function AnimatedStat({
       <p className="font-display text-5xl font-bold leading-none tracking-tight text-white sm:text-6xl lg:text-7xl">
         <span className="tabular-nums">{display}</span>
         {unit ? (
-          <span className="ml-2 align-baseline text-[0.32em] font-semibold uppercase tracking-[0.1em] text-white/55">
+          <span className="ml-2 align-baseline text-sm font-semibold uppercase tracking-[0.1em] text-white/55 sm:text-base">
             {unit}
           </span>
         ) : null}
       </p>
-      <p className="mt-4 font-display text-[11px] font-semibold uppercase tracking-[0.16em] text-white/45">
+      <p className="mt-4 font-display text-[14px] font-semibold uppercase tracking-[0.14em] text-white/45">
         {label}
       </p>
     </div>

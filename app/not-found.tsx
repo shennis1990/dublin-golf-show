@@ -30,7 +30,7 @@ export default function NotFound() {
         </p>
         <Link
           href="/"
-          className="mt-10 inline-flex min-h-12 items-center justify-center rounded-full bg-accent px-8 py-3.5 font-display text-[13px] font-semibold uppercase tracking-[0.12em] text-white transition-all duration-500 hover:-translate-y-0.5 hover:bg-[#00b07c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          className="mt-10 inline-flex min-h-12 items-center justify-center rounded-full bg-accent px-8 py-3.5 font-display text-[14px] font-semibold uppercase tracking-[0.12em] text-white transition-all duration-500 hover:-translate-y-0.5 hover:bg-[#00b07c] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
         >
           Back to Homepage
         </Link>

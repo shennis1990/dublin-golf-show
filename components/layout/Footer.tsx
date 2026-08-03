@@ -85,20 +85,20 @@ export function Footer() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email address"
-                className="h-12 w-full flex-1 rounded-full border border-white/15 bg-white/[0.03] px-5 text-sm text-white outline-none transition-colors placeholder:text-white/35 focus:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                className="h-12 w-full flex-1 rounded-full border border-white/15 bg-white/[0.03] px-5 text-base text-white outline-none transition-colors placeholder:text-white/35 focus:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
               />
               <Button type="submit" className="h-12 w-full shrink-0 sm:w-auto">
                 Subscribe
               </Button>
             </form>
             {done ? (
-              <p className="mt-4 text-sm text-accent">You&apos;re on the list.</p>
+              <p className="mt-4 text-base text-accent">You&apos;re on the list.</p>
             ) : null}
           </div>
 
           <div className="grid gap-10 sm:grid-cols-2 lg:col-span-5 lg:justify-items-end lg:text-right">
             <div className="sm:justify-self-start lg:justify-self-end">
-              <p className="font-display text-[11px] font-semibold uppercase tracking-[0.12em] text-white/40">
+              <p className="font-display text-[14px] font-semibold uppercase tracking-[0.12em] text-white/40">
                 Contact
               </p>
               <a
@@ -110,7 +110,7 @@ export function Footer() {
             </div>
 
             <div className="sm:justify-self-end">
-              <p className="font-display text-[11px] font-semibold uppercase tracking-[0.12em] text-white/40">
+              <p className="font-display text-[14px] font-semibold uppercase tracking-[0.12em] text-white/40">
                 Social
               </p>
               <ul className="mt-4 flex flex-wrap gap-3 sm:justify-end">
@@ -133,10 +133,10 @@ export function Footer() {
         </div>
 
         <div className="mt-16 flex flex-col gap-3 border-t border-line pt-8 sm:mt-20 sm:flex-row sm:items-center sm:justify-between">
-          <p className="font-display text-xs font-semibold uppercase tracking-[0.1em] text-white/50">
+          <p className="font-display text-[14px] font-semibold uppercase tracking-[0.1em] text-white/50">
             Dublin Golf Show 2027
           </p>
-          <p className="text-xs font-light text-white/35">
+          <p className="text-[14px] font-light text-white/35">
             © {new Date().getFullYear()} Dublin Golf Show. All rights reserved.
           </p>
         </div>

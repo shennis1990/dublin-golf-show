@@ -63,7 +63,7 @@ export function Overview() {
             {zones.map((zone) => (
               <span
                 key={zone}
-                className="font-display text-sm font-semibold uppercase tracking-[0.1em] text-white/55 transition-colors duration-300 hover:text-accent"
+                className="font-display text-[15px] font-semibold uppercase tracking-[0.1em] text-white/55 transition-colors duration-300 hover:text-accent"
               >
                 {zone}
               </span>

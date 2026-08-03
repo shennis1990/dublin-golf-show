@@ -111,7 +111,7 @@ export function OverviewCarousel() {
       <div className="absolute inset-0 bg-gradient-to-t from-[#0A111C]/80 via-[#0A111C]/15 to-[#0A111C]/25" />
 
       <div className="absolute bottom-0 left-0 right-0 z-10 p-8 md:p-12">
-        <p className="font-display text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
+        <p className="font-display text-[14px] font-semibold uppercase tracking-[0.12em] text-accent">
           19–20 June 2027
         </p>
         <p className="mt-2 font-display text-2xl font-bold uppercase tracking-tight text-white md:text-3xl">
@@ -119,7 +119,7 @@ export function OverviewCarousel() {
         </p>
         <p
           key={slides[index].caption}
-          className="mt-3 font-display text-sm font-medium uppercase tracking-[0.12em] text-white/70 transition-opacity duration-500"
+          className="mt-3 font-display text-[14px] font-medium uppercase tracking-[0.12em] text-white/70 transition-opacity duration-500"
         >
           {slides[index].caption}
         </p>

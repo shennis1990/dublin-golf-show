@@ -182,7 +182,7 @@ function InterestModal({
 
         {status === "success" ? (
           <div className="pr-6">
-            <p className="font-display text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
+            <p className="font-display text-[14px] font-semibold uppercase tracking-[0.12em] text-accent">
               Interest registered
             </p>
             <h2
@@ -193,7 +193,7 @@ function InterestModal({
             </h2>
             <p
               id={descId}
-              className="mt-5 text-sm font-light leading-relaxed text-white/70 md:text-base"
+              className="mt-5 text-base font-light leading-[1.9] text-white/70"
             >
               {SUCCESS_MESSAGE}
             </p>
@@ -203,7 +203,7 @@ function InterestModal({
           </div>
         ) : (
           <div className="pr-4">
-            <p className="font-display text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
+            <p className="font-display text-[14px] font-semibold uppercase tracking-[0.12em] text-accent">
               Register Interest
             </p>
             <h2
@@ -214,7 +214,7 @@ function InterestModal({
             </h2>
             <p
               id={descId}
-              className="mt-4 text-sm font-light leading-relaxed text-white/65"
+              className="mt-4 text-base font-light leading-[1.9] text-white/65"
             >
               Leave your details and we&apos;ll keep you updated on tickets and news for
               Dublin Golf Show 2027.
@@ -237,7 +237,7 @@ function InterestModal({
                 <div>
                   <label
                     htmlFor="interest-first-name"
-                    className="mb-2 block font-display text-[11px] font-semibold uppercase tracking-[0.1em] text-white/45"
+                    className="mb-2 block font-display text-[14px] font-semibold uppercase tracking-[0.1em] text-white/45"
                   >
                     First name
                   </label>
@@ -250,7 +250,7 @@ function InterestModal({
                     autoComplete="given-name"
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
-                    className="h-12 w-full rounded-full border border-white/15 bg-white/[0.03] px-5 text-sm text-white outline-none transition-colors placeholder:text-white/30 focus:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                    className="h-12 w-full rounded-full border border-white/15 bg-white/[0.03] px-5 text-base text-white outline-none transition-colors placeholder:text-white/30 focus:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                     placeholder="First name"
                   />
                 </div>
@@ -258,7 +258,7 @@ function InterestModal({
                 <div>
                   <label
                     htmlFor="interest-last-name"
-                    className="mb-2 block font-display text-[11px] font-semibold uppercase tracking-[0.1em] text-white/45"
+                    className="mb-2 block font-display text-[14px] font-semibold uppercase tracking-[0.1em] text-white/45"
                   >
                     Last name
                   </label>
@@ -270,7 +270,7 @@ function InterestModal({
                     autoComplete="family-name"
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
-                    className="h-12 w-full rounded-full border border-white/15 bg-white/[0.03] px-5 text-sm text-white outline-none transition-colors placeholder:text-white/30 focus:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                    className="h-12 w-full rounded-full border border-white/15 bg-white/[0.03] px-5 text-base text-white outline-none transition-colors placeholder:text-white/30 focus:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                     placeholder="Last name"
                   />
                 </div>
@@ -279,7 +279,7 @@ function InterestModal({
               <div>
                 <label
                   htmlFor="interest-email"
-                  className="mb-2 block font-display text-[11px] font-semibold uppercase tracking-[0.1em] text-white/45"
+                  className="mb-2 block font-display text-[14px] font-semibold uppercase tracking-[0.1em] text-white/45"
                 >
                   Email
                 </label>
@@ -291,7 +291,7 @@ function InterestModal({
                   autoComplete="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="h-12 w-full rounded-full border border-white/15 bg-white/[0.03] px-5 text-sm text-white outline-none transition-colors placeholder:text-white/30 focus:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                  className="h-12 w-full rounded-full border border-white/15 bg-white/[0.03] px-5 text-base text-white outline-none transition-colors placeholder:text-white/30 focus:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                   placeholder="you@email.com"
                 />
               </div>
@@ -309,7 +309,7 @@ function InterestModal({
                   onChange={(e) => setConsent(e.target.checked)}
                   className="mt-1 h-4 w-4 shrink-0 rounded border-white/30 accent-[#009A6D] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                 />
-                <span className="text-left text-xs font-light leading-relaxed text-white/60">
+                <span className="text-left text-[14px] font-light leading-[1.75] text-white/60">
                   {MARKETING_CONSENT_TEXT}
                 </span>
               </label>

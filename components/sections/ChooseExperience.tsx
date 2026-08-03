@@ -42,7 +42,7 @@ export function ChooseExperience() {
                 <h3 className="mt-4 max-w-md font-display text-3xl font-bold uppercase leading-[0.95] tracking-tight text-white md:text-4xl lg:text-5xl">
                   Join Ireland&apos;s Festival of Golf
                 </h3>
-                <p className="mt-5 max-w-md text-sm font-light leading-[1.85] text-white/70 md:text-base">
+                <p className="mt-5 max-w-md text-base font-light leading-[1.9] text-white/70 md:text-lg">
                   Hit the driving range. Explore the latest equipment. Learn from the pros. Book
                   your next golf escape. Two days built for people who live and love the game.
                 </p>
@@ -74,7 +74,7 @@ export function ChooseExperience() {
                 <h3 className="mt-4 max-w-md font-display text-3xl font-bold uppercase leading-[0.95] tracking-tight text-white md:text-4xl lg:text-5xl">
                   Showcase Your Brand
                 </h3>
-                <p className="mt-5 max-w-md text-sm font-light leading-[1.85] text-white/70 md:text-base">
+                <p className="mt-5 max-w-md text-base font-light leading-[1.9] text-white/70 md:text-lg">
                   Stand among Ireland&apos;s most engaged golf audience. Own a signature zone,
                   secure category presence, or cover the festival as media — with spaces limited
                   and allocated with intention.

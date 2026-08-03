@@ -68,7 +68,7 @@ export function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="group relative rounded-sm font-display text-[13px] font-semibold uppercase tracking-[0.1em] text-white/65 transition-colors duration-300 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+              className="group relative rounded-sm font-display text-[14px] font-semibold uppercase tracking-[0.1em] text-white/65 transition-colors duration-300 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
             >
               {link.label}
               <span className="absolute -bottom-1 left-0 h-px w-0 bg-accent transition-all duration-300 group-hover:w-full" />
