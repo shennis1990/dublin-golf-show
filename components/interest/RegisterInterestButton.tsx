@@ -12,7 +12,7 @@ type RegisterInterestButtonProps = {
 } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children" | "onClick" | "type">;
 
 export function RegisterInterestButton({
-  children = "Register Interest",
+  children = "Get Ticket Updates",
   variant = "primary",
   size = "default",
   className = "",

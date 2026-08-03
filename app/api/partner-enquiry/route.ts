@@ -204,7 +204,7 @@ export async function POST(request: Request) {
       replyTo: email,
       subject: `Partner Enquiry — ${companyName}`,
       text: [
-        "New Partner With Us enquiry",
+        "New Exhibit at Dublin Golf Show enquiry",
         "",
         `First name: ${firstName}`,
         `Last name: ${lastName}`,
@@ -216,7 +216,7 @@ export async function POST(request: Request) {
       ].join("\n"),
       html: `
         <div style="font-family:Arial,sans-serif;line-height:1.6;color:#0A111C">
-          <h2 style="margin:0 0 12px">New Partner With Us enquiry</h2>
+          <h2 style="margin:0 0 12px">New Exhibit at Dublin Golf Show enquiry</h2>
           <p style="margin:0 0 8px"><strong>First name:</strong> ${escapeHtml(firstName)}</p>
           <p style="margin:0 0 8px"><strong>Last name:</strong> ${escapeHtml(lastName)}</p>
           <p style="margin:0 0 8px"><strong>Company:</strong> ${escapeHtml(companyName)}</p>

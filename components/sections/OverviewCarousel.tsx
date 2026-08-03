@@ -8,11 +8,13 @@ const SLIDE_MS = 4000;
 const slides = [
   {
     src: "/images/stories/try.jpg",
-    alt: "A visitor and expert inspecting a golf club together on the show floor",
-    eyebrow: "Try",
-    title: "Hands on with the latest kit",
-    caption: "RDS Simmonscourt, Dublin",
-    objectPosition: "50% 36%",
+    alt: "A golfer in follow-through on a premium indoor simulator with launch monitor data at Dublin Golf Show",
+    eyebrow: "19–20 June 2027",
+    title: "Play the latest simulators",
+    caption:
+      "Compare the newest launch monitors, simulators and game-improvement technology.",
+    // Keep golfer, simulator screen, ball flight and Track/Analyze kiosk in frame
+    objectPosition: "50% 48%",
     quality: 95,
     priority: true,
   },

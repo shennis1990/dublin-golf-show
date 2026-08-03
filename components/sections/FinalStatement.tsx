@@ -46,8 +46,8 @@ export function FinalStatement() {
           </Reveal>
 
           <Reveal delay={2} className="cta-row mt-10 justify-center md:mt-12">
-            <RegisterInterestButton>Register Interest</RegisterInterestButton>
-            <PartnerWithUsButton>Partner With Us</PartnerWithUsButton>
+            <RegisterInterestButton>Get Ticket Updates</RegisterInterestButton>
+            <PartnerWithUsButton>Exhibit at Dublin Golf Show</PartnerWithUsButton>
           </Reveal>
         </div>
       </Container>

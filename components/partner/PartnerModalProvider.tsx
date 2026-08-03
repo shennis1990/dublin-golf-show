@@ -200,7 +200,7 @@ function PartnerModal({
         ) : (
           <div className="pr-4">
             <p className="font-display text-[14px] font-semibold uppercase tracking-[0.12em] text-accent">
-              Partner With Us
+              Exhibit at Dublin Golf Show
             </p>
             <h2
               id={titleId}

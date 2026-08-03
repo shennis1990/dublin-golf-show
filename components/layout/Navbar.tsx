@@ -8,7 +8,7 @@ import { useInterestModal } from "@/components/interest/InterestModalProvider";
 const links = [
   { href: "#about", label: "About" },
   { href: "#experience", label: "Experience" },
-  { href: "#partner", label: "Partner With Us" },
+  { href: "#partner", label: "Exhibit at Dublin Golf Show" },
   { href: "#contact", label: "Contact" },
 ];
 
@@ -74,7 +74,7 @@ export function Navbar() {
               <span className="absolute -bottom-1 left-0 h-px w-0 bg-accent transition-all duration-300 group-hover:w-full" />
             </a>
           ))}
-          <RegisterInterestButton size="sm">Register Interest</RegisterInterestButton>
+          <RegisterInterestButton size="sm">Get Ticket Updates</RegisterInterestButton>
         </div>
 
         <button
@@ -124,7 +124,7 @@ export function Navbar() {
               openInterestModal();
             }}
           >
-            Register Interest
+            Get Ticket Updates
           </Button>
         </div>
       </div>

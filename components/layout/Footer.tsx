@@ -1,14 +1,15 @@
 "use client";
 
-import { useState, type FormEvent, type ReactNode } from "react";
-import { Button } from "@/components/ui/Button";
+import type { ReactNode } from "react";
 import { Contour } from "@/components/ui/Contour";
 import { Container } from "@/components/ui/Container";
+import { RegisterInterestButton } from "@/components/interest/RegisterInterestButton";
+import { siteConfig } from "@/lib/site";
 
 const socials: Array<{ label: string; href: string; icon: ReactNode }> = [
   {
     label: "Instagram",
-    href: "https://www.instagram.com/",
+    href: siteConfig.social.instagram,
     icon: (
       <svg viewBox="0 0 24 24" fill="none" aria-hidden className="h-5 w-5">
         <rect
@@ -26,8 +27,17 @@ const socials: Array<{ label: string; href: string; icon: ReactNode }> = [
     ),
   },
   {
+    label: "Facebook",
+    href: siteConfig.social.facebook,
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className="h-5 w-5">
+        <path d="M14.5 8.5V6.75c0-.69.1-1.08 1.12-1.08H17V3h-2.34C11.9 3 11 4.55 11 6.58V8.5H9v2.75h2V21h3.5v-9.75h2.34l.36-2.75H14.5Z" />
+      </svg>
+    ),
+  },
+  {
     label: "X",
-    href: "https://x.com/",
+    href: siteConfig.social.x,
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className="h-5 w-5">
         <path d="M13.682 10.622 20.24 3h-1.554l-5.693 6.618L8.45 3H3.25l6.876 10.007L3.25 21h1.554l6.012-6.989L15.8 21h5.2l-7.318-10.378Zm-2.126 2.471-.697-.997L4.864 4.17h2.387l4.473 6.4.697.997 5.901 8.44h-2.387l-4.379-6.914Z" />
@@ -36,7 +46,7 @@ const socials: Array<{ label: string; href: string; icon: ReactNode }> = [
   },
   {
     label: "LinkedIn",
-    href: "https://www.linkedin.com/",
+    href: siteConfig.social.linkedin,
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className="h-5 w-5">
         <path d="M6.94 8.5H4.05V20h2.89V8.5ZM5.5 7.17a1.68 1.68 0 1 0 0-3.36 1.68 1.68 0 0 0 0 3.36ZM20 20h-2.88v-5.6c0-1.33-.02-3.05-1.86-3.05-1.86 0-2.15 1.45-2.15 2.95V20H10.2V8.5h2.77v1.57h.04c.39-.73 1.33-1.5 2.74-1.5 2.93 0 3.47 1.93 3.47 4.44V20Z" />
@@ -46,16 +56,6 @@ const socials: Array<{ label: string; href: string; icon: ReactNode }> = [
 ];
 
 export function Footer() {
-  const [email, setEmail] = useState("");
-  const [done, setDone] = useState(false);
-
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (!email.trim()) return;
-    setDone(true);
-    setEmail("");
-  }
-
   return (
     <footer id="contact" className="section-y relative overflow-hidden border-t border-line bg-[#070d16]">
       <div className="pointer-events-none absolute inset-0" aria-hidden>
@@ -63,37 +63,18 @@ export function Footer() {
       </div>
 
       <Container className="relative">
-        <div className="grid gap-14 lg:grid-cols-12 lg:items-start lg:gap-16">
+        <div className="grid gap-14 lg:grid-cols-12 lg:items-end lg:gap-16">
           <div className="lg:col-span-7">
-            <p className="eyebrow">Stay Close</p>
-            <h2 className="mt-4 max-w-md font-display text-3xl font-bold uppercase leading-none tracking-tight text-white md:text-4xl">
-              Be first to hear
+            <h2 className="max-w-md font-display text-3xl font-bold uppercase leading-none tracking-tight text-white md:text-4xl">
+              Get Ticket Updates
             </h2>
-
-            <form
-              onSubmit={onSubmit}
-              className="mt-8 flex max-w-lg flex-col gap-3 sm:flex-row sm:items-center sm:gap-4"
-            >
-              <label htmlFor="footer-email" className="sr-only">
-                Email address
-              </label>
-              <input
-                id="footer-email"
-                type="email"
-                required
-                autoComplete="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email address"
-                className="h-12 w-full flex-1 rounded-full border border-white/15 bg-white/[0.03] px-5 text-base text-white outline-none transition-colors placeholder:text-white/35 focus:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-              />
-              <Button type="submit" className="h-12 w-full shrink-0 sm:w-auto">
-                Subscribe
-              </Button>
-            </form>
-            {done ? (
-              <p className="mt-4 text-base text-accent">You&apos;re on the list.</p>
-            ) : null}
+            <p className="body-copy prose-width mt-5 md:mt-6">
+              Be the first to hear when tickets go on sale, speakers are announced and new
+              experiences are revealed.
+            </p>
+            <div className="mt-8 md:mt-10">
+              <RegisterInterestButton>Get Ticket Updates</RegisterInterestButton>
+            </div>
           </div>
 
           <div className="grid gap-10 sm:grid-cols-2 lg:col-span-5 lg:justify-items-end lg:text-right">
@@ -102,10 +83,10 @@ export function Footer() {
                 Contact
               </p>
               <a
-                href="mailto:hello@dublingolfshow.ie"
+                href={`mailto:${siteConfig.email}`}
                 className="mt-4 block text-lg font-light text-white transition-colors hover:text-accent"
               >
-                hello@dublingolfshow.ie
+                {siteConfig.email}
               </a>
             </div>
 

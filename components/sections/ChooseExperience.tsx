@@ -54,7 +54,7 @@ export function ChooseExperience() {
                 in the atmosphere — this is your weekend on the fairway, under one roof.
               </p>
               <div className="mt-10 md:mt-12">
-                <RegisterInterestButton>Register Your Interest</RegisterInterestButton>
+                <RegisterInterestButton>Get Ticket Updates</RegisterInterestButton>
               </div>
             </Reveal>
           </div>
@@ -91,7 +91,7 @@ export function ChooseExperience() {
                 built to put your brand in front of players, buyers and decision-makers.
               </p>
               <div className="mt-10 md:mt-12">
-                <PartnerWithUsButton>Partner With Us</PartnerWithUsButton>
+                <PartnerWithUsButton>Exhibit at Dublin Golf Show</PartnerWithUsButton>
               </div>
             </Reveal>
 

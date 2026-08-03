@@ -15,6 +15,7 @@ export function JsonLd() {
     },
     sameAs: [
       siteConfig.social.instagram,
+      siteConfig.social.facebook,
       siteConfig.social.x,
       siteConfig.social.linkedin,
     ],

@@ -200,9 +200,9 @@ export async function POST(request: Request) {
       from,
       to: [NOTIFY_EMAIL],
       replyTo: email,
-      subject: `Register Interest — ${fullName}`,
+      subject: `Get Ticket Updates — ${fullName}`,
       text: [
-        "New Register Interest submission",
+        "New Get Ticket Updates submission",
         "",
         `First name: ${firstName}`,
         `Last name: ${lastName}`,
@@ -213,7 +213,7 @@ export async function POST(request: Request) {
       ].join("\n"),
       html: `
         <div style="font-family:Arial,sans-serif;line-height:1.6;color:#0A111C">
-          <h2 style="margin:0 0 12px">New Register Interest submission</h2>
+          <h2 style="margin:0 0 12px">New Get Ticket Updates submission</h2>
           <p style="margin:0 0 8px"><strong>First name:</strong> ${escapeHtml(firstName)}</p>
           <p style="margin:0 0 8px"><strong>Last name:</strong> ${escapeHtml(lastName)}</p>
           <p style="margin:0 0 8px"><strong>Email:</strong> ${escapeHtml(email)}</p>

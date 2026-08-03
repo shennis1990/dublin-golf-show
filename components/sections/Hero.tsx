@@ -70,8 +70,8 @@ export function Hero() {
           </p>
 
           <div className="cta-row mt-7 md:mt-8">
-            <RegisterInterestButton>Register Interest</RegisterInterestButton>
-            <PartnerWithUsButton>Partner With Us</PartnerWithUsButton>
+            <RegisterInterestButton>Get Ticket Updates</RegisterInterestButton>
+            <PartnerWithUsButton>Exhibit at Dublin Golf Show</PartnerWithUsButton>
           </div>
         </div>
       </Container>

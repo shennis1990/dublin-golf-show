@@ -157,7 +157,7 @@ function InterestModal({
       <button
         type="button"
         className="absolute inset-0 bg-[rgba(7,13,22,0.78)] backdrop-blur-md"
-        aria-label="Close register interest dialog"
+        aria-label="Close ticket updates dialog"
         onClick={onClose}
       />
 
@@ -204,7 +204,7 @@ function InterestModal({
         ) : (
           <div className="pr-4">
             <p className="font-display text-[14px] font-semibold uppercase tracking-[0.12em] text-accent">
-              Register Interest
+              Get Ticket Updates
             </p>
             <h2
               id={titleId}

@@ -42,6 +42,8 @@ export const siteConfig = {
     instagram: "https://www.instagram.com/",
     x: "https://x.com/",
     linkedin: "https://www.linkedin.com/",
+    // TODO: replace with official Dublin Golf Show Facebook page URL
+    facebook: "https://www.facebook.com/",
   },
 } as const;
 
