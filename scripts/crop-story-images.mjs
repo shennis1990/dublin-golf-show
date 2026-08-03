@@ -1,5 +1,5 @@
 import sharp from "sharp";
-import { mkdirSync, unlinkSync } from "fs";
+import { mkdirSync, unlinkSync, copyFileSync, existsSync } from "fs";
 
 mkdirSync("public/images/stories", { recursive: true });
 
@@ -16,21 +16,30 @@ async function portraitCrop(src, out, box) {
   console.log("wrote", out);
 }
 
-// TRY — club fitting human story (keep hall-3 centre couple)
-await portraitCrop("public/images/hall-3.png", "public/images/stories/try.jpg", {
-  left: 480,
-  top: 50,
-  width: 900,
-  height: 770,
-});
+function copyEditorial(src, dest, label) {
+  if (!existsSync(src)) {
+    console.warn(`${label} source missing — leaving existing file untouched`);
+    return;
+  }
+  copyFileSync(src, dest);
+  console.log(`copied ${dest} from supplied editorial source (no recompression)`);
+}
 
-// WATCH — masterclass: speaker + engaged audience (hall-2)
-await portraitCrop("public/images/hall-2.png", "public/images/stories/watch.jpg", {
-  left: 520,
-  top: 60,
-  width: 880,
-  height: 760,
-});
+// TRY — supplied editorial portrait
+copyEditorial(
+  process.env.TRY_STORY_SOURCE ||
+    "C:/Users/Shane Ennis/.cursor/projects/c-Projects-dublin-golf-show/assets/c__Users_Shane_Ennis_AppData_Roaming_Cursor_User_workspaceStorage_empty-window_images_image-32365c2d-1e79-46df-aacf-f77e5370281a.png",
+  "public/images/stories/try.jpg",
+  "TRY",
+);
+
+// WATCH — supplied main-stage conversation
+copyEditorial(
+  process.env.WATCH_STORY_SOURCE ||
+    "C:/Users/Shane Ennis/.cursor/projects/c-Projects-dublin-golf-show/assets/c__Users_Shane_Ennis_AppData_Roaming_Cursor_User_workspaceStorage_empty-window_images_image-cbe4e33d-b352-4b05-8c7f-c12001a19662.png",
+  "public/images/stories/watch.jpg",
+  "WATCH",
+);
 
 // DISCOVER — visitors exploring premium stands & product (hall-3 right)
 await portraitCrop("public/images/hall-3.png", "public/images/stories/discover.jpg", {

@@ -8,21 +8,34 @@ const SLIDE_MS = 4000;
 const slides = [
   {
     src: "/images/stories/try.jpg",
-    alt: "A visitor trying a golf club with an expert on the show floor",
-    emotion: "Try",
-    caption: "Hands on with the latest kit",
+    alt: "A visitor and expert inspecting a golf club together on the show floor",
+    eyebrow: "Try",
+    title: "Hands on with the latest kit",
+    caption: "RDS Simmonscourt, Dublin",
+    objectPosition: "50% 36%",
+    quality: 95,
+    priority: true,
   },
   {
     src: "/images/stories/watch.jpg",
-    alt: "A short-game masterclass with a professional demonstrating to an engaged crowd",
-    emotion: "Watch",
-    caption: "Learn from the voices of the game",
+    alt: "Two speakers in conversation on the Dublin Golf Show main stage before a seated audience",
+    eyebrow: "19–20 June 2027",
+    title: "Hear the biggest voices in golf",
+    caption: "In conversation at RDS Simmonscourt",
+    // Keep speakers + LED branding clear; audience fills the lower frame
+    objectPosition: "50% 40%",
+    quality: 95,
+    priority: false,
   },
   {
     src: "/images/stories/discover.jpg",
     alt: "Visitors exploring premium golf equipment and stands",
-    emotion: "Discover",
-    caption: "Explore brands, products and experiences",
+    eyebrow: "Discover",
+    title: "Explore brands, products and experiences",
+    caption: "RDS Simmonscourt, Dublin",
+    objectPosition: "50% 50%",
+    quality: 90,
+    priority: false,
   },
 ] as const;
 
@@ -30,6 +43,7 @@ export function OverviewCarousel() {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const active = slides[index];
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -102,11 +116,14 @@ export function OverviewCarousel() {
             src={slide.src}
             alt={slide.alt}
             fill
-            loading={i === 0 ? "eager" : "lazy"}
-            sizes="(max-width: 1024px) 100vw, 55vw"
-            className={`object-cover object-center transition-transform duration-[1.6s] ease-out ${
+            priority={slide.priority}
+            loading={slide.priority ? undefined : "lazy"}
+            quality={slide.quality}
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 90vw, 55vw"
+            className={`object-cover transition-transform duration-[1.6s] ease-out ${
               i === index ? "scale-100" : "scale-105"
             }`}
+            style={{ objectPosition: slide.objectPosition }}
           />
         </div>
       ))}
@@ -117,19 +134,22 @@ export function OverviewCarousel() {
 
       <div className="absolute bottom-0 left-0 right-0 z-10 p-8 md:p-12">
         <p
-          key={slides[index].emotion}
+          key={`${active.src}-eyebrow`}
           className="font-display text-[14px] font-semibold uppercase tracking-[0.16em] text-accent"
         >
-          {slides[index].emotion}
-        </p>
-        <p className="mt-2 font-display text-2xl font-bold uppercase tracking-tight text-white md:text-3xl">
-          RDS Simmonscourt, Dublin
+          {active.eyebrow}
         </p>
         <p
-          key={slides[index].caption}
+          key={`${active.src}-title`}
+          className="mt-2 max-w-md font-display text-2xl font-bold uppercase leading-[0.95] tracking-tight text-white md:text-3xl"
+        >
+          {active.title}
+        </p>
+        <p
+          key={`${active.src}-caption`}
           className="mt-3 font-display text-[14px] font-medium uppercase tracking-[0.12em] text-white/70 transition-opacity duration-500"
         >
-          {slides[index].caption}
+          {active.caption}
         </p>
       </div>
 
