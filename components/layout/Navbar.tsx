@@ -8,7 +8,7 @@ import { useInterestModal } from "@/components/interest/InterestModalProvider";
 const links = [
   { href: "#about", label: "About" },
   { href: "#experience", label: "Experience" },
-  { href: "#partner", label: "Exhibit at Dublin Golf Show" },
+  { href: "#partner", label: "Exhibit at The Dublin Golf Show" },
   { href: "#contact", label: "Contact" },
 ];
 

@@ -40,14 +40,14 @@ export function FinalStatement() {
 
           <Reveal delay={1}>
             <p className="body-copy mx-auto mt-7 max-w-xl text-white/70 md:mt-8">
-              Whether you play, coach, travel, innovate, invest or simply love the game, Dublin
-              Golf Show is where Ireland&apos;s golf community comes together.
+              Whether you play, coach, travel, innovate, invest or simply love the game, the
+              Dublin Golf Show is where Ireland&apos;s golf community comes together.
             </p>
           </Reveal>
 
           <Reveal delay={2} className="cta-row mt-10 justify-center md:mt-12">
             <RegisterInterestButton>Get Ticket Updates</RegisterInterestButton>
-            <PartnerWithUsButton>Exhibit at Dublin Golf Show</PartnerWithUsButton>
+            <PartnerWithUsButton>Exhibit at The Dublin Golf Show</PartnerWithUsButton>
           </Reveal>
         </div>
       </Container>

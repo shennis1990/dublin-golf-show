@@ -8,6 +8,16 @@ const SLIDE_MS = 4000;
 const slides = [
   {
     src: "/images/stories/try.jpg",
+    alt: "A visitor and expert inspecting a golf club together on the show floor",
+    eyebrow: "19–20 June 2027",
+    title: "Hands on with the latest kit",
+    caption: "Try clubs, fittings and new equipment on the show floor.",
+    objectPosition: "50% 36%",
+    quality: 95,
+    priority: true,
+  },
+  {
+    src: "/images/stories/play.jpg",
     alt: "A golfer in follow-through on a premium indoor simulator with launch monitor data at Dublin Golf Show",
     eyebrow: "19–20 June 2027",
     title: "Play the latest simulators",
@@ -16,7 +26,7 @@ const slides = [
     // Keep golfer, simulator screen, ball flight and Track/Analyze kiosk in frame
     objectPosition: "50% 48%",
     quality: 95,
-    priority: true,
+    priority: false,
   },
   {
     src: "/images/stories/watch.jpg",

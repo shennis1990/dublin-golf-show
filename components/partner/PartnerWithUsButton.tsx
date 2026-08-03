@@ -12,7 +12,7 @@ type PartnerWithUsButtonProps = {
 } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children" | "onClick" | "type">;
 
 export function PartnerWithUsButton({
-  children = "Exhibit at Dublin Golf Show",
+  children = "Exhibit at The Dublin Golf Show",
   variant = "ghost",
   size = "default",
   className = "",

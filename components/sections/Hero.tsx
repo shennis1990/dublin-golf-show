@@ -71,7 +71,7 @@ export function Hero() {
 
           <div className="cta-row mt-7 md:mt-8">
             <RegisterInterestButton>Get Ticket Updates</RegisterInterestButton>
-            <PartnerWithUsButton>Exhibit at Dublin Golf Show</PartnerWithUsButton>
+            <PartnerWithUsButton>Exhibit at The Dublin Golf Show</PartnerWithUsButton>
           </div>
         </div>
       </Container>

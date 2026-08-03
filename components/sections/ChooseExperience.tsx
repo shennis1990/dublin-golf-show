@@ -91,7 +91,7 @@ export function ChooseExperience() {
                 built to put your brand in front of players, buyers and decision-makers.
               </p>
               <div className="mt-10 md:mt-12">
-                <PartnerWithUsButton>Exhibit at Dublin Golf Show</PartnerWithUsButton>
+                <PartnerWithUsButton>Exhibit at The Dublin Golf Show</PartnerWithUsButton>
               </div>
             </Reveal>
 

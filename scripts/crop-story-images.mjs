@@ -11,12 +11,20 @@ function copyEditorial(src, dest, label) {
   console.log(`copied ${dest} from supplied editorial source (no recompression)`);
 }
 
-// TRY — supplied simulator / driving-range portrait
+// TRY — supplied club-fitting portrait
 copyEditorial(
   process.env.TRY_STORY_SOURCE ||
-    "C:/Users/Shane Ennis/.cursor/projects/c-Projects-dublin-golf-show/assets/c__Users_Shane_Ennis_AppData_Roaming_Cursor_User_workspaceStorage_empty-window_images_image-5190a29c-cffb-4be1-b775-ac6ae49a4afe.png",
+    "C:/Users/Shane Ennis/.cursor/projects/c-Projects-dublin-golf-show/assets/c__Users_Shane_Ennis_AppData_Roaming_Cursor_User_workspaceStorage_empty-window_images_image-32365c2d-1e79-46df-aacf-f77e5370281a.png",
   "public/images/stories/try.jpg",
   "TRY",
+);
+
+// PLAY — supplied simulator / driving-range portrait
+copyEditorial(
+  process.env.PLAY_STORY_SOURCE ||
+    "C:/Users/Shane Ennis/.cursor/projects/c-Projects-dublin-golf-show/assets/c__Users_Shane_Ennis_AppData_Roaming_Cursor_User_workspaceStorage_empty-window_images_image-5190a29c-cffb-4be1-b775-ac6ae49a4afe.png",
+  "public/images/stories/play.jpg",
+  "PLAY",
 );
 
 // WATCH — supplied main-stage conversation
