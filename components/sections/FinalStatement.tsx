@@ -22,7 +22,7 @@ export function FinalStatement() {
         />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,17,28,0.75)_0%,rgba(10,17,28,0.82)_50%,rgba(10,17,28,0.94)_100%)]" />
         <div aria-hidden>
-          <Contour className="contour-drift" opacity={0.18} />
+          <Contour pattern="apron" opacity={0.08} />
         </div>
       </div>
 

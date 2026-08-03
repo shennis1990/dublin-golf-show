@@ -1,7 +1,10 @@
 type ContourProps = {
   className?: string;
+  /** Overall visibility. Prefer 0.04–0.10; up to ~0.15 in quiet areas. */
   opacity?: number;
-  variant?: "corner" | "field";
+  /** Small family of green-reading patterns reused sitewide. */
+  pattern?: "green" | "ridge" | "swale" | "apron";
+  /** Corner-anchored placement — lines fade off-screen from this corner. */
   anchor?: "bottom-right" | "bottom-left" | "top-right" | "top-left";
 };
 
@@ -22,7 +25,7 @@ type Peak = {
 
 type Terrain = {
   peaks: Peak[];
-  /** Low-frequency warp strength — creates wavy, non-uniform bends. */
+  /** Low-frequency warp — soft, uneven bends like real turf. */
   warp: number;
   levels: number[];
 };
@@ -41,8 +44,14 @@ function rotPoint(x: number, y: number, cx: number, cy: number, rot: number) {
 /** Continuous elevation field — isolines of this never cross. */
 function elevation(x: number, y: number, terrain: Terrain) {
   const w = terrain.warp;
-  const wx = x + w * Math.sin(y * 0.0074) + w * 0.55 * Math.cos(x * 0.0051 + y * 0.002);
-  const wy = y + w * Math.cos(x * 0.0068) + w * 0.45 * Math.sin(y * 0.0082 - x * 0.0015);
+  const wx =
+    x +
+    w * Math.sin(y * 0.0062) +
+    w * 0.4 * Math.cos(x * 0.0044 + y * 0.0018);
+  const wy =
+    y +
+    w * Math.cos(x * 0.0058) +
+    w * 0.35 * Math.sin(y * 0.0071 - x * 0.0012);
 
   let h = 0;
   for (const peak of terrain.peaks) {
@@ -52,10 +61,10 @@ function elevation(x: number, y: number, terrain: Terrain) {
     h += peak.amp * Math.exp(-(nx * nx + ny * ny));
   }
 
-  // Gentle secondary undulation so directional change isn't uniform
+  // Soft secondary undulation — irregular, never concentric
   h +=
-    0.045 * Math.sin(wx * 0.011 + wy * 0.007) * Math.cos(wy * 0.009 - wx * 0.004) +
-    0.028 * Math.sin((wx + wy) * 0.0085);
+    0.032 * Math.sin(wx * 0.009 + wy * 0.006) * Math.cos(wy * 0.0075 - wx * 0.0035) +
+    0.018 * Math.sin((wx * 0.7 + wy) * 0.007);
 
   return h;
 }
@@ -120,7 +129,7 @@ function edgePoint(
 
 type Seg = { a: [number, number]; b: [number, number] };
 
-function marchingSquares(terrain: Terrain, level: number, cols = 96, rows = 60): Seg[] {
+function marchingSquares(terrain: Terrain, level: number, cols = 100, rows = 64): Seg[] {
   const stepX = WIDTH / cols;
   const stepY = HEIGHT / rows;
   const grid: number[][] = [];
@@ -225,11 +234,10 @@ function stitch(segs: Seg[]): Array<Array<[number, number]>> {
       return pts;
     };
 
-    const forward = walk(seg.a, seg.b);
-    lines.push(forward);
+    lines.push(walk(seg.a, seg.b));
   }
 
-  return lines.filter((line) => line.length > 8);
+  return lines.filter((line) => line.length > 10);
 }
 
 function smoothPath(pts: Array<[number, number]>, closed: boolean) {
@@ -240,17 +248,12 @@ function smoothPath(pts: Array<[number, number]>, closed: boolean) {
 
   const sample = closed
     ? [...points, points[0], points[1]]
-    : [
-        points[0],
-        ...points,
-        points[points.length - 1],
-      ];
+    : [points[0], ...points, points[points.length - 1]];
 
   let d = `M ${points[0][0].toFixed(1)} ${points[0][1].toFixed(1)}`;
-  const start = closed ? 1 : 1;
   const end = closed ? sample.length - 2 : sample.length - 2;
 
-  for (let i = start; i < end; i += 1) {
+  for (let i = 1; i < end; i += 1) {
     const p0 = sample[i - 1];
     const p1 = sample[i];
     const p2 = sample[i + 1];
@@ -273,24 +276,22 @@ function extractRings(terrain: Terrain): Ring[] {
     const segs = marchingSquares(terrain, level);
     const lines = stitch(segs);
 
-    // Prefer the longest loop for each level (main contour body)
+    // Keep the strongest contour body per level — avoid noisy fragments
     const ranked = [...lines].sort((a, b) => b.length - a.length);
-    const keep = ranked.slice(0, 2);
+    const keep = ranked.slice(0, 1);
 
-    keep.forEach((line, lineIndex) => {
+    keep.forEach((line) => {
       const closed = keyOf(line[0]) === keyOf(line[line.length - 1]);
       const d = smoothPath(line, closed);
       if (!d) return;
 
-      const opacity =
-        0.18 +
-        0.55 * Math.sin(Math.PI * t) +
-        (lineIndex === 0 ? 0.08 : -0.05);
+      // Relative stroke weight within the pattern; final visibility is outer opacity
+      const opacity = 0.45 + 0.4 * Math.sin(Math.PI * t);
 
       rings.push({
         d,
-        opacity: Math.min(0.82, Math.max(0.12, opacity)),
-        width: t > 0.85 || t < 0.12 ? 1.05 : 0.75,
+        opacity: Math.min(0.9, Math.max(0.35, opacity)),
+        width: t > 0.82 || t < 0.15 ? 1.1 : 0.7,
       });
     });
   });
@@ -301,63 +302,127 @@ function extractRings(terrain: Terrain): Ring[] {
 function levelsBetween(min: number, max: number, count: number) {
   return Array.from({ length: count }, (_, i) => {
     const t = (i + 1) / (count + 1);
-    // Slightly uneven intervals — denser near peak like real greens
-    const eased = Math.pow(t, 0.9);
+    // Slightly denser near the high point — like a green book
+    const eased = Math.pow(t, 0.88);
     return min + (max - min) * eased;
   });
 }
 
-const CORNER_TERRAIN: Record<
-  NonNullable<ContourProps["anchor"]>,
-  Terrain
-> = {
-  "bottom-right": {
-    warp: 55,
+/**
+ * Pattern family — believable putting-green topography, not concentric radar.
+ * Each uses elongated asymmetric slopes that expand/contract like real terrain.
+ */
+const PATTERNS: Record<NonNullable<ContourProps["pattern"]>, Terrain> = {
+  // Classic green: primary crown + secondary shelf, offset and elongated
+  green: {
+    warp: 38,
     peaks: [
-      { cx: 1320, cy: 820, sx: 520, sy: 380, rot: -0.4, amp: 1 },
-      { cx: 1080, cy: 700, sx: 280, sy: 220, rot: 0.35, amp: 0.42 },
-      { cx: 1420, cy: 560, sx: 240, sy: 300, rot: -0.2, amp: 0.28 },
+      { cx: 780, cy: 420, sx: 420, sy: 280, rot: -0.55, amp: 1 },
+      { cx: 980, cy: 560, sx: 300, sy: 200, rot: 0.4, amp: 0.48 },
+      { cx: 560, cy: 300, sx: 260, sy: 340, rot: 0.25, amp: 0.32 },
     ],
-    levels: levelsBetween(0.12, 0.92, 16),
+    levels: levelsBetween(0.16, 0.9, 13),
   },
-  "bottom-left": {
-    warp: 55,
+  // Diagonal ridge — slope falls away to either side
+  ridge: {
+    warp: 42,
     peaks: [
-      { cx: 120, cy: 820, sx: 520, sy: 380, rot: 0.35, amp: 1 },
-      { cx: 360, cy: 700, sx: 280, sy: 220, rot: -0.3, amp: 0.42 },
-      { cx: 40, cy: 560, sx: 240, sy: 300, rot: 0.15, amp: 0.28 },
+      { cx: 520, cy: 280, sx: 560, sy: 160, rot: 0.65, amp: 1 },
+      { cx: 880, cy: 520, sx: 480, sy: 150, rot: 0.55, amp: 0.72 },
+      { cx: 1100, cy: 700, sx: 280, sy: 200, rot: -0.2, amp: 0.28 },
     ],
-    levels: levelsBetween(0.12, 0.92, 16),
+    levels: levelsBetween(0.14, 0.88, 12),
   },
-  "top-right": {
-    warp: 52,
+  // Soft swale between two rises — open in the middle, denser on flanks
+  swale: {
+    warp: 36,
     peaks: [
-      { cx: 1320, cy: 80, sx: 500, sy: 360, rot: 0.3, amp: 1 },
-      { cx: 1100, cy: 200, sx: 260, sy: 210, rot: -0.25, amp: 0.4 },
-      { cx: 1420, cy: 280, sx: 230, sy: 280, rot: 0.2, amp: 0.26 },
+      { cx: 320, cy: 360, sx: 300, sy: 360, rot: 0.2, amp: 0.95 },
+      { cx: 1080, cy: 480, sx: 340, sy: 300, rot: -0.35, amp: 1 },
+      { cx: 700, cy: 700, sx: 220, sy: 180, rot: 0.5, amp: 0.22 },
     ],
-    levels: levelsBetween(0.12, 0.92, 15),
+    levels: levelsBetween(0.15, 0.86, 12),
   },
-  "top-left": {
-    warp: 52,
+  // Front-apron fall-off — denser near one edge, opens into the field
+  apron: {
+    warp: 34,
     peaks: [
-      { cx: 120, cy: 80, sx: 500, sy: 360, rot: -0.28, amp: 1 },
-      { cx: 340, cy: 200, sx: 260, sy: 210, rot: 0.28, amp: 0.4 },
-      { cx: 40, cy: 280, sx: 230, sy: 280, rot: -0.15, amp: 0.26 },
+      { cx: 240, cy: 720, sx: 480, sy: 260, rot: -0.15, amp: 1 },
+      { cx: 480, cy: 520, sx: 320, sy: 220, rot: 0.45, amp: 0.55 },
+      { cx: 160, cy: 400, sx: 200, sy: 280, rot: 0.1, amp: 0.3 },
     ],
-    levels: levelsBetween(0.12, 0.92, 15),
+    levels: levelsBetween(0.14, 0.9, 13),
   },
 };
 
-const FIELD_TERRAIN: Terrain = {
-  warp: 48,
-  peaks: [
-    { cx: 140, cy: 100, sx: 380, sy: 280, rot: -0.25, amp: 1 },
-    { cx: 1280, cy: 120, sx: 360, sy: 260, rot: 0.3, amp: 0.95 },
-    { cx: 1320, cy: 780, sx: 400, sy: 300, rot: -0.35, amp: 1 },
-    { cx: 180, cy: 760, sx: 320, sy: 240, rot: 0.2, amp: 0.7 },
-  ],
-  levels: levelsBetween(0.14, 0.88, 14),
+/** Corner terrains hug one corner and fade into open space. */
+const CORNER_TERRAIN: Record<NonNullable<ContourProps["anchor"]>, Terrain> = {
+  "bottom-right": {
+    warp: 40,
+    peaks: [
+      { cx: 1280, cy: 760, sx: 460, sy: 320, rot: -0.48, amp: 1 },
+      { cx: 1040, cy: 820, sx: 300, sy: 180, rot: 0.55, amp: 0.5 },
+      { cx: 1360, cy: 520, sx: 220, sy: 280, rot: 0.15, amp: 0.34 },
+    ],
+    levels: levelsBetween(0.14, 0.9, 14),
+  },
+  "bottom-left": {
+    warp: 40,
+    peaks: [
+      { cx: 160, cy: 760, sx: 460, sy: 320, rot: 0.42, amp: 1 },
+      { cx: 400, cy: 820, sx: 300, sy: 180, rot: -0.5, amp: 0.5 },
+      { cx: 80, cy: 520, sx: 220, sy: 280, rot: -0.12, amp: 0.34 },
+    ],
+    levels: levelsBetween(0.14, 0.9, 14),
+  },
+  "top-right": {
+    warp: 38,
+    peaks: [
+      { cx: 1280, cy: 140, sx: 440, sy: 300, rot: 0.38, amp: 1 },
+      { cx: 1060, cy: 100, sx: 280, sy: 170, rot: -0.4, amp: 0.48 },
+      { cx: 1360, cy: 360, sx: 210, sy: 260, rot: -0.18, amp: 0.3 },
+    ],
+    levels: levelsBetween(0.14, 0.9, 13),
+  },
+  "top-left": {
+    warp: 38,
+    peaks: [
+      { cx: 160, cy: 140, sx: 440, sy: 300, rot: -0.35, amp: 1 },
+      { cx: 380, cy: 100, sx: 280, sy: 170, rot: 0.42, amp: 0.48 },
+      { cx: 80, cy: 360, sx: 210, sy: 260, rot: 0.16, amp: 0.3 },
+    ],
+    levels: levelsBetween(0.14, 0.9, 13),
+  },
+};
+
+const ANCHOR_ASPECT: Record<
+  NonNullable<ContourProps["anchor"]>,
+  string
+> = {
+  "bottom-right": "xMaxYMax slice",
+  "bottom-left": "xMinYMax slice",
+  "top-right": "xMaxYMin slice",
+  "top-left": "xMinYMin slice",
+};
+
+const ANCHOR_FADE: Record<
+  NonNullable<ContourProps["anchor"]>,
+  { x1: string; y1: string; x2: string; y2: string }
+> = {
+  "bottom-right": { x1: "100%", y1: "100%", x2: "20%", y2: "15%" },
+  "bottom-left": { x1: "0%", y1: "100%", x2: "80%", y2: "15%" },
+  "top-right": { x1: "100%", y1: "0%", x2: "20%", y2: "85%" },
+  "top-left": { x1: "0%", y1: "0%", x2: "80%", y2: "85%" },
+};
+
+const PATTERN_FADE: Record<
+  NonNullable<ContourProps["pattern"]>,
+  { x1: string; y1: string; x2: string; y2: string; aspect: string }
+> = {
+  green: { x1: "88%", y1: "28%", x2: "8%", y2: "92%", aspect: "xMaxYMid slice" },
+  ridge: { x1: "12%", y1: "18%", x2: "92%", y2: "88%", aspect: "xMidYMid slice" },
+  swale: { x1: "50%", y1: "100%", x2: "50%", y2: "5%", aspect: "xMidYMax slice" },
+  apron: { x1: "12%", y1: "95%", x2: "88%", y2: "12%", aspect: "xMinYMax slice" },
 };
 
 const CACHE = new Map<string, Ring[]>();
@@ -372,14 +437,18 @@ function getRings(key: string, terrain: Terrain) {
 
 export function Contour({
   className = "",
-  opacity = 1,
-  variant = "corner",
+  opacity = 0.08,
+  pattern,
   anchor = "bottom-right",
 }: ContourProps) {
-  const rings =
-    variant === "field"
-      ? getRings("field", FIELD_TERRAIN)
-      : getRings(`corner:${anchor}`, CORNER_TERRAIN[anchor]);
+  const isCorner = !pattern;
+  const rings = isCorner
+    ? getRings(`corner:${anchor}`, CORNER_TERRAIN[anchor])
+    : getRings(`pattern:${pattern}`, PATTERNS[pattern]);
+
+  const fadeId = `contour-fade-${isCorner ? anchor : pattern}`;
+  const fade = isCorner ? ANCHOR_FADE[anchor] : PATTERN_FADE[pattern];
+  const aspect = isCorner ? ANCHOR_ASPECT[anchor] : PATTERN_FADE[pattern].aspect;
 
   return (
     <svg
@@ -389,20 +458,44 @@ export function Contour({
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden
       style={{ opacity }}
-      preserveAspectRatio="xMidYMid slice"
+      preserveAspectRatio={aspect}
     >
-      {rings.map((ring, index) => (
-        <path
-          key={index}
-          d={ring.d}
-          stroke="#009A6D"
-          strokeWidth={ring.width}
-          strokeOpacity={ring.opacity}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          vectorEffect="non-scaling-stroke"
-        />
-      ))}
+      <defs>
+        <linearGradient
+          id={fadeId}
+          x1={fade.x1}
+          y1={fade.y1}
+          x2={fade.x2}
+          y2={fade.y2}
+        >
+          <stop offset="0%" stopColor="#fff" stopOpacity="1" />
+          <stop offset="55%" stopColor="#fff" stopOpacity="0.55" />
+          <stop offset="100%" stopColor="#fff" stopOpacity="0" />
+        </linearGradient>
+        <mask id={`${fadeId}-mask`}>
+          <rect width={WIDTH} height={HEIGHT} fill={`url(#${fadeId})`} />
+        </mask>
+        <linearGradient id={`${fadeId}-stroke`} x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#009A6D" stopOpacity="0.85" />
+          <stop offset="55%" stopColor="#009A6D" stopOpacity="1" />
+          <stop offset="100%" stopColor="#00a878" stopOpacity="0.75" />
+        </linearGradient>
+      </defs>
+
+      <g mask={`url(#${fadeId}-mask)`}>
+        {rings.map((ring, index) => (
+          <path
+            key={index}
+            d={ring.d}
+            stroke={`url(#${fadeId}-stroke)`}
+            strokeWidth={ring.width}
+            strokeOpacity={ring.opacity}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            vectorEffect="non-scaling-stroke"
+          />
+        ))}
+      </g>
     </svg>
   );
 }

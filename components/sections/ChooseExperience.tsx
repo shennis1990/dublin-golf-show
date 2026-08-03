@@ -9,7 +9,7 @@ export function ChooseExperience() {
   return (
     <section id="experience" className="section-y relative overflow-hidden">
       <div className="absolute inset-0" aria-hidden>
-        <Contour opacity={0.11} />
+        <Contour pattern="swale" opacity={0.05} />
       </div>
 
       <Container className="relative">

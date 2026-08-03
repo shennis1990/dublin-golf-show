@@ -221,22 +221,6 @@ body {
   animation: scroll-pulse 2.2s ease-in-out infinite;
 }
 
-@keyframes contour-drift {
-  0% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  50% {
-    transform: translate3d(-1.5%, 1%, 0) scale(1.03);
-  }
-  100% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-}
-
-.contour-drift {
-  animation: contour-drift 28s ease-in-out infinite;
-}
-
 @keyframes story-progress {
   from {
     transform: scaleX(0);

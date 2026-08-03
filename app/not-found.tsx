@@ -16,7 +16,7 @@ export default function NotFound() {
   return (
     <main className="relative flex min-h-[100svh] items-center overflow-hidden bg-background">
       <div className="pointer-events-none absolute inset-0" aria-hidden>
-        <Contour variant="corner" anchor="top-right" opacity={0.7} />
+        <Contour anchor="top-right" opacity={0.1} />
       </div>
 
       <div className="section-y relative z-10 mx-auto w-full max-w-3xl px-6 text-center md:px-10">

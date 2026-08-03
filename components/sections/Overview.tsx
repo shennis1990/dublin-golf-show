@@ -17,7 +17,7 @@ export function Overview() {
   return (
     <section id="about" className="section-y relative overflow-hidden">
       <div className="absolute inset-0" aria-hidden>
-        <Contour className="contour-drift" opacity={0.14} />
+        <Contour pattern="green" opacity={0.07} />
       </div>
 
       <Container className="relative">

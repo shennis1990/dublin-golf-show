@@ -59,7 +59,7 @@ export function Footer() {
   return (
     <footer id="contact" className="section-y relative overflow-hidden border-t border-line bg-[#070d16]">
       <div className="pointer-events-none absolute inset-0" aria-hidden>
-        <Contour variant="corner" anchor="bottom-right" opacity={0.95} />
+        <Contour anchor="bottom-right" opacity={0.14} />
       </div>
 
       <Container className="relative">

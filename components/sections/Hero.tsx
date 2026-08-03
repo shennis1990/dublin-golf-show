@@ -47,8 +47,8 @@ export function Hero() {
       {/* Soft bottom fade so the next section can peek through */}
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,17,28,0.28)_0%,transparent_24%,transparent_68%,rgba(10,17,28,0.72)_100%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_50%,rgba(10,17,28,0.28)_100%)]" />
-      <div className="contour-drift absolute inset-0" aria-hidden>
-        <Contour opacity={0.07} />
+      <div className="absolute inset-0" aria-hidden>
+        <Contour pattern="ridge" opacity={0.06} />
       </div>
 
       <Container className="relative z-10 w-full md:-translate-y-9 lg:-translate-y-10">
