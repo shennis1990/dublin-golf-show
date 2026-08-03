@@ -29,12 +29,24 @@ const slides = [
   },
   {
     src: "/images/stories/discover.jpg",
-    alt: "Visitors exploring premium golf equipment and stands",
-    eyebrow: "Discover",
-    title: "Explore brands, products and experiences",
-    caption: "RDS Simmonscourt, Dublin",
-    objectPosition: "50% 50%",
-    quality: 90,
+    alt: "A couple exploring the Dublin Golf Show exhibition floor among equipment, apparel and experiences",
+    eyebrow: "19–20 June 2027",
+    title: "Discover the future of golf",
+    caption: "Explore equipment, travel, coaching, technology and experiences.",
+    // Keep the couple central while retaining aisle depth and surrounding stands
+    objectPosition: "50% 42%",
+    quality: 95,
+    priority: false,
+  },
+  {
+    src: "/images/stories/connect.jpg",
+    alt: "Three guests sharing coffee and conversation at The Fairway Club lounge during Dublin Golf Show",
+    eyebrow: "19–20 June 2027",
+    title: "The Fairway Club",
+    caption: "Coffee. Conversations. Connections.",
+    // Keep the standing trio and Fairway Club signage in frame
+    objectPosition: "50% 45%",
+    quality: 95,
     priority: false,
   },
 ] as const;

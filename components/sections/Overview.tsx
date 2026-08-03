@@ -26,7 +26,7 @@ export function Overview() {
             <Reveal>
               <p className="eyebrow">Event Overview</p>
               <h2 className="heading-section mt-4 md:mt-5">
-                Two days closer to the game you love.
+                Two days. Closer to the game you love.
               </h2>
             </Reveal>
 

@@ -1,20 +1,6 @@
-import sharp from "sharp";
 import { mkdirSync, unlinkSync, copyFileSync, existsSync } from "fs";
 
 mkdirSync("public/images/stories", { recursive: true });
-
-const W = 1080;
-const H = 1350; // 4:5 portrait stories
-
-async function portraitCrop(src, out, box) {
-  await sharp(src)
-    .extract(box)
-    .resize(W, H, { fit: "cover", position: "centre" })
-    .modulate({ brightness: 1.02, saturation: 0.9 })
-    .jpeg({ quality: 90, mozjpeg: true })
-    .toFile(out);
-  console.log("wrote", out);
-}
 
 function copyEditorial(src, dest, label) {
   if (!existsSync(src)) {
@@ -41,13 +27,21 @@ copyEditorial(
   "WATCH",
 );
 
-// DISCOVER — visitors exploring premium stands & product (hall-3 right)
-await portraitCrop("public/images/hall-3.png", "public/images/stories/discover.jpg", {
-  left: 980,
-  top: 50,
-  width: 860,
-  height: 770,
-});
+// DISCOVER — supplied exhibition-floor portrait
+copyEditorial(
+  process.env.DISCOVER_STORY_SOURCE ||
+    "C:/Users/Shane Ennis/.cursor/projects/c-Projects-dublin-golf-show/assets/c__Users_Shane_Ennis_AppData_Roaming_Cursor_User_workspaceStorage_empty-window_images_image-8497c15a-75ee-4abb-8f52-070541c32a70.png",
+  "public/images/stories/discover.jpg",
+  "DISCOVER",
+);
+
+// CONNECT — supplied Fairway Club lounge portrait
+copyEditorial(
+  process.env.CONNECT_STORY_SOURCE ||
+    "C:/Users/Shane Ennis/.cursor/projects/c-Projects-dublin-golf-show/assets/c__Users_Shane_Ennis_AppData_Roaming_Cursor_User_workspaceStorage_empty-window_images_image-966b229d-24ff-4173-98cd-107c40e9bfe9.png",
+  "public/images/stories/connect.jpg",
+  "CONNECT",
+);
 
 for (const stale of ["try-v2.jpg", "watch-v2.jpg", "discover-alt.jpg", "discover-v2.jpg"]) {
   try {
@@ -57,4 +51,4 @@ for (const stale of ["try-v2.jpg", "watch-v2.jpg", "discover-alt.jpg", "discover
   }
 }
 
-console.log("Story crops ready.");
+console.log("Story images ready.");
