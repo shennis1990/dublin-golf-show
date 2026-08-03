@@ -28,7 +28,7 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-[100svh] items-end overflow-hidden pb-28 pt-28 md:items-center md:pb-[18vh] md:pt-24"
+      className="relative flex min-h-[85svh] items-end overflow-hidden pb-20 pt-28 md:min-h-[85svh] md:items-center md:pb-24 md:pt-28"
     >
       <div ref={layerRef} className="absolute inset-0 scale-105 will-change-transform">
         <Image
@@ -38,55 +38,50 @@ export function Hero() {
           priority
           fetchPriority="high"
           sizes="100vw"
-          className="object-cover object-center brightness-[0.72] contrast-[1.05] saturate-[0.92] blur-[2px] scale-105"
+          className="object-cover object-center brightness-[0.88] contrast-[1.04] saturate-[0.95]"
         />
       </div>
 
-      {/* Stronger dark wash for type contrast */}
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,17,28,0.72)_0%,rgba(10,17,28,0.78)_40%,rgba(10,17,28,0.94)_100%)]" />
-      {/* Soft emerald lift behind the focal area */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_45%,rgba(0,154,109,0.14)_0%,transparent_52%)]" />
-      {/* Edge vignette */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_28%,rgba(10,17,28,0.55)_72%,rgba(10,17,28,0.88)_100%)]" />
+      {/* Left content column — keeps type legible while letting photography breathe */}
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,17,28,0.88)_0%,rgba(10,17,28,0.62)_38%,rgba(10,17,28,0.22)_62%,rgba(10,17,28,0.08)_100%)]" />
+      {/* Soft bottom fade into next section */}
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,17,28,0.35)_0%,transparent_28%,transparent_62%,rgba(10,17,28,0.78)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_45%,rgba(10,17,28,0.35)_100%)]" />
       <div className="contour-drift absolute inset-0" aria-hidden>
-        <Contour opacity={0.12} />
+        <Contour opacity={0.08} />
       </div>
 
-      <Container className="relative z-10 w-full md:-translate-y-8 lg:-translate-y-12">
-        <div className="max-w-4xl">
-          <h1 className="font-display text-[3.4rem] font-bold uppercase leading-[0.9] tracking-tight text-white sm:text-[4.05rem] md:text-[5.05rem] lg:text-[6.5rem]">
+      <Container className="relative z-10 w-full">
+        <div className="flex max-w-xl flex-col items-start md:max-w-2xl">
+          <h1 className="font-display text-[3rem] font-bold uppercase leading-[0.9] tracking-tight text-white sm:text-[3.75rem] md:text-[4.75rem] lg:text-[5.75rem]">
             Dublin Golf Show{" "}
             <span className="text-accent">2027</span>
           </h1>
 
-          <p className="mt-6 font-display text-[1.55rem] font-normal uppercase leading-[1.05] tracking-tight text-white/85 sm:mt-7 sm:text-[1.85rem] md:mt-8 md:text-[2.3rem] lg:text-[2.95rem]">
+          <p className="mt-5 font-display text-[1.35rem] font-normal uppercase leading-[1.05] tracking-tight text-white/85 sm:mt-6 sm:text-[1.65rem] md:text-[2rem] lg:text-[2.5rem]">
             Ireland&apos;s Festival of Golf
           </p>
 
-          <div className="mt-9 h-px w-36 bg-gradient-to-r from-accent via-accent/70 to-transparent md:mt-10" />
+          <div className="mt-8 h-px w-28 bg-gradient-to-r from-accent via-accent/70 to-transparent md:mt-9" />
 
-          <p className="mt-10 max-w-md text-base font-light leading-relaxed text-white/75 md:mt-12 md:text-lg">
+          <p className="body-copy prose-width mt-8 text-white/75 md:mt-9">
             Ireland&apos;s biggest celebration of golf brings together players, brands,
             destinations and innovators for two unforgettable days at RDS Simmonscourt.
           </p>
 
-          <div className="mt-12 flex flex-wrap gap-4 md:mt-14">
-            <RegisterInterestButton className="!px-9 !py-4 !text-[14px]">
-              Register Interest
-            </RegisterInterestButton>
-            <PartnerWithUsButton className="!border-white/25 !px-9 !py-4 !text-[14px] hover:!border-accent/60">
-              Partner With Us
-            </PartnerWithUsButton>
+          <div className="cta-row mt-10 md:mt-12">
+            <RegisterInterestButton>Register Interest</RegisterInterestButton>
+            <PartnerWithUsButton>Partner With Us</PartnerWithUsButton>
           </div>
         </div>
       </Container>
 
       <a
         href="#about"
-        className="absolute bottom-8 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-3 text-white/45 transition-colors hover:text-white"
+        className="absolute bottom-6 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-3 text-white/45 transition-colors hover:text-white md:bottom-8"
         aria-label="Scroll to about"
       >
-        <span className="flex h-10 w-px items-start justify-center overflow-hidden bg-white/20">
+        <span className="flex h-9 w-px items-start justify-center overflow-hidden bg-white/20">
           <span className="scroll-dot block h-2 w-px bg-accent" />
         </span>
       </a>

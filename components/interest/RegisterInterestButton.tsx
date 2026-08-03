@@ -7,12 +7,14 @@ import { useInterestModal } from "@/components/interest/InterestModalProvider";
 type RegisterInterestButtonProps = {
   children?: ReactNode;
   variant?: "primary" | "ghost";
+  size?: "default" | "sm";
   className?: string;
 } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children" | "onClick" | "type">;
 
 export function RegisterInterestButton({
   children = "Register Interest",
   variant = "primary",
+  size = "default",
   className = "",
   ...props
 }: RegisterInterestButtonProps) {
@@ -22,6 +24,7 @@ export function RegisterInterestButton({
     <Button
       type="button"
       variant={variant}
+      size={size}
       className={className}
       onClick={openInterestModal}
       {...props}

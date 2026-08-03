@@ -26,12 +26,12 @@ export function FinalStatement() {
         </div>
       </div>
 
-      <Container className="relative flex min-h-[85vh] items-center py-28 md:py-36">
-        <div className="mx-auto max-w-5xl text-center">
+      <Container className="section-y relative flex min-h-[72vh] items-center md:min-h-[78vh]">
+        <div className="mx-auto max-w-4xl text-center">
           <Reveal>
             <h2
               id="final-statement-heading"
-              className="font-display text-5xl font-bold uppercase leading-[0.92] tracking-tight text-white sm:text-6xl md:text-7xl lg:text-8xl"
+              className="font-display text-4xl font-bold uppercase leading-[0.92] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl"
             >
               The Future of Golf
               <span className="block text-accent">Comes Together.</span>
@@ -39,13 +39,13 @@ export function FinalStatement() {
           </Reveal>
 
           <Reveal delay={1}>
-            <p className="mx-auto mt-8 max-w-2xl text-base font-light leading-relaxed text-white/70 md:text-lg">
+            <p className="body-copy mx-auto mt-7 max-w-xl text-white/70 md:mt-8">
               Whether you play, coach, travel, innovate, invest or simply love the game, Dublin
               Golf Show is where Ireland&apos;s golf community comes together.
             </p>
           </Reveal>
 
-          <Reveal delay={2} className="mt-12 flex flex-wrap items-center justify-center gap-4">
+          <Reveal delay={2} className="cta-row mt-10 justify-center md:mt-12">
             <RegisterInterestButton>Register Interest</RegisterInterestButton>
             <PartnerWithUsButton>Partner With Us</PartnerWithUsButton>
           </Reveal>

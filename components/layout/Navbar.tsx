@@ -50,37 +50,36 @@ export function Navbar() {
       }`}
     >
       <nav
-        className="mx-auto flex h-[4.5rem] max-w-7xl items-center justify-between px-6 md:h-20 md:px-10 lg:px-14"
+        className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 md:h-[5.25rem] md:px-10 lg:px-14"
         aria-label="Primary"
       >
         <a
           href="#top"
           className="group relative z-10 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
         >
-          <span className="font-display text-lg font-bold uppercase leading-none tracking-[0.04em] text-white md:text-xl">
+          <span className="font-display text-xl font-bold uppercase leading-none tracking-[0.04em] text-white md:text-[1.35rem]">
             Dublin Golf Show <span className="text-accent">2027</span>
           </span>
           <span className="mt-1.5 block h-px w-full bg-gradient-to-r from-accent via-white/70 to-transparent transition-opacity duration-500 group-hover:opacity-80" />
         </a>
 
-        <div className="hidden items-center gap-10 lg:flex">
+        <div className="hidden items-center gap-11 lg:flex">
           {links.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="rounded-sm font-display text-[12px] font-semibold uppercase tracking-[0.1em] text-white/70 transition-colors duration-300 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+              className="group relative rounded-sm font-display text-[13px] font-semibold uppercase tracking-[0.1em] text-white/65 transition-colors duration-300 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
             >
               {link.label}
+              <span className="absolute -bottom-1 left-0 h-px w-0 bg-accent transition-all duration-300 group-hover:w-full" />
             </a>
           ))}
-          <RegisterInterestButton className="!px-6 !py-2.5 !text-[11px]">
-            Register Interest
-          </RegisterInterestButton>
+          <RegisterInterestButton size="sm">Register Interest</RegisterInterestButton>
         </div>
 
         <button
           type="button"
-          className="relative z-10 inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-white transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent lg:hidden"
+          className="relative z-10 inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/[0.04] text-white transition-colors hover:border-white/30 hover:bg-white/[0.07] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent lg:hidden"
           aria-expanded={open}
           aria-controls={menuId}
           aria-label={open ? "Close menu" : "Open menu"}
@@ -106,20 +105,20 @@ export function Navbar() {
           open ? "block" : "hidden"
         }`}
       >
-        <div className="flex flex-col gap-1 px-6 py-8" role="navigation" aria-label="Mobile">
+        <div className="flex flex-col gap-1 px-6 py-10" role="navigation" aria-label="Mobile">
           {links.map((link) => (
             <a
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
-              className="rounded-xl px-3 py-3 font-display text-2xl font-bold uppercase tracking-[0.04em] text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+              className="rounded-xl px-3 py-3.5 font-display text-2xl font-bold uppercase tracking-[0.04em] text-white transition-colors hover:text-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
             >
               {link.label}
             </a>
           ))}
           <Button
             type="button"
-            className="mt-6"
+            className="mt-8 w-full sm:w-auto"
             onClick={() => {
               setOpen(false);
               openInterestModal();

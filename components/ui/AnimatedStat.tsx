@@ -78,16 +78,16 @@ export function AnimatedStat({
   }, [decimals, suffix, target, value]);
 
   return (
-    <div ref={ref} className={`min-w-0 ${className}`}>
-      <p className="font-display text-[2.35rem] font-bold leading-none tracking-tight text-white sm:text-5xl md:text-[3.25rem] lg:text-5xl xl:text-[3.5rem]">
+    <div ref={ref} className={`min-w-0 text-left ${className}`}>
+      <p className="font-display text-5xl font-bold leading-none tracking-tight text-white sm:text-6xl lg:text-7xl">
         <span className="tabular-nums">{display}</span>
         {unit ? (
-          <span className="ml-1.5 text-[0.45em] font-semibold uppercase tracking-[0.08em] text-white/70">
+          <span className="ml-2 align-baseline text-[0.32em] font-semibold uppercase tracking-[0.1em] text-white/55">
             {unit}
           </span>
         ) : null}
       </p>
-      <p className="mt-3 font-display text-[11px] font-semibold uppercase tracking-[0.14em] text-white/50">
+      <p className="mt-4 font-display text-[11px] font-semibold uppercase tracking-[0.16em] text-white/45">
         {label}
       </p>
     </div>

@@ -46,7 +46,7 @@ export function OverviewCarousel() {
 
   return (
     <div
-      className="group relative aspect-[4/5] overflow-hidden rounded-[1.5rem] md:aspect-[5/4] lg:aspect-[4/5] xl:aspect-[5/6]"
+      className="media-frame group relative aspect-[4/5] md:aspect-[5/4] lg:aspect-[4/5] xl:aspect-[5/6]"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
@@ -110,7 +110,7 @@ export function OverviewCarousel() {
 
       <div className="absolute inset-0 bg-gradient-to-t from-[#0A111C]/80 via-[#0A111C]/15 to-[#0A111C]/25" />
 
-      <div className="absolute bottom-0 left-0 right-0 z-10 p-8 md:p-10">
+      <div className="absolute bottom-0 left-0 right-0 z-10 p-8 md:p-12">
         <p className="font-display text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
           19–20 June 2027
         </p>

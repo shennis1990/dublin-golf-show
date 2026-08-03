@@ -9,6 +9,14 @@
   --muted-strong: rgba(255, 255, 255, 0.78);
   --line: rgba(255, 255, 255, 0.1);
   --glass: rgba(10, 17, 28, 0.65);
+
+  /* Layout rhythm */
+  --section-y: 6rem;
+  --section-y-md: 8rem;
+  --section-y-lg: 9rem;
+  --radius-media: 1.5rem;
+  --prose-width: 34rem;
+  --cta-gap: 1rem;
 }
 
 @theme inline {
@@ -88,9 +96,83 @@ body {
   font-family: var(--font-body), "Manrope", ui-sans-serif, system-ui, sans-serif;
 }
 
-/* Display face defaults — weight/tracking still set per element for hierarchy */
 .font-display {
   font-family: var(--font-barlow), "Barlow Condensed", ui-sans-serif, sans-serif;
+}
+
+.section-y {
+  padding-block: var(--section-y);
+}
+
+@media (min-width: 768px) {
+  .section-y {
+    padding-block: var(--section-y-md);
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-y {
+    padding-block: var(--section-y-lg);
+  }
+}
+
+.prose-width {
+  max-width: var(--prose-width);
+}
+
+.body-copy {
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.9;
+  color: var(--muted);
+}
+
+@media (min-width: 768px) {
+  .body-copy {
+    font-size: 1.125rem;
+  }
+}
+
+.heading-section {
+  font-family: var(--font-barlow), "Barlow Condensed", ui-sans-serif, sans-serif;
+  font-size: 2.25rem;
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+@media (min-width: 768px) {
+  .heading-section {
+    font-size: 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heading-section {
+    font-size: 3.75rem;
+  }
+}
+
+.eyebrow {
+  font-family: var(--font-barlow), "Barlow Condensed", ui-sans-serif, sans-serif;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.media-frame {
+  overflow: hidden;
+  border-radius: var(--radius-media);
+}
+
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--cta-gap);
 }
 
 ::selection {
@@ -149,6 +231,10 @@ body {
   100% {
     transform: translate3d(0, 0, 0) scale(1);
   }
+}
+
+.contour-drift {
+  animation: contour-drift 28s ease-in-out infinite;
 }
 
 @keyframes story-progress {

@@ -7,12 +7,14 @@ import { usePartnerModal } from "@/components/partner/PartnerModalProvider";
 type PartnerWithUsButtonProps = {
   children?: ReactNode;
   variant?: "primary" | "ghost";
+  size?: "default" | "sm";
   className?: string;
 } & Omit<ButtonHTMLAttributes<HTMLButtonElement>, "children" | "onClick" | "type">;
 
 export function PartnerWithUsButton({
   children = "Partner With Us",
   variant = "ghost",
+  size = "default",
   className = "",
   ...props
 }: PartnerWithUsButtonProps) {
@@ -22,6 +24,7 @@ export function PartnerWithUsButton({
     <Button
       type="button"
       variant={variant}
+      size={size}
       className={className}
       onClick={openPartnerModal}
       {...props}

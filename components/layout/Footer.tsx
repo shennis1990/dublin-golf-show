@@ -57,26 +57,23 @@ export function Footer() {
   }
 
   return (
-    <footer id="contact" className="relative overflow-hidden border-t border-line bg-[#070d16] py-20 md:py-24">
-      {/* One emerald topo cluster from a height field — lines never cross */}
-      <div
-        className="pointer-events-none absolute inset-0"
-        aria-hidden
-      >
+    <footer id="contact" className="section-y relative overflow-hidden border-t border-line bg-[#070d16]">
+      <div className="pointer-events-none absolute inset-0" aria-hidden>
         <Contour variant="corner" anchor="bottom-right" opacity={0.95} />
       </div>
 
       <Container className="relative">
-        <div className="grid gap-16 lg:grid-cols-[1.2fr_0.8fr] lg:gap-24">
-          <div>
-            <p className="font-display text-[11px] font-semibold uppercase tracking-[0.14em] text-accent">
-              Stay Close
-            </p>
+        <div className="grid gap-14 lg:grid-cols-12 lg:items-start lg:gap-16">
+          <div className="lg:col-span-7">
+            <p className="eyebrow">Stay Close</p>
             <h2 className="mt-4 max-w-md font-display text-3xl font-bold uppercase leading-none tracking-tight text-white md:text-4xl">
               Be first to hear
             </h2>
 
-            <form onSubmit={onSubmit} className="mt-8 flex max-w-md flex-col gap-3 sm:flex-row">
+            <form
+              onSubmit={onSubmit}
+              className="mt-8 flex max-w-lg flex-col gap-3 sm:flex-row sm:items-center sm:gap-4"
+            >
               <label htmlFor="footer-email" className="sr-only">
                 Email address
               </label>
@@ -88,31 +85,31 @@ export function Footer() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Email address"
-                className="h-12 flex-1 rounded-full border border-white/15 bg-white/[0.03] px-5 text-sm text-white outline-none transition-colors placeholder:text-white/35 focus:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                className="h-12 w-full flex-1 rounded-full border border-white/15 bg-white/[0.03] px-5 text-sm text-white outline-none transition-colors placeholder:text-white/35 focus:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
               />
-              <Button type="submit" className="h-12 shrink-0 !px-7">
+              <Button type="submit" className="h-12 w-full shrink-0 sm:w-auto">
                 Subscribe
               </Button>
             </form>
             {done ? (
-              <p className="mt-3 text-sm text-accent">You&apos;re on the list.</p>
+              <p className="mt-4 text-sm text-accent">You&apos;re on the list.</p>
             ) : null}
           </div>
 
-          <div className="flex flex-col justify-between gap-10 sm:flex-row lg:flex-col lg:items-end lg:text-right">
-            <div>
+          <div className="grid gap-10 sm:grid-cols-2 lg:col-span-5 lg:justify-items-end lg:text-right">
+            <div className="sm:justify-self-start lg:justify-self-end">
               <p className="font-display text-[11px] font-semibold uppercase tracking-[0.12em] text-white/40">
                 Contact
               </p>
               <a
                 href="mailto:hello@dublingolfshow.ie"
-                className="mt-3 block text-lg font-light text-white transition-colors hover:text-accent"
+                className="mt-4 block text-lg font-light text-white transition-colors hover:text-accent"
               >
                 hello@dublingolfshow.ie
               </a>
             </div>
 
-            <div>
+            <div className="sm:justify-self-end">
               <p className="font-display text-[11px] font-semibold uppercase tracking-[0.12em] text-white/40">
                 Social
               </p>
@@ -124,7 +121,7 @@ export function Footer() {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${social.label} (opens in a new tab)`}
-                      className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/15 text-white/60 transition-all duration-300 hover:-translate-y-0.5 hover:border-white/30 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+                      className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 text-white/60 transition-all duration-300 hover:-translate-y-0.5 hover:border-white/30 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
                     >
                       {social.icon}
                     </a>
@@ -135,7 +132,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col gap-3 border-t border-line pt-8 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-16 flex flex-col gap-3 border-t border-line pt-8 sm:mt-20 sm:flex-row sm:items-center sm:justify-between">
           <p className="font-display text-xs font-semibold uppercase tracking-[0.1em] text-white/50">
             Dublin Golf Show 2027
           </p>
