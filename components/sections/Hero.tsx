@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { Contour } from "@/components/ui/Contour";
 import { Container } from "@/components/ui/Container";
 import { RegisterInterestButton } from "@/components/interest/RegisterInterestButton";
 import { PartnerWithUsButton } from "@/components/partner/PartnerWithUsButton";
@@ -17,7 +16,8 @@ export function Hero() {
     const onScroll = () => {
       const y = window.scrollY;
       if (y > window.innerHeight) return;
-      layer.style.transform = `translate3d(0, ${y * 0.28}px, 0) scale(1.08)`;
+      // Light parallax — keep scale modest so the cube and portal stay in frame
+      layer.style.transform = `translate3d(0, ${y * 0.22}px, 0) scale(1.03)`;
     };
 
     onScroll();
@@ -28,31 +28,26 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative flex min-h-[78svh] items-end overflow-hidden pb-16 pt-28 md:min-h-[78svh] md:items-center md:pb-20 md:pt-24"
+      className="relative flex min-h-[80svh] items-end overflow-hidden pb-14 pt-28 md:min-h-[80svh] md:items-center md:pb-16 md:pt-28"
     >
-      <div ref={layerRef} className="absolute inset-0 scale-105 will-change-transform">
+      <div ref={layerRef} className="absolute inset-0 will-change-transform">
         <Image
           src="/images/hero-hall.jpg"
-          alt="Cinematic view of the Dublin Golf Show exhibition hall at RDS Simmonscourt"
+          alt="Visitors approaching the monumental Dublin Golf Show 2027 entrance into the exhibition"
           fill
           priority
           fetchPriority="high"
           quality={95}
           sizes="100vw"
-          className="object-cover object-[68%_center] brightness-[0.97] contrast-[1.04] saturate-[0.95] md:object-[72%_center]"
+          // Frame cube (top-right), portal and crowd without heavy lateral crop
+          className="object-cover object-[58%_32%] md:object-[56%_30%] lg:object-[54%_28%]"
         />
       </div>
 
-      {/* Left ~40% content column; photography remains dominant on the right */}
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,17,28,0.86)_0%,rgba(10,17,28,0.58)_34%,rgba(10,17,28,0.22)_52%,rgba(10,17,28,0.06)_72%,transparent_100%)]" />
-      {/* Soft bottom fade so the next section can peek through */}
-      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,17,28,0.28)_0%,transparent_24%,transparent_68%,rgba(10,17,28,0.72)_100%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_50%,rgba(10,17,28,0.28)_100%)]" />
-      <div className="absolute inset-0" aria-hidden>
-        <Contour pattern="ridge" opacity={0.06} />
-      </div>
+      {/* Rely on the image’s built-in left fade; only a light bottom ease into Event Overview */}
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,transparent_0%,transparent_72%,rgba(10,17,28,0.45)_100%)]" />
 
-      <Container className="relative z-10 w-full md:-translate-y-9 lg:-translate-y-10">
+      <Container className="relative z-10 w-full md:-translate-y-3 lg:-translate-y-4">
         <div className="flex max-w-xl flex-col items-start md:max-w-3xl lg:max-w-[52rem]">
           <h1 className="font-display text-[2.85rem] font-bold uppercase leading-[0.9] tracking-tight text-white sm:text-[3.5rem] md:whitespace-nowrap md:text-[4.4rem] lg:text-[5.35rem]">
             Dublin Golf Show{" "}
