@@ -26,12 +26,13 @@ export function ChooseExperience() {
                 className="media-frame group relative aspect-[4/5] w-full overflow-hidden md:aspect-[5/6] lg:min-h-[72vh] lg:aspect-auto"
               >
                 <Image
-                  src="/images/hall-3.png"
-                  alt="Visitors examining premium golf clubs on the exhibition floor"
+                  src="/images/fans-entrance.jpg"
+                  alt="Visitors approaching the Dublin Golf Show 2027 entrance into the exhibition hall"
                   fill
                   loading="lazy"
+                  quality={95}
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover transition-transform duration-[1.6s] ease-out group-hover:scale-105"
+                  className="object-cover object-[center_42%] transition-transform duration-[1.6s] ease-out group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0A111C]/35 via-transparent to-transparent" />
               </div>
@@ -43,15 +44,17 @@ export function ChooseExperience() {
                 id="fans-heading"
                 className="heading-section mt-4 max-w-xl md:mt-5"
               >
-                Join Ireland&apos;s Festival of Golf
+                Experience Ireland&apos;s Festival of Golf
               </h2>
               <p className="body-copy prose-width mt-7 md:mt-8">
-                Hit the driving range. Explore the latest equipment. Learn from the pros. Book
-                your next golf escape. Two days built for people who live and love the game.
+                Discover the latest equipment and apparel, test cutting-edge golf technology,
+                explore unforgettable golf destinations and watch live demonstrations from
+                leading coaches and tour professionals.
               </p>
               <p className="body-copy prose-width mt-5">
-                Whether you come to try something new, meet the names you follow, or simply soak
-                in the atmosphere — this is your weekend on the fairway, under one roof.
+                Whether you&apos;re looking to improve your game, find your next set of clubs,
+                plan your next golf trip or simply enjoy the atmosphere, Dublin Golf Show brings
+                everything you love about golf together under one roof.
               </p>
               <div className="mt-10 md:mt-12">
                 <RegisterInterestButton>Get Ticket Updates</RegisterInterestButton>
@@ -88,7 +91,7 @@ export function ChooseExperience() {
               </p>
               <p className="body-copy prose-width mt-5">
                 From flagship sponsorship to curated exhibitor stands, partner with a festival
-                built to put your brand in front of players, buyers and decision-makers.
+                built to connect your brand with thousands of passionate golfers.
               </p>
               <div className="mt-10 md:mt-12">
                 <PartnerWithUsButton>Exhibit at The Dublin Golf Show</PartnerWithUsButton>
@@ -98,12 +101,13 @@ export function ChooseExperience() {
             <Reveal delay={1} className="order-1 lg:order-2">
               <div className="media-frame group relative aspect-[4/5] w-full overflow-hidden md:aspect-[5/6] lg:min-h-[72vh] lg:aspect-auto">
                 <Image
-                  src="/images/hall-floor.png"
-                  alt="Guests entering the branded Dublin Golf Show exhibition hall"
+                  src="/images/partners-floor.jpg"
+                  alt="Exhibitors and visitors in conversation on the Dublin Golf Show exhibition floor"
                   fill
                   loading="lazy"
+                  quality={95}
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover transition-transform duration-[1.6s] ease-out group-hover:scale-105"
+                  className="object-cover object-[center_45%] transition-transform duration-[1.6s] ease-out group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0A111C]/35 via-transparent to-transparent" />
               </div>
