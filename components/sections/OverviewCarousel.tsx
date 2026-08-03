@@ -7,19 +7,22 @@ const SLIDE_MS = 4000;
 
 const slides = [
   {
-    src: "/images/hall-3.png",
-    alt: "Visitors trying clubs and gear across the exhibition floor",
-    caption: "Try the latest kit",
+    src: "/images/stories/try.jpg",
+    alt: "A visitor trying a golf club with an expert on the show floor",
+    emotion: "Try",
+    caption: "Hands on with the latest kit",
   },
   {
-    src: "/images/hall-1.png",
-    alt: "Crowd gathered for a main stage interview at Dublin Golf Show",
-    caption: "Hear the voices of the game",
+    src: "/images/stories/watch.jpg",
+    alt: "A short-game masterclass with a professional demonstrating to an engaged crowd",
+    emotion: "Watch",
+    caption: "Learn from the voices of the game",
   },
   {
-    src: "/images/hall-floor.png",
-    alt: "Guests arriving into the branded Dublin Golf Show hall",
-    caption: "Feel the atmosphere",
+    src: "/images/stories/discover.jpg",
+    alt: "Visitors exploring premium golf equipment and stands",
+    emotion: "Discover",
+    caption: "Explore brands, products and experiences",
   },
 ] as const;
 
@@ -101,18 +104,23 @@ export function OverviewCarousel() {
             fill
             loading={i === 0 ? "eager" : "lazy"}
             sizes="(max-width: 1024px) 100vw, 55vw"
-            className={`object-cover transition-transform duration-[1.6s] ease-out ${
+            className={`object-cover object-center transition-transform duration-[1.6s] ease-out ${
               i === index ? "scale-100" : "scale-105"
             }`}
           />
         </div>
       ))}
 
-      <div className="absolute inset-0 bg-gradient-to-t from-[#0A111C]/80 via-[#0A111C]/15 to-[#0A111C]/25" />
+      {/* Shared cinematic grade across all slides */}
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,17,28,0.28)_0%,transparent_28%,transparent_55%,rgba(10,17,28,0.82)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(10,17,28,0.22)_100%)]" />
 
       <div className="absolute bottom-0 left-0 right-0 z-10 p-8 md:p-12">
-        <p className="font-display text-[14px] font-semibold uppercase tracking-[0.12em] text-accent">
-          19–20 June 2027
+        <p
+          key={slides[index].emotion}
+          className="font-display text-[14px] font-semibold uppercase tracking-[0.16em] text-accent"
+        >
+          {slides[index].emotion}
         </p>
         <p className="mt-2 font-display text-2xl font-bold uppercase tracking-tight text-white md:text-3xl">
           RDS Simmonscourt, Dublin
@@ -125,7 +133,6 @@ export function OverviewCarousel() {
         </p>
       </div>
 
-      {/* Accessible slide controls for keyboard / reduced motion */}
       <div className="sr-only">
         <button
           type="button"
