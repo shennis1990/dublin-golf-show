@@ -1,9 +1,13 @@
+"use client";
+
+import { useId } from "react";
+
 type ContourProps = {
   className?: string;
   /** Overall visibility. Prefer 0.04–0.10; up to ~0.15 in quiet areas. */
   opacity?: number;
   /** Small family of green-reading patterns reused sitewide. */
-  pattern?: "green" | "ridge" | "swale" | "apron";
+  pattern?: "green" | "ridge" | "swale" | "apron" | "hero";
   /** Corner-anchored placement — lines fade off-screen from this corner. */
   anchor?: "bottom-right" | "bottom-left" | "top-right" | "top-left";
 };
@@ -353,6 +357,20 @@ const PATTERNS: Record<NonNullable<ContourProps["pattern"]>, Terrain> = {
     ],
     levels: levelsBetween(0.14, 0.9, 13),
   },
+  /**
+   * Hero signature — fewer, larger rings rising behind the left content column.
+   * Uneven level spacing avoids a mechanical radar look.
+   */
+  hero: {
+    warp: 52,
+    peaks: [
+      { cx: 300, cy: 400, sx: 560, sy: 420, rot: -0.42, amp: 1 },
+      { cx: 460, cy: 620, sx: 400, sy: 280, rot: 0.38, amp: 0.58 },
+      { cx: 160, cy: 240, sx: 340, sy: 300, rot: 0.22, amp: 0.42 },
+      { cx: 620, cy: 320, sx: 280, sy: 360, rot: -0.18, amp: 0.28 },
+    ],
+    levels: [0.2, 0.31, 0.4, 0.51, 0.6, 0.69, 0.78],
+  },
 };
 
 /** Corner terrains hug one corner and fade into open space. */
@@ -423,7 +441,13 @@ const PATTERN_FADE: Record<
   ridge: { x1: "12%", y1: "18%", x2: "92%", y2: "88%", aspect: "xMidYMid slice" },
   swale: { x1: "50%", y1: "100%", x2: "50%", y2: "5%", aspect: "xMidYMax slice" },
   apron: { x1: "12%", y1: "95%", x2: "88%", y2: "12%", aspect: "xMinYMax slice" },
+  // Originate behind left copy, dissipate toward centre / Stories column
+  hero: { x1: "18%", y1: "42%", x2: "78%", y2: "48%", aspect: "xMinYMid slice" },
 };
+
+/** Absolute emerald stroke opacities for the hero signature (strongest ≈ 80%). */
+const HERO_STROKE_OPACITY = [0.8, 0.62, 0.48, 0.36, 0.26, 0.16, 0.09];
+const HERO_STROKE_WIDTH = [1.75, 1.45, 1.25, 1.05, 0.9, 0.75, 0.6];
 
 const CACHE = new Map<string, Ring[]>();
 
@@ -441,12 +465,14 @@ export function Contour({
   pattern,
   anchor = "bottom-right",
 }: ContourProps) {
+  const uid = useId().replace(/:/g, "");
   const isCorner = !pattern;
+  const isHero = pattern === "hero";
   const rings = isCorner
     ? getRings(`corner:${anchor}`, CORNER_TERRAIN[anchor])
     : getRings(`pattern:${pattern}`, PATTERNS[pattern]);
 
-  const fadeId = `contour-fade-${isCorner ? anchor : pattern}`;
+  const fadeId = `contour-fade-${uid}`;
   const fade = isCorner ? ANCHOR_FADE[anchor] : PATTERN_FADE[pattern];
   const aspect = isCorner ? ANCHOR_ASPECT[anchor] : PATTERN_FADE[pattern].aspect;
 
@@ -457,7 +483,7 @@ export function Contour({
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden
-      style={{ opacity }}
+      style={{ opacity: isHero && opacity === 0.08 ? 1 : opacity }}
       preserveAspectRatio={aspect}
     >
       <defs>
@@ -468,9 +494,20 @@ export function Contour({
           x2={fade.x2}
           y2={fade.y2}
         >
-          <stop offset="0%" stopColor="#fff" stopOpacity="1" />
-          <stop offset="55%" stopColor="#fff" stopOpacity="0.55" />
-          <stop offset="100%" stopColor="#fff" stopOpacity="0" />
+          {isHero ? (
+            <>
+              <stop offset="0%" stopColor="#fff" stopOpacity="1" />
+              <stop offset="42%" stopColor="#fff" stopOpacity="0.75" />
+              <stop offset="72%" stopColor="#fff" stopOpacity="0.28" />
+              <stop offset="100%" stopColor="#fff" stopOpacity="0" />
+            </>
+          ) : (
+            <>
+              <stop offset="0%" stopColor="#fff" stopOpacity="1" />
+              <stop offset="55%" stopColor="#fff" stopOpacity="0.55" />
+              <stop offset="100%" stopColor="#fff" stopOpacity="0" />
+            </>
+          )}
         </linearGradient>
         <mask id={`${fadeId}-mask`}>
           <rect width={WIDTH} height={HEIGHT} fill={`url(#${fadeId})`} />
@@ -487,9 +524,11 @@ export function Contour({
           <path
             key={index}
             d={ring.d}
-            stroke={`url(#${fadeId}-stroke)`}
-            strokeWidth={ring.width}
-            strokeOpacity={ring.opacity}
+            stroke={isHero ? "#009A6D" : `url(#${fadeId}-stroke)`}
+            strokeWidth={isHero ? HERO_STROKE_WIDTH[index] ?? ring.width : ring.width}
+            strokeOpacity={
+              isHero ? HERO_STROKE_OPACITY[index] ?? ring.opacity * 0.5 : ring.opacity
+            }
             strokeLinecap="round"
             strokeLinejoin="round"
             vectorEffect="non-scaling-stroke"

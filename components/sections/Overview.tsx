@@ -16,7 +16,7 @@ export function Overview() {
   return (
     <section
       id="about"
-      className="relative overflow-hidden pb-16 pt-8 md:pb-20 md:pt-10 lg:pb-24 lg:pt-12"
+      className="relative overflow-hidden pb-16 pt-12 md:pb-20 md:pt-14 lg:pb-24 lg:pt-16"
     >
       <div className="absolute inset-0" aria-hidden>
         <Contour pattern="green" opacity={0.05} />

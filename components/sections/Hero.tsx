@@ -9,33 +9,24 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative overflow-hidden bg-[#0A111C] lg:h-[73svh] lg:min-h-[72svh] lg:max-h-[75svh]"
+      className="relative overflow-hidden bg-[#0A111C] lg:h-[78svh] lg:min-h-[75svh] lg:max-h-[80svh]"
     >
-      {/* Contour layers — architectural depth across the full hero */}
+      {/* Signature hero contours — topographic brand mark, not ambient texture */}
       <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
+        <Contour pattern="hero" className="scale-[1.35] origin-[12%_45%]" />
+        {/* Secondary quieter layer for depth beneath the Stories column */}
         <Contour
-          pattern="ridge"
-          opacity={0.13}
-          className="scale-[1.55] origin-[8%_42%]"
+          pattern="hero"
+          opacity={0.35}
+          className="scale-[1.15] origin-[70%_60%]"
         />
-        <Contour
-          pattern="green"
-          opacity={0.07}
-          className="scale-[1.25] origin-[20%_70%]"
-        />
-        <Contour
-          anchor="bottom-left"
-          opacity={0.06}
-          className="scale-110 origin-bottom-left"
-        />
-        {/* Soft fade toward centre so contours texture the field without fighting type */}
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(10,17,28,0.15)_0%,rgba(10,17,28,0.45)_38%,rgba(10,17,28,0.55)_52%,rgba(10,17,28,0.2)_72%,transparent_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_35%_45%,rgba(10,17,28,0.5)_0%,transparent_55%)]" />
+        {/* Soft centre wash so type stays primary */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_32%_48%,rgba(10,17,28,0.42)_0%,rgba(10,17,28,0.12)_42%,transparent_68%)]" />
       </div>
 
-      <div className="relative z-10 mx-auto grid h-full max-w-7xl items-center gap-6 px-6 pb-12 pt-28 md:gap-8 md:px-10 md:pb-12 md:pt-28 lg:grid-cols-[minmax(0,45fr)_minmax(0,55fr)] lg:gap-8 lg:px-14 lg:pb-8 lg:pt-24 xl:gap-10">
+      <div className="relative z-10 mx-auto grid h-full max-w-7xl items-center gap-6 px-6 pb-16 pt-32 md:gap-7 md:px-10 md:pb-16 md:pt-36 lg:grid-cols-[minmax(0,45fr)_minmax(0,55fr)] lg:gap-7 lg:px-14 lg:pb-14 lg:pt-32 xl:gap-8">
         {/* Left ~45% — copy */}
-        <div className="relative flex items-center lg:pr-2">
+        <div className="relative flex items-center lg:pr-1">
           <div className="relative flex w-full max-w-[30rem] flex-col items-start xl:max-w-[32rem]">
             <h1 className="font-display text-[2.65rem] font-bold uppercase leading-[0.9] tracking-tight text-white sm:text-[3.25rem] md:text-[3.85rem] lg:text-[4.5rem] xl:text-[4.85rem]">
               Dublin Golf Show{" "}
@@ -62,22 +53,10 @@ export function Hero() {
 
         {/* Right ~55% — Stories as primary editorial feature */}
         <div className="relative flex h-full items-center justify-center lg:justify-end">
-          <div className="relative w-full max-w-[28rem] sm:max-w-[30rem] xl:max-w-[32rem]">
-            {/* Contours continue behind the card for depth */}
-            <div
-              className="pointer-events-none absolute -inset-12 -z-10 lg:-inset-16"
-              aria-hidden
-            >
-              <Contour
-                pattern="apron"
-                opacity={0.09}
-                className="scale-125 origin-center"
-              />
-            </div>
-
+          <div className="relative w-full max-w-[31.5rem] sm:max-w-[33.5rem] xl:max-w-[36rem]">
             <OverviewCarousel
               className="aspect-[4/5]"
-              sizes="(max-width: 1024px) 90vw, min(32rem, 42vw)"
+              sizes="(max-width: 1024px) 90vw, min(36rem, 46vw)"
             />
           </div>
         </div>
@@ -85,10 +64,10 @@ export function Hero() {
 
       <a
         href="#about"
-        className="absolute bottom-3.5 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2 text-white/40 transition-colors hover:text-white lg:bottom-4"
+        className="absolute bottom-5 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2.5 text-white/40 transition-colors hover:text-white lg:bottom-6"
         aria-label="Scroll to about"
       >
-        <span className="flex h-6 w-px items-start justify-center overflow-hidden bg-white/20">
+        <span className="flex h-7 w-px items-start justify-center overflow-hidden bg-white/20">
           <span className="scroll-dot block h-2 w-px bg-accent" />
         </span>
       </a>
