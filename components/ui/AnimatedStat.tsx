@@ -7,6 +7,8 @@ type AnimatedStatProps = {
   label: string;
   unit?: string;
   className?: string;
+  /** Slightly tighter display for editorial sidebars */
+  compact?: boolean;
 };
 
 function parseTarget(value: string) {
@@ -26,6 +28,7 @@ export function AnimatedStat({
   label,
   unit,
   className = "",
+  compact = false,
 }: AnimatedStatProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [display, setDisplay] = useState(value.startsWith("0") ? value : "0");
@@ -79,7 +82,13 @@ export function AnimatedStat({
 
   return (
     <div ref={ref} className={`min-w-0 text-left ${className}`}>
-      <p className="font-display text-5xl font-bold leading-none tracking-tight text-white sm:text-6xl lg:text-7xl">
+      <p
+        className={`font-display font-bold leading-none tracking-tight text-white ${
+          compact
+            ? "text-4xl sm:text-5xl lg:text-5xl xl:text-6xl"
+            : "text-5xl sm:text-6xl lg:text-7xl"
+        }`}
+      >
         <span className="tabular-nums">{display}</span>
         {unit ? (
           <span className="ml-2 align-baseline text-sm font-semibold uppercase tracking-[0.1em] text-white/55 sm:text-base">
@@ -87,7 +96,11 @@ export function AnimatedStat({
           </span>
         ) : null}
       </p>
-      <p className="mt-4 font-display text-[14px] font-semibold uppercase tracking-[0.14em] text-white/45">
+      <p
+        className={`font-display text-[14px] font-semibold uppercase tracking-[0.14em] text-white/45 ${
+          compact ? "mt-3" : "mt-4"
+        }`}
+      >
         {label}
       </p>
     </div>

@@ -23,7 +23,6 @@ const slides = [
     title: "Play the latest simulators",
     caption:
       "Compare the newest launch monitors, simulators and game-improvement technology.",
-    // Keep golfer, simulator screen, ball flight and Track/Analyze kiosk in frame
     objectPosition: "50% 48%",
     quality: 95,
     priority: false,
@@ -34,7 +33,6 @@ const slides = [
     eyebrow: "19–20 June 2027",
     title: "Hear the biggest voices in golf",
     caption: "In conversation at RDS Simmonscourt",
-    // Keep speakers + LED branding clear; audience fills the lower frame
     objectPosition: "50% 40%",
     quality: 95,
     priority: false,
@@ -45,7 +43,6 @@ const slides = [
     eyebrow: "19–20 June 2027",
     title: "Discover the future of golf",
     caption: "Explore equipment, travel, coaching, technology and experiences.",
-    // Keep the couple central while retaining aisle depth and surrounding stands
     objectPosition: "50% 42%",
     quality: 95,
     priority: false,
@@ -56,14 +53,21 @@ const slides = [
     eyebrow: "19–20 June 2027",
     title: "The Fairway Club",
     caption: "Coffee. Conversations. Connections.",
-    // Keep the standing trio and Fairway Club signage in frame
     objectPosition: "50% 45%",
     quality: 95,
     priority: false,
   },
 ] as const;
 
-export function OverviewCarousel() {
+type OverviewCarouselProps = {
+  className?: string;
+  sizes?: string;
+};
+
+export function OverviewCarousel({
+  className = "aspect-[4/5]",
+  sizes = "(max-width: 768px) 100vw, (max-width: 1024px) 55vw, 28vw",
+}: OverviewCarouselProps) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
@@ -87,7 +91,7 @@ export function OverviewCarousel() {
 
   return (
     <div
-      className="media-frame group relative aspect-[4/5] md:aspect-[5/4] lg:aspect-[4/5] xl:aspect-[5/6]"
+      className={`media-frame group relative w-full overflow-hidden ${className}`}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)}
@@ -143,7 +147,7 @@ export function OverviewCarousel() {
             priority={slide.priority}
             loading={slide.priority ? undefined : "lazy"}
             quality={slide.quality}
-            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 90vw, 55vw"
+            sizes={sizes}
             className={`object-cover transition-transform duration-[1.6s] ease-out ${
               i === index ? "scale-100" : "scale-105"
             }`}
@@ -156,7 +160,7 @@ export function OverviewCarousel() {
       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,17,28,0.28)_0%,transparent_28%,transparent_55%,rgba(10,17,28,0.82)_100%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(10,17,28,0.22)_100%)]" />
 
-      <div className="absolute bottom-0 left-0 right-0 z-10 p-8 md:p-12">
+      <div className="absolute bottom-0 left-0 right-0 z-10 p-6 md:p-8 xl:p-10">
         <p
           key={`${active.src}-eyebrow`}
           className="font-display text-[14px] font-semibold uppercase tracking-[0.16em] text-accent"
@@ -165,13 +169,13 @@ export function OverviewCarousel() {
         </p>
         <p
           key={`${active.src}-title`}
-          className="mt-2 max-w-md font-display text-2xl font-bold uppercase leading-[0.95] tracking-tight text-white md:text-3xl"
+          className="mt-2 max-w-md font-display text-xl font-bold uppercase leading-[0.95] tracking-tight text-white md:text-2xl xl:text-[1.75rem]"
         >
           {active.title}
         </p>
         <p
           key={`${active.src}-caption`}
-          className="mt-3 font-display text-[14px] font-medium uppercase tracking-[0.12em] text-white/70 transition-opacity duration-500"
+          className="mt-3 font-display text-[13px] font-medium uppercase tracking-[0.12em] text-white/70 transition-opacity duration-500 md:text-[14px]"
         >
           {active.caption}
         </p>

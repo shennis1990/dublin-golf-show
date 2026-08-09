@@ -1,7 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { Contour } from "@/components/ui/Contour";
+import { OverviewCarousel } from "@/components/sections/OverviewCarousel";
 import { RegisterInterestButton } from "@/components/interest/RegisterInterestButton";
 import { PartnerWithUsButton } from "@/components/partner/PartnerWithUsButton";
 
@@ -11,10 +11,10 @@ export function Hero() {
       id="top"
       className="relative min-h-[80svh] overflow-hidden bg-[#0A111C]"
     >
-      <div className="grid min-h-[80svh] lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
-        {/* Left ~40% — brand copy on solid dark, no hero image */}
-        <div className="relative z-10 flex flex-col justify-center px-6 pb-14 pt-28 md:px-10 md:pb-16 md:pt-28 lg:px-14 lg:pb-16 xl:pr-10">
-          <div className="pointer-events-none absolute inset-0" aria-hidden>
+      <div className="grid min-h-[80svh] items-center gap-10 px-6 pb-16 pt-28 md:gap-12 md:px-10 md:pb-16 md:pt-28 lg:grid-cols-[minmax(0,45fr)_minmax(0,55fr)] lg:gap-14 lg:px-14 lg:pb-14 xl:gap-16">
+        {/* Left ~45% — brand copy */}
+        <div className="relative z-10 flex flex-col justify-center lg:pr-4">
+          <div className="pointer-events-none absolute inset-0 -mx-6 md:-mx-10 lg:mx-0" aria-hidden>
             <Contour pattern="ridge" opacity={0.07} />
           </div>
 
@@ -42,28 +42,14 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Right ~60% — hero artwork only */}
-        <div className="relative min-h-[52vh] lg:min-h-[80svh]">
-          <Image
-            src="/images/hero-entrance.jpg"
-            alt="Visitors approaching the monumental Dublin Golf Show 2027 entrance into the exhibition"
-            fill
-            priority
-            fetchPriority="high"
-            quality={95}
-            sizes="(max-width: 1024px) 100vw, 60vw"
-            className="object-cover object-[52%_28%] md:object-[50%_26%] lg:object-[48%_24%]"
-          />
-
-          {/* CSS-only blend into the copy column — no baked image fade */}
-          <div
-            className="pointer-events-none absolute inset-x-0 top-0 z-[1] h-28 bg-[linear-gradient(180deg,#0A111C_0%,transparent_100%)] lg:hidden"
-            aria-hidden
-          />
-          <div
-            className="pointer-events-none absolute inset-y-0 left-0 z-[1] hidden w-[32%] bg-[linear-gradient(90deg,#0A111C_0%,rgba(10,17,28,0.72)_28%,rgba(10,17,28,0.28)_58%,transparent_100%)] lg:block"
-            aria-hidden
-          />
+        {/* Right ~55% — Stories carousel as primary visual */}
+        <div className="relative z-10 flex justify-center lg:justify-end lg:pl-2">
+          <div className="w-full max-w-[19.5rem] sm:max-w-[21rem] md:max-w-[22.5rem] xl:max-w-[24rem]">
+            <OverviewCarousel
+              className="aspect-[4/5]"
+              sizes="(max-width: 1024px) 90vw, 24rem"
+            />
+          </div>
         </div>
       </div>
 
