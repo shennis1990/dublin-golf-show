@@ -1,6 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
+import Link from "next/link";
 import { Contour } from "@/components/ui/Contour";
 import { Container } from "@/components/ui/Container";
 import { RegisterInterestButton } from "@/components/interest/RegisterInterestButton";
@@ -41,15 +42,6 @@ const socials: Array<{ label: string; href: string; icon: ReactNode }> = [
     icon: (
       <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className="h-[1.375rem] w-[1.375rem]">
         <path d="M13.682 10.622 20.24 3h-1.554l-5.693 6.618L8.45 3H3.25l6.876 10.007L3.25 21h1.554l6.012-6.989L15.8 21h5.2l-7.318-10.378Zm-2.126 2.471-.697-.997L4.864 4.17h2.387l4.473 6.4.697.997 5.901 8.44h-2.387l-4.379-6.914Z" />
-      </svg>
-    ),
-  },
-  {
-    label: "LinkedIn",
-    href: siteConfig.social.linkedin,
-    icon: (
-      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden className="h-[1.375rem] w-[1.375rem]">
-        <path d="M6.94 8.5H4.05V20h2.89V8.5ZM5.5 7.17a1.68 1.68 0 1 0 0-3.36 1.68 1.68 0 0 0 0 3.36ZM20 20h-2.88v-5.6c0-1.33-.02-3.05-1.86-3.05-1.86 0-2.15 1.45-2.15 2.95V20H10.2V8.5h2.77v1.57h.04c.39-.73 1.33-1.5 2.74-1.5 2.93 0 3.47 1.93 3.47 4.44V20Z" />
       </svg>
     ),
   },
@@ -122,8 +114,14 @@ export function Footer() {
               © {new Date().getFullYear()} Dublin Golf Show. All rights reserved.
             </p>
             <p className="mt-1 text-[14px] font-light text-white/35">
-              JKLM Media DAC, Dublin, Ireland.
+              {siteConfig.organiser.legalName}
             </p>
+            <Link
+              href={siteConfig.organiser.path}
+              className="mt-3 inline-block font-display text-[12px] font-semibold uppercase tracking-[0.12em] text-white/28 underline-offset-4 transition-colors hover:text-white/55 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+            >
+              About the Event Organiser
+            </Link>
           </div>
         </div>
       </Container>

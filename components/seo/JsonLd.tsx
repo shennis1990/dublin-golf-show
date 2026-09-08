@@ -17,7 +17,6 @@ export function JsonLd() {
       siteConfig.social.instagram,
       siteConfig.social.facebook,
       siteConfig.social.x,
-      siteConfig.social.linkedin,
     ],
   };
 

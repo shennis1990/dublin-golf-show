@@ -44,6 +44,11 @@ export const siteConfig = {
     linkedin: "https://www.linkedin.com/company/dublingolfshow",
     facebook: "https://www.facebook.com/dublingolfshow",
   },
+  organiser: {
+    name: "JKLM Media",
+    path: "/about-the-event-organiser",
+    legalName: "JKLM Media DAC, Dublin, Ireland.",
+  },
 } as const;
 
 export type SiteConfig = typeof siteConfig;
