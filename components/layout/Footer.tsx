@@ -1,9 +1,9 @@
 "use client";
 
 import type { ReactNode } from "react";
-import Link from "next/link";
 import { Contour } from "@/components/ui/Contour";
 import { Container } from "@/components/ui/Container";
+import { Button } from "@/components/ui/Button";
 import { RegisterInterestButton } from "@/components/interest/RegisterInterestButton";
 import { siteConfig } from "@/lib/site";
 
@@ -116,12 +116,14 @@ export function Footer() {
             <p className="mt-1 text-[14px] font-light text-white/35">
               {siteConfig.organiser.legalName}
             </p>
-            <Link
+            <Button
               href={siteConfig.organiser.path}
-              className="mt-3 inline-block font-display text-[12px] font-semibold uppercase tracking-[0.12em] text-white/28 underline-offset-4 transition-colors hover:text-white/55 hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+              variant="ghost"
+              size="sm"
+              className="mt-4"
             >
               About the Event Organiser
-            </Link>
+            </Button>
           </div>
         </div>
       </Container>
