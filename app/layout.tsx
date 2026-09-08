@@ -71,6 +71,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+    site: "@dublingolfshow",
+    creator: "@dublingolfshow",
     title: siteConfig.title,
     description: siteConfig.ogDescription,
     images: ["/og.jpg"],
