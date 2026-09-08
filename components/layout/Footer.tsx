@@ -113,13 +113,18 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col gap-3 border-t border-line pt-8 sm:mt-20 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-16 flex flex-col gap-3 border-t border-line pt-8 sm:mt-20 sm:flex-row sm:items-start sm:justify-between">
           <p className="font-display text-[14px] font-semibold uppercase tracking-[0.1em] text-white/50">
             Dublin Golf Show 2027
           </p>
-          <p className="text-[14px] font-light text-white/35">
-            © {new Date().getFullYear()} Dublin Golf Show. All rights reserved.
-          </p>
+          <div className="sm:text-right">
+            <p className="text-[14px] font-light text-white/35">
+              © {new Date().getFullYear()} Dublin Golf Show. All rights reserved.
+            </p>
+            <p className="mt-1 text-[14px] font-light text-white/35">
+              JKLM Media DAC, Dublin, Ireland.
+            </p>
+          </div>
         </div>
       </Container>
     </footer>
