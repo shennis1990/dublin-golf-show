@@ -85,15 +85,26 @@ export function Navbar() {
           aria-label={open ? "Close menu" : "Open menu"}
           onClick={() => setOpen((v) => !v)}
         >
-          <span className="flex flex-col gap-1.5" aria-hidden>
+          <span className="relative block h-[14px] w-4" aria-hidden>
             <span
-              className={`block h-px w-4 bg-white transition-transform duration-300 ${open ? "translate-y-[3.5px] rotate-45" : ""}`}
+              className="absolute left-0 top-0 block h-px w-4 origin-center bg-white transition-transform duration-300 ease-out"
+              style={{
+                transform: open
+                  ? "translateY(6.5px) rotate(45deg)"
+                  : "translateY(0) rotate(0deg)",
+              }}
             />
             <span
-              className={`block h-px w-4 bg-white transition-opacity duration-300 ${open ? "opacity-0" : ""}`}
+              className="absolute left-0 top-[6.5px] block h-px w-4 bg-white transition-opacity duration-300 ease-out"
+              style={{ opacity: open ? 0 : 1 }}
             />
             <span
-              className={`block h-px w-4 bg-white transition-transform duration-300 ${open ? "-translate-y-[3.5px] -rotate-45" : ""}`}
+              className="absolute left-0 top-[13px] block h-px w-4 origin-center bg-white transition-transform duration-300 ease-out"
+              style={{
+                transform: open
+                  ? "translateY(-6.5px) rotate(-45deg)"
+                  : "translateY(0) rotate(0deg)",
+              }}
             />
           </span>
         </button>

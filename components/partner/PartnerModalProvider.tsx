@@ -81,8 +81,10 @@ function PartnerModal({
     setWebsite("");
     setOpenedAt(Date.now());
 
-    const previousOverflow = document.body.style.overflow;
+    const previousBodyOverflow = document.body.style.overflow;
+    const previousHtmlOverflow = document.documentElement.style.overflow;
     document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
     const t = window.setTimeout(() => firstNameRef.current?.focus(), 40);
 
     const onKeyDown = (event: KeyboardEvent) => {
@@ -91,7 +93,8 @@ function PartnerModal({
     window.addEventListener("keydown", onKeyDown);
 
     return () => {
-      document.body.style.overflow = previousOverflow;
+      document.body.style.overflow = previousBodyOverflow;
+      document.documentElement.style.overflow = previousHtmlOverflow;
       window.clearTimeout(t);
       window.removeEventListener("keydown", onKeyDown);
     };
@@ -148,7 +151,7 @@ function PartnerModal({
 
   return (
     <div
-      className="fixed inset-0 z-[100] flex items-center justify-center px-6 py-10"
+      className="fixed inset-0 z-[100] flex items-center justify-center overflow-hidden px-4 pt-[max(1rem,env(safe-area-inset-top))] pb-[max(1rem,env(safe-area-inset-bottom))] md:px-6 md:py-10"
       role="presentation"
     >
       <button
@@ -163,12 +166,12 @@ function PartnerModal({
         aria-modal="true"
         aria-labelledby={titleId}
         aria-describedby={descId}
-        className="relative z-10 max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-2xl border border-white/12 bg-[#0c1522] p-7 shadow-[0_30px_80px_rgba(0,0,0,0.45)] md:p-9"
+        className="relative z-10 flex min-h-0 w-full max-w-lg flex-col overflow-hidden rounded-2xl border border-white/12 bg-[#0c1522] p-7 shadow-[0_30px_80px_rgba(0,0,0,0.45)] max-h-[calc(100dvh-2rem-env(safe-area-inset-top)-env(safe-area-inset-bottom))] md:max-h-[min(90vh,calc(100dvh-5rem))] md:p-9"
       >
         <button
           type="button"
           onClick={onClose}
-          className="absolute right-4 top-4 inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/12 text-white/55 transition-colors hover:border-white/25 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+          className="absolute right-4 top-4 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/12 text-white/55 transition-colors hover:border-white/25 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
           aria-label="Close"
         >
           <span aria-hidden className="text-lg leading-none">
@@ -177,46 +180,50 @@ function PartnerModal({
         </button>
 
         {status === "success" ? (
-          <div className="pr-6">
-            <p className="font-display text-[14px] font-semibold uppercase tracking-[0.12em] text-accent">
-              Enquiry received
-            </p>
-            <h2
-              id={titleId}
-              className="mt-4 font-display text-3xl font-bold uppercase leading-none tracking-tight text-white"
-            >
-              We&apos;ll be in touch
-            </h2>
-            <p
-              id={descId}
-              className="mt-5 text-base font-light leading-[1.9] text-white/70"
-            >
-              {SUCCESS_MESSAGE}
-            </p>
-            <Button type="button" className="mt-8 w-full" onClick={onClose}>
+          <div className="flex min-h-0 flex-col overflow-hidden pr-6">
+            <div className="min-h-0 overflow-y-auto overscroll-contain">
+              <p className="font-display text-[14px] font-semibold uppercase tracking-[0.12em] text-accent">
+                Enquiry received
+              </p>
+              <h2
+                id={titleId}
+                className="mt-4 font-display text-3xl font-bold uppercase leading-none tracking-tight text-white"
+              >
+                We&apos;ll be in touch
+              </h2>
+              <p
+                id={descId}
+                className="mt-5 text-base font-light leading-[1.9] text-white/70"
+              >
+                {SUCCESS_MESSAGE}
+              </p>
+            </div>
+            <Button type="button" className="mt-8 w-full shrink-0" onClick={onClose}>
               Close
             </Button>
           </div>
         ) : (
-          <div className="pr-4">
-            <p className="font-display text-[14px] font-semibold uppercase tracking-[0.12em] text-accent">
-              Exhibit at The Dublin Golf Show
-            </p>
-            <h2
-              id={titleId}
-              className="mt-4 font-display text-3xl font-bold uppercase leading-none tracking-tight text-white"
-            >
-              Showcase your brand
-            </h2>
-            <p
-              id={descId}
-              className="mt-4 text-base font-light leading-[1.9] text-white/65"
-            >
-              Tell us about your brand and we&apos;ll follow up on sponsorship, exhibitor
-              and media opportunities for Dublin Golf Show 2027.
-            </p>
+          <div className="flex min-h-0 flex-col overflow-hidden pr-4">
+            <div className="shrink-0 pr-8">
+              <p className="font-display text-[14px] font-semibold uppercase tracking-[0.12em] text-accent">
+                Exhibit at The Dublin Golf Show
+              </p>
+              <h2
+                id={titleId}
+                className="mt-4 font-display text-3xl font-bold uppercase leading-none tracking-tight text-white"
+              >
+                Showcase your brand
+              </h2>
+              <p
+                id={descId}
+                className="mt-4 text-base font-light leading-[1.9] text-white/65"
+              >
+                Tell us about your brand and we&apos;ll follow up on sponsorship, exhibitor
+                and media opportunities for Dublin Golf Show 2027.
+              </p>
+            </div>
 
-            <form onSubmit={onSubmit} className="mt-8 space-y-4" noValidate>
+            <form onSubmit={onSubmit} className="mt-8 flex min-h-0 flex-col overflow-hidden" noValidate>
               <div className="absolute -left-[9999px] top-auto h-px w-px overflow-hidden">
                 <label htmlFor="partner-website">Website</label>
                 <input
@@ -229,106 +236,110 @@ function PartnerModal({
                 />
               </div>
 
-              <div className="grid gap-4 sm:grid-cols-2">
+              <div className="min-h-0 space-y-4 overflow-y-auto overscroll-contain">
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div>
+                    <label htmlFor="partner-first-name" className={labelClass}>
+                      First name
+                    </label>
+                    <input
+                      ref={firstNameRef}
+                      id="partner-first-name"
+                      name="firstName"
+                      type="text"
+                      required
+                      autoComplete="given-name"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                      className={inputClass}
+                      placeholder="First name"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="partner-last-name" className={labelClass}>
+                      Last name
+                    </label>
+                    <input
+                      id="partner-last-name"
+                      name="lastName"
+                      type="text"
+                      required
+                      autoComplete="family-name"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                      className={inputClass}
+                      placeholder="Last name"
+                    />
+                  </div>
+                </div>
+
                 <div>
-                  <label htmlFor="partner-first-name" className={labelClass}>
-                    First name
+                  <label htmlFor="partner-company" className={labelClass}>
+                    Company
                   </label>
                   <input
-                    ref={firstNameRef}
-                    id="partner-first-name"
-                    name="firstName"
+                    id="partner-company"
+                    name="companyName"
                     type="text"
                     required
-                    autoComplete="given-name"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
+                    autoComplete="organization"
+                    value={companyName}
+                    onChange={(e) => setCompanyName(e.target.value)}
                     className={inputClass}
-                    placeholder="First name"
+                    placeholder="Company name"
                   />
                 </div>
+
                 <div>
-                  <label htmlFor="partner-last-name" className={labelClass}>
-                    Last name
+                  <label htmlFor="partner-email" className={labelClass}>
+                    Email
                   </label>
                   <input
-                    id="partner-last-name"
-                    name="lastName"
-                    type="text"
+                    id="partner-email"
+                    name="email"
+                    type="email"
                     required
-                    autoComplete="family-name"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
+                    autoComplete="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className={inputClass}
-                    placeholder="Last name"
+                    placeholder="you@company.com"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="partner-phone" className={labelClass}>
+                    Phone
+                  </label>
+                  <input
+                    id="partner-phone"
+                    name="phone"
+                    type="tel"
+                    required
+                    autoComplete="tel"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    className={inputClass}
+                    placeholder="+353…"
                   />
                 </div>
               </div>
 
-              <div>
-                <label htmlFor="partner-company" className={labelClass}>
-                  Company
-                </label>
-                <input
-                  id="partner-company"
-                  name="companyName"
-                  type="text"
-                  required
-                  autoComplete="organization"
-                  value={companyName}
-                  onChange={(e) => setCompanyName(e.target.value)}
-                  className={inputClass}
-                  placeholder="Company name"
-                />
+              <div className="shrink-0 pt-4">
+                {status === "error" ? (
+                  <p className="mb-4 text-sm text-red-300" role="alert">
+                    {error}
+                  </p>
+                ) : null}
+
+                <Button
+                  type="submit"
+                  className="w-full"
+                  disabled={status === "loading"}
+                >
+                  {status === "loading" ? "Sending…" : "Submit"}
+                </Button>
               </div>
-
-              <div>
-                <label htmlFor="partner-email" className={labelClass}>
-                  Email
-                </label>
-                <input
-                  id="partner-email"
-                  name="email"
-                  type="email"
-                  required
-                  autoComplete="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className={inputClass}
-                  placeholder="you@company.com"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="partner-phone" className={labelClass}>
-                  Phone
-                </label>
-                <input
-                  id="partner-phone"
-                  name="phone"
-                  type="tel"
-                  required
-                  autoComplete="tel"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  className={inputClass}
-                  placeholder="+353…"
-                />
-              </div>
-
-              {status === "error" ? (
-                <p className="text-sm text-red-300" role="alert">
-                  {error}
-                </p>
-              ) : null}
-
-              <Button
-                type="submit"
-                className="w-full"
-                disabled={status === "loading"}
-              >
-                {status === "loading" ? "Sending…" : "Submit"}
-              </Button>
             </form>
           </div>
         )}

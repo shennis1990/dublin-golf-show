@@ -41,7 +41,7 @@ export default function AboutTheEventOrganiserPage() {
 
       <header className="relative z-10 border-b border-white/10">
         <nav
-          className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 md:h-[5.25rem] md:px-10 lg:px-14"
+          className="mx-auto flex h-20 max-w-7xl items-center px-6 md:h-[5.25rem] md:px-10 lg:px-14"
           aria-label="Organiser page"
         >
           <Link
@@ -53,15 +53,12 @@ export default function AboutTheEventOrganiserPage() {
             </span>
             <span className="mt-1.5 block h-px w-full bg-gradient-to-r from-accent via-white/70 to-transparent transition-opacity duration-500 group-hover:opacity-80" />
           </Link>
-          <BackButton className="hidden sm:inline-flex" />
         </nav>
       </header>
 
       <main id="main-content" className="relative">
-        <Container className="relative section-y">
-          <BackButton className="sm:hidden" />
-
-          <p className="eyebrow mt-10 sm:mt-0">The Event Organiser</p>
+        <Container className="relative pt-16 pb-[var(--section-y)] md:py-[var(--section-y-md)] lg:py-[var(--section-y-lg)]">
+          <p className="eyebrow">The Event Organiser</p>
           <h1 className="heading-section mt-4 max-w-3xl md:mt-5">About JKLM Media</h1>
 
           <div className="mt-8 max-w-3xl space-y-6 md:mt-10 md:space-y-7">
