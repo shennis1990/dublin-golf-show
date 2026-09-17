@@ -3,8 +3,9 @@ export const siteConfig = {
   shortName: "DGS",
   title: "Dublin Golf Show 2027 | Ireland's Festival of Golf",
   description:
-    "Discover Ireland's biggest celebration of golf. Experience leading golf brands, destinations, technology, coaching, travel and live experiences at RDS Simmonscourt in June 2027.",
-  ogDescription: "Ireland's biggest celebration of golf.",
+    "Dublin Golf Show 2027 — Ireland's Festival of Golf. Experience the latest golf equipment, technology, travel, apparel and more at RDS Simmonscourt, 19–20 June 2027.",
+  ogDescription:
+    "Dublin Golf Show 2027 — Ireland's Festival of Golf. Experience the latest golf equipment, technology, travel, apparel and more at RDS Simmonscourt, 19–20 June 2027.",
   keywords: [
     "Dublin Golf Show",
     "Golf Show Ireland",

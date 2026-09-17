@@ -1,5 +1,5 @@
 import sharp from "sharp";
-import { copyFileSync, mkdirSync, unlinkSync } from "fs";
+import { copyFileSync, mkdirSync, unlinkSync, writeFileSync } from "fs";
 import { join } from "path";
 
 const root = process.cwd();
@@ -86,19 +86,79 @@ async function markIcon(size, file) {
   console.log("wrote", file);
 }
 
-// Tiny / tab favicons — golf ball mark
+async function stackedLogoPng(size, paddingRatio = 0.06) {
+  const pad = Math.round(size * paddingRatio);
+  const inner = Math.max(1, size - pad * 2);
+  const resized = await sharp(logoSquare)
+    .resize(inner, inner, { fit: "contain", background: bg })
+    .png()
+    .toBuffer();
+
+  return sharp({
+    create: { width: size, height: size, channels: 4, background: bg },
+  })
+    .composite([{ input: resized, gravity: "centre" }])
+    .png()
+    .toBuffer();
+}
+
+function pngsToIco(images) {
+  const count = images.length;
+  const headerSize = 6 + count * 16;
+  let offset = headerSize;
+  const entries = images.map((img) => {
+    const entry = { ...img, offset, bytes: img.png.length };
+    offset += img.png.length;
+    return entry;
+  });
+
+  const buf = Buffer.alloc(offset);
+  buf.writeUInt16LE(0, 0);
+  buf.writeUInt16LE(1, 2);
+  buf.writeUInt16LE(count, 4);
+
+  let entryOffset = 6;
+  for (const entry of entries) {
+    buf[entryOffset] = entry.width >= 256 ? 0 : entry.width;
+    buf[entryOffset + 1] = entry.height >= 256 ? 0 : entry.height;
+    buf[entryOffset + 2] = 0;
+    buf[entryOffset + 3] = 0;
+    buf.writeUInt16LE(1, entryOffset + 4);
+    buf.writeUInt16LE(32, entryOffset + 6);
+    buf.writeUInt32LE(entry.bytes, entryOffset + 8);
+    buf.writeUInt32LE(entry.offset, entryOffset + 12);
+    entryOffset += 16;
+  }
+
+  for (const entry of entries) {
+    entry.png.copy(buf, entry.offset);
+  }
+
+  return buf;
+}
+
+// Tiny / tab favicons — golf ball mark (legacy files; not used as the primary Google icon)
 await markIcon(16, join(iconsDir, "favicon-16x16-v2.png"));
 await markIcon(32, join(iconsDir, "favicon-32x32-v2.png"));
 await markIcon(48, join(iconsDir, "favicon-48x48-v2.png"));
-await markIcon(32, join(appDir, "icon.png"));
-await markIcon(32, join(publicDir, "favicon.ico"));
 
-// Remove unversioned favicons so stale CDN/browser caches cannot keep serving them
-for (const stale of [
-  "favicon-16x16.png",
-  "favicon-32x32.png",
-  "favicon-48x48.png",
-]) {
+// Google Search / browser favicon — existing stacked square DGS logo
+const favicon48 = await stackedLogoPng(48);
+const faviconIco = pngsToIco([
+  { width: 16, height: 16, png: await stackedLogoPng(16) },
+  { width: 32, height: 32, png: await stackedLogoPng(32) },
+  { width: 48, height: 48, png: favicon48 },
+  { width: 256, height: 256, png: await stackedLogoPng(256) },
+]);
+
+await sharp(favicon48).toFile(join(iconsDir, "favicon-48x48.png"));
+console.log("wrote", join(iconsDir, "favicon-48x48.png"));
+await fullLogoIcon(192, join(appDir, "icon.png"), 0.06);
+writeFileSync(join(publicDir, "favicon.ico"), faviconIco);
+console.log("wrote", join(publicDir, "favicon.ico"));
+
+// Remove unversioned tiny favicons so stale CDN/browser caches cannot keep serving them
+for (const stale of ["favicon-16x16.png", "favicon-32x32.png"]) {
   try {
     unlinkSync(join(iconsDir, stale));
   } catch {

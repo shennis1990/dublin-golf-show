@@ -1,17 +1,23 @@
 import { siteConfig } from "@/lib/site";
 
 export function JsonLd() {
+  const organizationId = `${siteConfig.url}/#organization`;
+  const organizerId = `${siteConfig.url}/#organizer`;
+  const websiteId = `${siteConfig.url}/#website`;
+  const eventId = `${siteConfig.url}/#event-2027`;
+  const logoUrl = `${siteConfig.url}/images/logo-stacked-square.png`;
+
   const organization = {
     "@type": "Organization",
-    "@id": `${siteConfig.url}/#organization`,
+    "@id": organizationId,
     name: siteConfig.name,
     url: siteConfig.url,
     email: siteConfig.email,
     logo: {
       "@type": "ImageObject",
-      url: `${siteConfig.url}/images/logo-stacked-square.png`,
-      width: 1200,
-      height: 1200,
+      url: logoUrl,
+      width: 1080,
+      height: 1080,
     },
     sameAs: [
       siteConfig.social.instagram,
@@ -20,28 +26,37 @@ export function JsonLd() {
     ],
   };
 
+  const organizer = {
+    "@type": "Organization",
+    "@id": organizerId,
+    name: siteConfig.organiser.name,
+    url: `${siteConfig.url}${siteConfig.organiser.path}`,
+  };
+
   const website = {
     "@type": "WebSite",
-    "@id": `${siteConfig.url}/#website`,
+    "@id": websiteId,
     url: siteConfig.url,
     name: siteConfig.name,
     description: siteConfig.description,
-    publisher: { "@id": `${siteConfig.url}/#organization` },
+    publisher: { "@id": organizationId },
     inLanguage: "en-IE",
   };
 
   const event = {
     "@type": "Event",
-    "@id": `${siteConfig.url}/#event-2027`,
+    "@id": eventId,
     name: siteConfig.event.name,
-    description: siteConfig.description,
+    alternateName: "Ireland's Festival of Golf",
+    description:
+      "Ireland's Festival of Golf. A two-day indoor golf event at RDS Simmonscourt, Dublin.",
     image: [`${siteConfig.url}/og.jpg`],
     startDate: siteConfig.event.startDate,
     endDate: siteConfig.event.endDate,
     eventStatus: "https://schema.org/EventScheduled",
     eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
     url: siteConfig.url,
-    organizer: { "@id": `${siteConfig.url}/#organization` },
+    organizer: { "@id": organizerId },
     location: {
       "@type": "Place",
       name: siteConfig.event.locationName,
@@ -53,25 +68,19 @@ export function JsonLd() {
         addressCountry: siteConfig.event.addressCountry,
       },
     },
-    offers: {
-      "@type": "Offer",
-      url: `${siteConfig.url}/#register`,
-      availability: "https://schema.org/PreOrder",
-      price: "0",
-      priceCurrency: "EUR",
-      validFrom: "2026-01-01",
-    },
   };
 
   const graph = {
     "@context": "https://schema.org",
-    "@graph": [organization, website, event],
+    "@graph": [organization, organizer, website, event],
   };
 
   return (
     <script
       type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }}
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(graph).replace(/</g, "\\u003c"),
+      }}
     />
   );
 }
