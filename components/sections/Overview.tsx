@@ -54,7 +54,7 @@ export function Overview() {
           >
             <div className="grid gap-8 sm:grid-cols-3 sm:gap-6 lg:grid-cols-1 lg:gap-8">
               <AnimatedStat value="25,000+" label="Visitors" />
-              <AnimatedStat value="150+" label="Brands" />
+              <AnimatedStat value="200+" label="Brands" />
               <AnimatedStat value="100,000" unit="sq ft" label="Experience" />
             </div>
 
