@@ -9,7 +9,7 @@ export function Hero() {
   return (
     <section
       id="top"
-      className="relative overflow-hidden bg-[#0A111C] lg:h-[78svh] lg:min-h-[75svh] lg:max-h-[80svh]"
+      className="relative overflow-hidden bg-[#0A111C] lg:min-h-[78svh]"
     >
       {/* Signature hero contours — topographic brand mark, not ambient texture */}
       <div className="pointer-events-none absolute inset-0 z-0" aria-hidden>
