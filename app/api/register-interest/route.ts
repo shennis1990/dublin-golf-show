@@ -4,7 +4,7 @@ import { MARKETING_CONSENT_TEXT } from "@/lib/consent";
 import { getSupabaseAdmin } from "@/lib/supabase/admin";
 
 const NOTIFY_EMAIL =
-  process.env.INTEREST_NOTIFY_EMAIL || "shane.ennis90@gmail.com";
+  process.env.INTEREST_NOTIFY_EMAIL || "shane@dublingolfshow.ie";
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 

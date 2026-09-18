@@ -5,7 +5,7 @@ import { getSupabaseAdmin } from "@/lib/supabase/admin";
 const NOTIFY_EMAIL =
   process.env.PARTNER_NOTIFY_EMAIL ||
   process.env.INTEREST_NOTIFY_EMAIL ||
-  "shane.ennis90@gmail.com";
+  "shane@dublingolfshow.ie";
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const phonePattern = /^[+()\d\s.-]{7,20}$/;

@@ -216,7 +216,7 @@ function InterestModal({
                 id={titleId}
                 className="mt-4 font-display text-3xl font-bold uppercase leading-none tracking-tight text-white"
               >
-                Stay close to the fairway
+                Be part of what&apos;s coming
               </h2>
               <p
                 id={descId}

@@ -53,7 +53,7 @@ export function ChooseExperience() {
               </p>
               <p className="body-copy prose-width mt-5">
                 Whether you&apos;re looking to improve your game, find your next set of clubs,
-                plan your next golf trip or simply enjoy the atmosphere, Dublin Golf Show brings
+                plan your next golf trip or simply enjoy the atmosphere, the Dublin Golf Show brings
                 everything you love about golf together under one roof.
               </p>
               <div className="mt-10 md:mt-12">

@@ -58,6 +58,8 @@ export default function AboutTheEventOrganiserPage() {
 
       <main id="main-content" className="relative">
         <Container className="relative pt-16 pb-[var(--section-y)] md:py-[var(--section-y-md)] lg:py-[var(--section-y-lg)]">
+          <BackButton className="mb-10 md:mb-12" />
+
           <p className="eyebrow">The Event Organiser</p>
           <h1 className="heading-section mt-4 max-w-3xl md:mt-5">About JKLM Media</h1>
 

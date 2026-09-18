@@ -4,12 +4,12 @@ import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
 
 const zones = [
-  "Driving Range",
+  "Equipment & Technology",
+  "Golf Fashion",
+  "Irish & World Golf Pavilions",
+  "Retail Zone",
+  "Driving Range & Short Game",
   "Main Stage",
-  "Equipment",
-  "Travel",
-  "Fashion",
-  "Short Game",
 ];
 
 export function Overview() {
@@ -29,20 +29,20 @@ export function Overview() {
             <Reveal>
               <p className="eyebrow">Event Overview</p>
               <h2 className="heading-section mt-3 max-w-2xl md:mt-4">
-                Two days. Closer to the game you love.
+                Everything golf. All under one roof.
               </h2>
             </Reveal>
 
             <Reveal delay={1} className="mt-6 max-w-2xl space-y-4 md:mt-7 md:space-y-5">
               <p className="body-copy">
-                Walk into RDS Simmonscourt and you&apos;re in the middle of it — clubs to try,
-                places to go, coaches to learn from, and a weekend crowd that feels like your
-                favourite golfing friends, gathered in one place.
+                Dublin Golf Show brings the world of golf together at RDS Simmonscourt — from the
+                latest equipment and technology to golf fashion, Irish and international
+                destinations, live experiences and more.
               </p>
               <p className="body-copy">
-                Come to hit balls. Come to discover something new. Come to hear the names you
-                follow. Or simply come to spend two days immersed in Ireland&apos;s festival of
-                golf.
+                Explore the brands shaping the game. Test the latest clubs and technology.
+                Discover your next golf destination. Meet the people you follow. And experience
+                two days built around everything you love about golf.
               </p>
             </Reveal>
           </div>

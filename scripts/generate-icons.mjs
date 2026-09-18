@@ -86,11 +86,11 @@ async function markIcon(size, file) {
   console.log("wrote", file);
 }
 
-async function stackedLogoPng(size, paddingRatio = 0.06) {
-  const pad = Math.round(size * paddingRatio);
-  const inner = Math.max(1, size - pad * 2);
-  const resized = await sharp(logoSquare)
-    .resize(inner, inner, { fit: "contain", background: bg })
+const faviconMark = join(imagesDir, "logo-dgs-27.png");
+
+async function faviconMarkPng(size) {
+  const resized = await sharp(faviconMark)
+    .resize(size, size, { fit: "contain", background: bg })
     .png()
     .toBuffer();
 
@@ -142,18 +142,19 @@ await markIcon(16, join(iconsDir, "favicon-16x16-v2.png"));
 await markIcon(32, join(iconsDir, "favicon-32x32-v2.png"));
 await markIcon(48, join(iconsDir, "favicon-48x48-v2.png"));
 
-// Google Search / browser favicon — existing stacked square DGS logo
-const favicon48 = await stackedLogoPng(48);
+// Browser / Google Search favicon — compact DGS 27 mark
+const favicon48 = await faviconMarkPng(48);
 const faviconIco = pngsToIco([
-  { width: 16, height: 16, png: await stackedLogoPng(16) },
-  { width: 32, height: 32, png: await stackedLogoPng(32) },
+  { width: 16, height: 16, png: await faviconMarkPng(16) },
+  { width: 32, height: 32, png: await faviconMarkPng(32) },
   { width: 48, height: 48, png: favicon48 },
-  { width: 256, height: 256, png: await stackedLogoPng(256) },
+  { width: 256, height: 256, png: await faviconMarkPng(256) },
 ]);
 
 await sharp(favicon48).toFile(join(iconsDir, "favicon-48x48.png"));
 console.log("wrote", join(iconsDir, "favicon-48x48.png"));
-await fullLogoIcon(192, join(appDir, "icon.png"), 0.06);
+await sharp(await faviconMarkPng(192)).toFile(join(appDir, "icon.png"));
+console.log("wrote", join(appDir, "icon.png"));
 writeFileSync(join(publicDir, "favicon.ico"), faviconIco);
 console.log("wrote", join(publicDir, "favicon.ico"));
 
