@@ -61,7 +61,7 @@ export function Footer() {
               Get Ticket Updates
             </h2>
             <p className="body-copy prose-width mt-5 md:mt-6">
-              Be the first to hear about tickets, new experiences and everything coming to Dublin
+              Be the first to hear about tickets, new experiences and everything coming to the Dublin
               Golf Show 2027.
             </p>
             <div className="mt-8 md:mt-10">

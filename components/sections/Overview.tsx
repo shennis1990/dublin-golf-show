@@ -37,7 +37,7 @@ export function Overview() {
 
             <Reveal delay={1} className="mt-6 max-w-2xl space-y-4 md:mt-7 md:space-y-5">
               <p className="body-copy">
-                Dublin Golf Show brings the world of golf together at RDS Simmonscourt — from the
+                The Dublin Golf Show brings the world of golf together at RDS Simmonscourt — from the
                 latest equipment and technology to golf fashion, Irish and international
                 destinations, live experiences and more.
               </p>

@@ -18,7 +18,7 @@ const paragraphs = [
   "Events have always formed an important part of that story. JKLM Media and its team have worked alongside some of Ireland and the UK's leading event promoters and production companies on major consumer shows and live events. These have included the Nevo EV Show with Drive Inc, Top Gear Live with Brand Events, the Dublin Motorcycle & Scooter Show with SDL Exhibitions, the Irish Times Motorshow with EventPro, Masters of Dirt with Hotwire Media, Modified Motors with AJS Promotions and Toys 4 Big Boys with Mediateam.",
   "Our involvement has extended far beyond simply promoting these events. From sourcing vehicles and attractions to securing exhibitors and selling trade stands, developing floor plans, working with commercial partners and sponsors, creating content and marketing campaigns, and being on site throughout build up, show days and breakdown, the JKLM Media team understands what it takes to bring a large scale consumer event to life.",
   "That breadth of experience is now being brought together for the Dublin Golf Show. For exhibitors, sponsors and partners, it means working with a team that understands both sides of the equation. We know how to build an event that visitors genuinely want to attend, but equally importantly, we understand that brands need to see value from being there.",
-  "Dublin Golf Show is a new event, but the experience behind it is anything but new.",
+  "The Dublin Golf Show is a new event, but the experience behind it is anything but new.",
 ];
 
 function BackButton({ className = "" }: { className?: string }) {

@@ -223,7 +223,7 @@ function InterestModal({
                 className="mt-4 text-base font-light leading-[1.9] text-white/65"
               >
                 Leave your details and we&apos;ll keep you updated on tickets and news for
-                Dublin Golf Show 2027.
+                the Dublin Golf Show 2027.
               </p>
             </div>
 

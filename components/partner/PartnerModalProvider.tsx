@@ -29,7 +29,7 @@ export function usePartnerModal() {
 }
 
 const SUCCESS_MESSAGE =
-  "Thanks for your interest in partnering with Dublin Golf Show 2027. Our team will be in touch shortly.";
+  "Thanks for your interest in partnering with the Dublin Golf Show 2027. Our team will be in touch shortly.";
 
 export function PartnerModalProvider({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
@@ -219,7 +219,7 @@ function PartnerModal({
                 className="mt-4 text-base font-light leading-[1.9] text-white/65"
               >
                 Tell us about your brand and we&apos;ll follow up on sponsorship, exhibitor
-                and media opportunities for Dublin Golf Show 2027.
+                and media opportunities for the Dublin Golf Show 2027.
               </p>
             </div>
 

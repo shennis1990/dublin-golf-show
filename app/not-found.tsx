@@ -26,7 +26,7 @@ export default function NotFound() {
         </h1>
         <p className="body-copy mx-auto mt-7 max-w-lg">
           The page you&apos;re looking for has taken a wrong turn toward the rough.
-          Let&apos;s get you back to {siteConfig.name}.
+          Let&apos;s get you back to the {siteConfig.name}.
         </p>
         <Link
           href="/"
