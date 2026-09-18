@@ -26,7 +26,7 @@ export function ChooseExperience() {
                 className="media-frame group relative aspect-[4/5] w-full overflow-hidden md:aspect-[5/6] lg:min-h-[72vh] lg:aspect-auto"
               >
                 <Image
-                  src="/images/fans-entrance-v2.jpg"
+                  src="/images/fans-entrance-v3.jpg"
                   alt="Crowd entering the Dublin Golf Show 2027 exhibition hall under the branded entrance"
                   fill
                   loading="lazy"
