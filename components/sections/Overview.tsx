@@ -2,6 +2,8 @@ import { AnimatedStat } from "@/components/ui/AnimatedStat";
 import { Contour } from "@/components/ui/Contour";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
+import { RegisterInterestButton } from "@/components/interest/RegisterInterestButton";
+import { PartnerWithUsButton } from "@/components/partner/PartnerWithUsButton";
 
 const zones = [
   "Equipment & Technology",
@@ -44,6 +46,11 @@ export function Overview() {
                 Discover your next golf destination. Meet the people you follow. And experience
                 two days built around everything you love about golf.
               </p>
+            </Reveal>
+
+            <Reveal delay={2} className="cta-row mt-10 max-w-2xl md:mt-12">
+              <RegisterInterestButton>Get Ticket Updates</RegisterInterestButton>
+              <PartnerWithUsButton>Exhibit at The Dublin Golf Show</PartnerWithUsButton>
             </Reveal>
           </div>
 
