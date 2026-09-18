@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { BrandLogo } from "@/components/layout/BrandLogo";
 import { Contour } from "@/components/ui/Contour";
 import { Container } from "@/components/ui/Container";
 import { siteConfig } from "@/lib/site";
@@ -46,19 +47,17 @@ export default function AboutTheEventOrganiserPage() {
         >
           <Link
             href="/"
-            className="group relative rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+            aria-label="Dublin Golf Show 2027"
+            className="relative rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
           >
-            <span className="font-display text-xl font-bold uppercase leading-none tracking-[0.04em] text-white md:text-[1.35rem]">
-              Dublin Golf Show <span className="text-accent">2027</span>
-            </span>
-            <span className="mt-1.5 block h-px w-full bg-gradient-to-r from-accent via-white/70 to-transparent transition-opacity duration-500 group-hover:opacity-80" />
+            <BrandLogo />
           </Link>
         </nav>
       </header>
 
       <main id="main-content" className="relative">
-        <Container className="relative pt-16 pb-[var(--section-y)] md:py-[var(--section-y-md)] lg:py-[var(--section-y-lg)]">
-          <BackButton className="mb-10 md:mb-12" />
+        <Container className="relative pt-8 pb-[var(--section-y)] md:pt-16 md:pb-[var(--section-y-md)] lg:pt-20 lg:pb-[var(--section-y-lg)]">
+          <BackButton className="mb-5 md:mb-6" />
 
           <p className="eyebrow">The Event Organiser</p>
           <h1 className="heading-section mt-4 max-w-3xl md:mt-5">About JKLM Media</h1>

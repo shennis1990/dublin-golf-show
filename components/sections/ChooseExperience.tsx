@@ -26,13 +26,13 @@ export function ChooseExperience() {
                 className="media-frame group relative aspect-[4/5] w-full overflow-hidden md:aspect-[5/6] lg:min-h-[72vh] lg:aspect-auto"
               >
                 <Image
-                  src="/images/fans-entrance.jpg"
-                  alt="Visitors approaching the Dublin Golf Show 2027 entrance into the exhibition hall"
+                  src="/images/fans-entrance-v2.jpg"
+                  alt="Crowd entering the Dublin Golf Show 2027 exhibition hall under the branded entrance"
                   fill
                   loading="lazy"
                   quality={95}
                   sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover object-[center_42%] transition-transform duration-[1.6s] ease-out group-hover:scale-105"
+                  className="object-cover object-top transition-transform duration-[1.6s] ease-out group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0A111C]/35 via-transparent to-transparent" />
               </div>

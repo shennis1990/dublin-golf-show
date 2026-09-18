@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useState } from "react";
+import { BrandLogo } from "@/components/layout/BrandLogo";
 import { Button } from "@/components/ui/Button";
 import { RegisterInterestButton } from "@/components/interest/RegisterInterestButton";
 import { useInterestModal } from "@/components/interest/InterestModalProvider";
@@ -55,12 +56,10 @@ export function Navbar() {
       >
         <a
           href="#top"
-          className="group relative z-10 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+          aria-label="Dublin Golf Show 2027"
+          className="relative z-10 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
         >
-          <span className="font-display text-xl font-bold uppercase leading-none tracking-[0.04em] text-white md:text-[1.35rem]">
-            Dublin Golf Show <span className="text-accent">2027</span>
-          </span>
-          <span className="mt-1.5 block h-px w-full bg-gradient-to-r from-accent via-white/70 to-transparent transition-opacity duration-500 group-hover:opacity-80" />
+          <BrandLogo />
         </a>
 
         <div className="hidden items-center gap-11 lg:flex">

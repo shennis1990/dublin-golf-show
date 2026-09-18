@@ -37,11 +37,15 @@ export function Hero() {
               Ireland&apos;s Festival of Golf
             </p>
 
+            <p className="mt-3 font-display text-[0.95rem] font-medium tracking-[0.04em] text-white/65 sm:text-[1.05rem] md:mt-3.5 md:text-[1.1rem]">
+              19–20 June 2027 · RDS Simmonscourt, Dublin
+            </p>
+
             <div className="mt-4 h-px w-24 bg-gradient-to-r from-accent via-accent/70 to-transparent md:mt-5" />
 
             <p className="body-copy mt-4 max-w-[28rem] text-white/75 md:mt-5">
-              Ireland&apos;s biggest celebration of golf brings together players, brands,
-              destinations and innovators for two unforgettable days at RDS Simmonscourt.
+              The world of golf comes together in Dublin for two days of equipment,
+              technology, fashion, travel, live experiences and more.
             </p>
 
             <div className="cta-row mt-6 md:mt-7">
