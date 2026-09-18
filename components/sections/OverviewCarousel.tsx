@@ -5,6 +5,7 @@ import Image from "next/image";
 
 const SLIDE_MS = 4000;
 
+/** Hero stories: range, pavilions, equipment, technology, main stage, discover, Fairway Club. */
 const slides = [
   {
     src: "/images/stories/range.jpg",
