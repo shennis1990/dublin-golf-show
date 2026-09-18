@@ -7,12 +7,13 @@ const SLIDE_MS = 4000;
 
 const slides = [
   {
-    src: "/images/stories/try.jpg",
-    alt: "A visitor and expert inspecting a golf club together on the show floor",
+    src: "/images/stories/try-v2.jpg",
+    alt: "A visitor and expert inspecting a golf iron together beside a row of clubs on the show floor",
     eyebrow: "19–20 June 2027",
-    title: "Hands on with the latest kit",
-    caption: "Try clubs, fittings and new equipment on the show floor.",
-    objectPosition: "50% 36%",
+    title: "Get hands-on with new equipment",
+    caption:
+      "Try clubs, explore fittings and discover the latest equipment from leading golf brands.",
+    objectPosition: "50% 28%",
     quality: 95,
     priority: true,
   },
