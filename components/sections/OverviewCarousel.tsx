@@ -7,6 +7,26 @@ const SLIDE_MS = 4000;
 
 const slides = [
   {
+    src: "/images/stories/range.jpg",
+    alt: "A short-game masterclass around a bunker with a crowd watching at the Dublin Golf Show",
+    eyebrow: "19–20 June 2027",
+    title: "Step onto the range.",
+    caption: "Drive it. Chip it. Test it.",
+    objectPosition: "50% 28%",
+    quality: 95,
+    priority: true,
+  },
+  {
+    src: "/images/stories/pavilions.jpg",
+    alt: "Visitors exploring the Irish Golf Pavilion and World of Golf Pavilion on the Dublin Golf Show floor",
+    eyebrow: "19–20 June 2027",
+    title: "Ireland & World Golf Pavilions",
+    caption: "From Ireland to the world.",
+    objectPosition: "50% 22%",
+    quality: 95,
+    priority: false,
+  },
+  {
     src: "/images/stories/try-v2.jpg",
     alt: "A visitor and expert inspecting a golf iron together beside a row of clubs on the show floor",
     eyebrow: "19–20 June 2027",
@@ -15,7 +35,7 @@ const slides = [
       "Try clubs, explore fittings and discover the latest equipment from leading golf brands.",
     objectPosition: "50% 28%",
     quality: 95,
-    priority: true,
+    priority: false,
   },
   {
     src: "/images/stories/play.jpg",
@@ -56,16 +76,6 @@ const slides = [
     title: "The Fairway Club",
     caption: "Coffee. Conversations. Connections.",
     objectPosition: "50% 45%",
-    quality: 95,
-    priority: false,
-  },
-  {
-    src: "/images/stories/pavilions.jpg",
-    alt: "Visitors exploring the Irish Golf Pavilion and World of Golf Pavilion on the Dublin Golf Show floor",
-    eyebrow: "19–20 June 2027",
-    title: "Ireland & World Golf Pavilions",
-    caption: "From Ireland to the world.",
-    objectPosition: "50% 22%",
     quality: 95,
     priority: false,
   },
