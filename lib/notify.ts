@@ -15,3 +15,21 @@ export function notifyRecipients(primary: string): string[] {
 
   return recipients;
 }
+
+export async function deliverNotifyEmails(
+  primary: string,
+  send: (to: string[]) => Promise<{ error: unknown }>,
+): Promise<boolean> {
+  let delivered = false;
+
+  for (const to of notifyRecipients(primary)) {
+    const { error } = await send([to]);
+    if (error) {
+      console.error("Resend error:", to, error);
+      continue;
+    }
+    delivered = true;
+  }
+
+  return delivered;
+}

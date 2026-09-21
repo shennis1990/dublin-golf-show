@@ -1,7 +1,7 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
 import { MARKETING_CONSENT_TEXT } from "@/lib/consent";
-import { notifyRecipients } from "@/lib/notify";
+import { deliverNotifyEmails } from "@/lib/notify";
 import { getSupabaseAdmin } from "@/lib/supabase/admin";
 
 const NOTIFY_EMAIL =
@@ -196,23 +196,23 @@ export async function POST(request: Request) {
       process.env.RESEND_FROM_EMAIL ||
       "Dublin Golf Show <onboarding@resend.dev>";
     const fullName = `${firstName} ${lastName}`;
-
-    const { error } = await resend.emails.send({
-      from,
-      to: notifyRecipients(NOTIFY_EMAIL),
-      replyTo: email,
-      subject: `Get Ticket Updates — ${fullName}`,
-      text: [
-        "New Get Ticket Updates submission",
-        "",
-        `First name: ${firstName}`,
-        `Last name: ${lastName}`,
-        `Email: ${email}`,
-        "Marketing consent: Yes — ticketing and marketing contact agreed",
-        "",
-        `Submitted: ${consentAt}`,
-      ].join("\n"),
-      html: `
+    const delivered = await deliverNotifyEmails(NOTIFY_EMAIL, (to) =>
+      resend.emails.send({
+        from,
+        to,
+        replyTo: email,
+        subject: `Get Ticket Updates — ${fullName}`,
+        text: [
+          "New Get Ticket Updates submission",
+          "",
+          `First name: ${firstName}`,
+          `Last name: ${lastName}`,
+          `Email: ${email}`,
+          "Marketing consent: Yes — ticketing and marketing contact agreed",
+          "",
+          `Submitted: ${consentAt}`,
+        ].join("\n"),
+        html: `
         <div style="font-family:Arial,sans-serif;line-height:1.6;color:#0A111C">
           <h2 style="margin:0 0 12px">New Get Ticket Updates submission</h2>
           <p style="margin:0 0 8px"><strong>First name:</strong> ${escapeHtml(firstName)}</p>
@@ -222,10 +222,10 @@ export async function POST(request: Request) {
           <p style="margin:16px 0 0;color:#555;font-size:12px">Submitted: ${consentAt}</p>
         </div>
       `,
-    });
+      }),
+    );
 
-    if (error) {
-      console.error("Resend error:", error);
+    if (!delivered) {
       return NextResponse.json({ ok: true, emailed: false });
     }
 

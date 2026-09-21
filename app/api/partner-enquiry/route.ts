@@ -1,6 +1,6 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
-import { notifyRecipients } from "@/lib/notify";
+import { deliverNotifyEmails } from "@/lib/notify";
 import { getSupabaseAdmin } from "@/lib/supabase/admin";
 
 const NOTIFY_EMAIL =
@@ -198,24 +198,24 @@ export async function POST(request: Request) {
       process.env.RESEND_FROM_EMAIL ||
       "Dublin Golf Show <onboarding@resend.dev>";
     const fullName = `${firstName} ${lastName}`;
-
-    const { error } = await resend.emails.send({
-      from,
-      to: notifyRecipients(NOTIFY_EMAIL),
-      replyTo: email,
-      subject: `Partner Enquiry — ${companyName}`,
-      text: [
-        "New Exhibit at The Dublin Golf Show enquiry",
-        "",
-        `First name: ${firstName}`,
-        `Last name: ${lastName}`,
-        `Company: ${companyName}`,
-        `Email: ${email}`,
-        `Phone: ${phone}`,
-        "",
-        `Submitted: ${submittedAt}`,
-      ].join("\n"),
-      html: `
+    const delivered = await deliverNotifyEmails(NOTIFY_EMAIL, (to) =>
+      resend.emails.send({
+        from,
+        to,
+        replyTo: email,
+        subject: `Partner Enquiry — ${companyName}`,
+        text: [
+          "New Exhibit at The Dublin Golf Show enquiry",
+          "",
+          `First name: ${firstName}`,
+          `Last name: ${lastName}`,
+          `Company: ${companyName}`,
+          `Email: ${email}`,
+          `Phone: ${phone}`,
+          "",
+          `Submitted: ${submittedAt}`,
+        ].join("\n"),
+        html: `
         <div style="font-family:Arial,sans-serif;line-height:1.6;color:#0A111C">
           <h2 style="margin:0 0 12px">New Exhibit at The Dublin Golf Show enquiry</h2>
           <p style="margin:0 0 8px"><strong>First name:</strong> ${escapeHtml(firstName)}</p>
@@ -226,10 +226,10 @@ export async function POST(request: Request) {
           <p style="margin:16px 0 0;color:#555;font-size:12px">Submitted: ${submittedAt}</p>
         </div>
       `,
-    });
+      }),
+    );
 
-    if (error) {
-      console.error("Partner Resend error:", error);
+    if (!delivered) {
       return NextResponse.json({ ok: true, emailed: false });
     }
 
