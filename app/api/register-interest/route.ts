@@ -1,6 +1,7 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
 import { MARKETING_CONSENT_TEXT } from "@/lib/consent";
+import { notifyRecipients } from "@/lib/notify";
 import { getSupabaseAdmin } from "@/lib/supabase/admin";
 
 const NOTIFY_EMAIL =
@@ -198,7 +199,7 @@ export async function POST(request: Request) {
 
     const { error } = await resend.emails.send({
       from,
-      to: [NOTIFY_EMAIL],
+      to: notifyRecipients(NOTIFY_EMAIL),
       replyTo: email,
       subject: `Get Ticket Updates — ${fullName}`,
       text: [
