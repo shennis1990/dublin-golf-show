@@ -8,11 +8,13 @@ import {
   useId,
   useRef,
   useState,
-  type FormEvent,
   type ReactNode,
 } from "react";
 import { Button } from "@/components/ui/Button";
-import { MARKETING_CONSENT_TEXT } from "@/lib/consent";
+import {
+  DEFAULT_INTEREST_SUCCESS,
+  InterestRegistrationForm,
+} from "@/components/interest/InterestRegistrationForm";
 
 type InterestModalContextValue = {
   openInterestModal: () => void;
@@ -30,9 +32,6 @@ export function useInterestModal() {
   }
   return ctx;
 }
-
-const SUCCESS_MESSAGE =
-  "We look forward to welcoming you to the Dublin Golf Show 2027 and will keep you updated with tickets and news soon.";
 
 export function InterestModalProvider({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
@@ -58,36 +57,14 @@ function InterestModal({
   const titleId = useId();
   const descId = useId();
   const dialogRef = useRef<HTMLDivElement>(null);
-  const firstNameRef = useRef<HTMLInputElement>(null);
-
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [consent, setConsent] = useState(false);
-  const [company, setCompany] = useState(""); // honeypot
-  const [openedAt, setOpenedAt] = useState(0);
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
-    "idle",
-  );
-  const [error, setError] = useState("");
 
   useEffect(() => {
     if (!open) return;
-
-    setStatus("idle");
-    setError("");
-    setFirstName("");
-    setLastName("");
-    setEmail("");
-    setConsent(false);
-    setCompany("");
-    setOpenedAt(Date.now());
 
     const previousBodyOverflow = document.body.style.overflow;
     const previousHtmlOverflow = document.documentElement.style.overflow;
     document.body.style.overflow = "hidden";
     document.documentElement.style.overflow = "hidden";
-    const t = window.setTimeout(() => firstNameRef.current?.focus(), 40);
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") onClose();
@@ -97,58 +74,9 @@ function InterestModal({
     return () => {
       document.body.style.overflow = previousBodyOverflow;
       document.documentElement.style.overflow = previousHtmlOverflow;
-      window.clearTimeout(t);
       window.removeEventListener("keydown", onKeyDown);
     };
   }, [open, onClose]);
-
-  async function onSubmit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (status === "loading") return;
-
-    if (!consent) {
-      setStatus("error");
-      setError(
-        "Please confirm you agree to be contacted about tickets and marketing updates.",
-      );
-      return;
-    }
-
-    setStatus("loading");
-    setError("");
-
-    try {
-      const response = await fetch("/api/register-interest", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          firstName,
-          lastName,
-          email,
-          consent,
-          company,
-          openedAt,
-        }),
-      });
-
-      const data = (await response.json().catch(() => ({}))) as {
-        error?: string;
-      };
-
-      if (!response.ok) {
-        throw new Error(data.error || "Something went wrong. Please try again.");
-      }
-
-      setStatus("success");
-    } catch (err) {
-      setStatus("error");
-      setError(
-        err instanceof Error
-          ? err.message
-          : "Something went wrong. Please try again.",
-      );
-    }
-  }
 
   if (!open) return null;
 
@@ -183,164 +111,30 @@ function InterestModal({
           </span>
         </button>
 
-        {status === "success" ? (
-          <div className="flex min-h-0 flex-col overflow-hidden pr-6">
-            <div className="min-h-0 overflow-y-auto overscroll-contain">
-              <p className="font-display text-[14px] font-semibold uppercase tracking-[0.12em] text-accent">
-                Interest registered
-              </p>
-              <h2
-                id={titleId}
-                className="mt-4 font-display text-3xl font-bold uppercase leading-none tracking-tight text-white"
-              >
-                You&apos;re on the list
-              </h2>
-              <p
-                id={descId}
-                className="mt-5 text-base font-light leading-[1.9] text-white/70"
-              >
-                {SUCCESS_MESSAGE}
-              </p>
-            </div>
-            <Button type="button" className="mt-8 w-full shrink-0" onClick={onClose}>
-              Close
-            </Button>
-          </div>
-        ) : (
-          <div className="flex min-h-0 flex-col overflow-hidden pr-4">
-            <div className="shrink-0 pr-8">
-              <p className="font-display text-[14px] font-semibold uppercase tracking-[0.12em] text-accent">
-                Get Ticket Updates
-              </p>
-              <h2
-                id={titleId}
-                className="mt-4 font-display text-3xl font-bold uppercase leading-none tracking-tight text-white"
-              >
-                Be part of what&apos;s coming
-              </h2>
-              <p
-                id={descId}
-                className="mt-4 text-base font-light leading-[1.9] text-white/65"
-              >
-                Leave your details and we&apos;ll keep you updated on tickets and news for
-                the Dublin Golf Show 2027.
-              </p>
-            </div>
-
-            <form onSubmit={onSubmit} className="mt-8 flex min-h-0 flex-col overflow-hidden" noValidate>
-              <div className="absolute -left-[9999px] top-auto h-px w-px overflow-hidden">
-                <label htmlFor="interest-company">Company</label>
-                <input
-                  id="interest-company"
-                  name="company"
-                  tabIndex={-1}
-                  autoComplete="off"
-                  value={company}
-                  onChange={(e) => setCompany(e.target.value)}
-                />
-              </div>
-
-              <div className="min-h-0 space-y-4 overflow-y-auto overscroll-contain">
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div>
-                    <label
-                      htmlFor="interest-first-name"
-                      className="mb-2 block font-display text-[14px] font-semibold uppercase tracking-[0.1em] text-white/45"
-                    >
-                      First name
-                    </label>
-                    <input
-                      ref={firstNameRef}
-                      id="interest-first-name"
-                      name="firstName"
-                      type="text"
-                      required
-                      autoComplete="given-name"
-                      value={firstName}
-                      onChange={(e) => setFirstName(e.target.value)}
-                      className="h-12 w-full rounded-full border border-white/15 bg-white/[0.03] px-5 text-base text-white outline-none transition-colors placeholder:text-white/30 focus:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-                      placeholder="First name"
-                    />
-                  </div>
-
-                  <div>
-                    <label
-                      htmlFor="interest-last-name"
-                      className="mb-2 block font-display text-[14px] font-semibold uppercase tracking-[0.1em] text-white/45"
-                    >
-                      Last name
-                    </label>
-                    <input
-                      id="interest-last-name"
-                      name="lastName"
-                      type="text"
-                      required
-                      autoComplete="family-name"
-                      value={lastName}
-                      onChange={(e) => setLastName(e.target.value)}
-                      className="h-12 w-full rounded-full border border-white/15 bg-white/[0.03] px-5 text-base text-white outline-none transition-colors placeholder:text-white/30 focus:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-                      placeholder="Last name"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="interest-email"
-                    className="mb-2 block font-display text-[14px] font-semibold uppercase tracking-[0.1em] text-white/45"
-                  >
-                    Email
-                  </label>
-                  <input
-                    id="interest-email"
-                    name="email"
-                    type="email"
-                    required
-                    autoComplete="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="h-12 w-full rounded-full border border-white/15 bg-white/[0.03] px-5 text-base text-white outline-none transition-colors placeholder:text-white/30 focus:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-                    placeholder="you@email.com"
-                  />
-                </div>
-
-                <label
-                  htmlFor="interest-consent"
-                  className="flex cursor-pointer items-start gap-3 rounded-xl border border-white/10 bg-white/[0.02] px-4 py-3"
-                >
-                  <input
-                    id="interest-consent"
-                    name="consent"
-                    type="checkbox"
-                    required
-                    checked={consent}
-                    onChange={(e) => setConsent(e.target.checked)}
-                    className="mt-1 h-4 w-4 shrink-0 rounded border-white/30 accent-[#009A6D] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
-                  />
-                  <span className="text-left text-[14px] font-light leading-[1.75] text-white/60">
-                    {MARKETING_CONSENT_TEXT}
-                  </span>
-                </label>
-              </div>
-
-              <div className="shrink-0 pt-4">
-                {status === "error" ? (
-                  <p className="mb-4 text-sm text-red-300" role="alert">
-                    {error}
-                  </p>
-                ) : null}
-
-                <Button
-                  type="submit"
-                  className="w-full"
-                  disabled={status === "loading"}
-                >
-                  {status === "loading" ? "Sending…" : "Submit"}
-                </Button>
-              </div>
-            </form>
-          </div>
-        )}
+        <InterestRegistrationForm
+          idPrefix="interest"
+          source="register-interest"
+          autoFocus
+          titleId={titleId}
+          descId={descId}
+          layout="dialog"
+          heading={{
+            eyebrow: "Get Ticket Updates",
+            title: "Be part of what's coming",
+            description:
+              "Leave your details and we'll keep you updated on tickets and news for the Dublin Golf Show 2027.",
+          }}
+          success={{
+            eyebrow: DEFAULT_INTEREST_SUCCESS.eyebrow,
+            title: DEFAULT_INTEREST_SUCCESS.title,
+            message: DEFAULT_INTEREST_SUCCESS.message,
+            action: (
+              <Button type="button" className="mt-8 w-full shrink-0" onClick={onClose}>
+                Close
+              </Button>
+            ),
+          }}
+        />
       </div>
     </div>
   );

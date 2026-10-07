@@ -53,6 +53,9 @@ export const siteConfig = {
   terms: {
     path: "/terms",
   },
+  irishOpen: {
+    path: "/register-irish-open",
+  },
 } as const;
 
 export type SiteConfig = typeof siteConfig;

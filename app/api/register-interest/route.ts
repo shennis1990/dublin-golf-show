@@ -1,6 +1,7 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
 import { MARKETING_CONSENT_TEXT } from "@/lib/consent";
+import { resolveInterestSource } from "@/lib/interest";
 import { deliverNotifyEmails } from "@/lib/notify";
 import { getSupabaseAdmin } from "@/lib/supabase/admin";
 
@@ -22,6 +23,7 @@ export async function POST(request: Request) {
       company?: string;
       consent?: boolean;
       openedAt?: number;
+      source?: string;
     };
 
     // Honeypot — bots fill hidden fields
@@ -76,6 +78,7 @@ export async function POST(request: Request) {
 
     const consentAt = new Date().toISOString();
     const ipAddress = getClientIp(request);
+    const source = resolveInterestSource(body.source);
 
     let shouldNotify = true;
 
@@ -149,7 +152,7 @@ export async function POST(request: Request) {
           consent_marketing: true,
           consent_text: MARKETING_CONSENT_TEXT,
           consent_at: consentAt,
-          source: "register-interest",
+          source,
           ip_address: ipAddress,
         },
         { onConflict: "email" },
@@ -204,7 +207,9 @@ export async function POST(request: Request) {
         subject: `Get Ticket Updates — ${fullName}`,
         text: [
           "New Get Ticket Updates submission",
-          "",
+          ...(source === "register-irish-open"
+            ? ["Source: Irish Open competition (/register-irish-open)", ""]
+            : [""]),
           `First name: ${firstName}`,
           `Last name: ${lastName}`,
           `Email: ${email}`,
@@ -215,6 +220,11 @@ export async function POST(request: Request) {
         html: `
         <div style="font-family:Arial,sans-serif;line-height:1.6;color:#0A111C">
           <h2 style="margin:0 0 12px">New Get Ticket Updates submission</h2>
+          ${
+            source === "register-irish-open"
+              ? "<p style=\"margin:0 0 8px\"><strong>Source:</strong> Irish Open competition (/register-irish-open)</p>"
+              : ""
+          }
           <p style="margin:0 0 8px"><strong>First name:</strong> ${escapeHtml(firstName)}</p>
           <p style="margin:0 0 8px"><strong>Last name:</strong> ${escapeHtml(lastName)}</p>
           <p style="margin:0 0 8px"><strong>Email:</strong> ${escapeHtml(email)}</p>
