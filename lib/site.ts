@@ -50,6 +50,9 @@ export const siteConfig = {
     path: "/about-the-event-organiser",
     legalName: "JKLM Media DAC, Dublin, Ireland.",
   },
+  terms: {
+    path: "/terms",
+  },
 } as const;
 
 export type SiteConfig = typeof siteConfig;

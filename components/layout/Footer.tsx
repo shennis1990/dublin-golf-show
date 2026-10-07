@@ -116,14 +116,14 @@ export function Footer() {
             <p className="mt-1 text-[14px] font-light text-white/35">
               {siteConfig.organiser.legalName}
             </p>
-            <Button
-              href={siteConfig.organiser.path}
-              variant="ghost"
-              size="sm"
-              className="mt-4"
-            >
-              About the Event Organiser
-            </Button>
+            <div className="mt-4 flex flex-col items-start gap-3 sm:items-end">
+              <Button href={siteConfig.organiser.path} variant="ghost" size="sm">
+                About the Event Organiser
+              </Button>
+              <Button href={siteConfig.terms.path} variant="ghost" size="sm">
+                Competition Terms & Privacy
+              </Button>
+            </div>
           </div>
         </div>
       </Container>
