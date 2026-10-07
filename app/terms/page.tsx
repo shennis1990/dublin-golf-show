@@ -101,7 +101,7 @@ export default function TermsPage() {
               Competition Terms &amp; Conditions and Privacy Notice
             </h1>
             <p className="mt-5 font-display text-[14px] font-semibold uppercase tracking-[0.1em] text-white/45 md:mt-6">
-              Last updated: [DATE]
+              Last updated: 07/10/2026
             </p>
 
             <div className="mt-4 h-px w-24 bg-gradient-to-r from-accent via-accent/70 to-transparent md:mt-5" />
@@ -125,11 +125,7 @@ export default function TermsPage() {
             <div className="mt-12 space-y-0 md:mt-16">
               <Section title="1. Promoter">
                 <p className="body-copy">The Competition is organised by:</p>
-                <p className="body-copy">[FULL LEGAL COMPANY NAME]</p>
-                <p className="body-copy">[REGISTERED ADDRESS]</p>
-                <p className="body-copy">
-                  [COMPANY REGISTRATION NUMBER, IF APPLICABLE]
-                </p>
+                <p className="body-copy">JKLM Media DAC</p>
                 <p className="body-copy">
                   referred to in these Terms as “Dublin Golf Show”, “we”, “us” or
                   “the Promoter”.
@@ -137,16 +133,20 @@ export default function TermsPage() {
                 <p className="body-copy">
                   For questions regarding the Competition, please contact:
                 </p>
-                <p className="body-copy">[COMPETITION EMAIL ADDRESS]</p>
+                <p className="body-copy">
+                  <a href={`mailto:${siteConfig.email}`} className={textLinkClass}>
+                    hello@dublingolfshow.ie
+                  </a>
+                </p>
               </Section>
 
               <Section title="2. Competition period">
                 <p className="body-copy">
-                  The Competition opens at [TIME] on [DATE] 2026.
+                  The Competition opens at 19:30 on 07/10/2026.
                 </p>
                 <p className="body-copy">
                   The Competition will close when 1,000 eligible entries have been
-                  received, or at 23:59 on [CLOSING DATE], whichever occurs first.
+                  received, or at 23:59 on 31/12/2026, whichever occurs first.
                 </p>
                 <p className="body-copy">
                   The Promoter may close the Competition earlier if the first
@@ -160,9 +160,8 @@ export default function TermsPage() {
 
               <Section title="3. Eligibility">
                 <p className="body-copy">
-                  The Competition is open to residents of [Republic of Ireland /
-                  Ireland and Northern Ireland – CONFIRM] aged 18 years or over at
-                  the time of entry.
+                  The Competition is open to residents of Republic of Ireland and
+                  Northern Ireland aged 18 years or over at the time of entry.
                 </p>
                 <p className="body-copy">
                   Employees of the Promoter, its associated companies, agencies,
@@ -182,7 +181,12 @@ export default function TermsPage() {
                   <li>
                     Register your interest for Dublin Golf Show 2027 through the
                     official registration form at{" "}
-                    <Link href="/" className={textLinkClass}>www.dublingolfshow.ie</Link>; and
+                    <Link
+                      href={siteConfig.irishOpen.path}
+                      className={textLinkClass}
+                    >
+                      www.dublingolfshow.ie/register-irish-open
+                    </Link>; and
                   </li>
                   <li>
                     Follow{" "}
@@ -231,10 +235,6 @@ export default function TermsPage() {
                   Two tickets to the 2027 Irish Open at The K Club, Ireland.
                 </p>
                 <p className="body-copy">
-                  [CONFIRM EXACT TICKET TYPE / DAYS / SEATING OR ACCESS BEFORE
-                  PUBLISHING.]
-                </p>
-                <p className="body-copy">
                   The prize is subject to the terms, conditions and restrictions
                   imposed by the relevant ticket issuer and/or event organiser.
                 </p>
@@ -265,8 +265,7 @@ export default function TermsPage() {
                   person appointed by the Promoter.
                 </p>
                 <p className="body-copy">
-                  The draw will take place within [7 DAYS] of the Competition
-                  closing.
+                  The draw will take place on 01/03/2027.
                 </p>
                 <p className="body-copy">
                   The Promoter&apos;s decision regarding eligibility and the
@@ -285,7 +284,7 @@ export default function TermsPage() {
                   facilitate delivery of the prize.
                 </p>
                 <p className="body-copy">
-                  If the winner does not respond within [7 DAYS] of the
+                  If the winner does not respond within 7 Days of the
                   Promoter&apos;s first attempt to contact them, or cannot
                   reasonably demonstrate that they meet the eligibility
                   requirements, the Promoter reserves the right to select an
@@ -346,6 +345,28 @@ export default function TermsPage() {
                 <p className="body-copy">
                   Nothing in these Terms &amp; Conditions limits any rights or
                   remedies that cannot lawfully be excluded.
+                </p>
+                <h3 className="font-display text-[1.15rem] font-bold tracking-tight text-white md:text-[1.25rem]">
+                  Cancellation of Dublin Golf Show
+                </h3>
+                <p className="body-copy">
+                  The Competition is being run in connection with Dublin Golf Show
+                  2027, currently scheduled to take place on 19–20 June 2027 at RDS
+                  Simmonscourt, Dublin.
+                </p>
+                <p className="body-copy">
+                  If Dublin Golf Show 2027 is cancelled, postponed indefinitely, or
+                  otherwise does not proceed for any reason, the Competition will
+                  automatically become void and no prize will be awarded.
+                </p>
+                <p className="body-copy">
+                  In such circumstances, the Promoter will have no obligation to
+                  provide an alternative prize or compensation to entrants.
+                </p>
+                <p className="body-copy">
+                  The Promoter will communicate any such cancellation through the
+                  Dublin Golf Show website and, where appropriate, its official
+                  social media channels.
                 </p>
               </Section>
 
@@ -470,9 +491,11 @@ export default function TermsPage() {
                   To exercise your rights or ask a question about your personal
                   data, contact:
                 </p>
-                <p className="body-copy">[PRIVACY EMAIL ADDRESS]</p>
-                <p className="body-copy">[DATA CONTROLLER / COMPANY NAME]</p>
-                <p className="body-copy">[POSTAL ADDRESS]</p>
+                <p className="body-copy">
+                  <a href={`mailto:${siteConfig.email}`} className={textLinkClass}>
+                    hello@dublingolfshow.ie
+                  </a>
+                </p>
                 <p className="body-copy">
                   You also have the right to lodge a complaint with the Irish Data
                   Protection Commission.
