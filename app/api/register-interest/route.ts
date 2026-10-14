@@ -2,11 +2,10 @@ import { Resend } from "resend";
 import { NextResponse } from "next/server";
 import { MARKETING_CONSENT_TEXT } from "@/lib/consent";
 import { resolveInterestSource } from "@/lib/interest";
-import { deliverNotifyEmails } from "@/lib/notify";
+import { deliverNotifyEmails, SHOW_NOTIFY_EMAIL } from "@/lib/notify";
 import { getSupabaseAdmin } from "@/lib/supabase/admin";
 
-const NOTIFY_EMAIL =
-  process.env.INTEREST_NOTIFY_EMAIL || "shane.ennis90@gmail.com";
+const NOTIFY_EMAIL = process.env.INTEREST_NOTIFY_EMAIL || SHOW_NOTIFY_EMAIL;
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 

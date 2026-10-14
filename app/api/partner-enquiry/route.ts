@@ -1,12 +1,12 @@
 import { Resend } from "resend";
 import { NextResponse } from "next/server";
-import { deliverNotifyEmails } from "@/lib/notify";
+import { deliverNotifyEmails, SHOW_NOTIFY_EMAIL } from "@/lib/notify";
 import { getSupabaseAdmin } from "@/lib/supabase/admin";
 
 const NOTIFY_EMAIL =
   process.env.PARTNER_NOTIFY_EMAIL ||
   process.env.INTEREST_NOTIFY_EMAIL ||
-  "shane.ennis90@gmail.com";
+  SHOW_NOTIFY_EMAIL;
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const phonePattern = /^[+()\d\s.-]{7,20}$/;

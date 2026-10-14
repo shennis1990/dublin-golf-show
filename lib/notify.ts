@@ -1,4 +1,5 @@
-const SHOW_NOTIFY_EMAIL = "shane@dublingolfshow.ie";
+export const SHOW_NOTIFY_EMAIL = "shane@dublingolfshow.ie";
+const RETIRED_NOTIFY_EMAIL = "shane.ennis90@gmail.com";
 
 export function notifyRecipients(primary: string): string[] {
   const seen = new Set<string>();
@@ -8,9 +9,14 @@ export function notifyRecipients(primary: string): string[] {
     const trimmed = email.trim();
     if (!trimmed) continue;
     const key = trimmed.toLowerCase();
+    if (key === RETIRED_NOTIFY_EMAIL) continue;
     if (seen.has(key)) continue;
     seen.add(key);
     recipients.push(trimmed);
+  }
+
+  if (recipients.length === 0) {
+    recipients.push(SHOW_NOTIFY_EMAIL);
   }
 
   return recipients;
