@@ -40,18 +40,12 @@ export function PartnerModalProvider({ children }: { children: ReactNode }) {
   return (
     <PartnerModalContext.Provider value={{ openPartnerModal, closePartnerModal }}>
       {children}
-      <PartnerModal open={open} onClose={closePartnerModal} />
+      {open ? <PartnerModal onClose={closePartnerModal} /> : null}
     </PartnerModalContext.Provider>
   );
 }
 
-function PartnerModal({
-  open,
-  onClose,
-}: {
-  open: boolean;
-  onClose: () => void;
-}) {
+function PartnerModal({ onClose }: { onClose: () => void }) {
   const titleId = useId();
   const descId = useId();
   const firstNameRef = useRef<HTMLInputElement>(null);
@@ -62,25 +56,13 @@ function PartnerModal({
   const [companyName, setCompanyName] = useState("");
   const [phone, setPhone] = useState("");
   const [website, setWebsite] = useState(""); // honeypot
-  const [openedAt, setOpenedAt] = useState(0);
+  const [openedAt] = useState(() => Date.now());
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">(
     "idle",
   );
   const [error, setError] = useState("");
 
   useEffect(() => {
-    if (!open) return;
-
-    setStatus("idle");
-    setError("");
-    setFirstName("");
-    setLastName("");
-    setEmail("");
-    setCompanyName("");
-    setPhone("");
-    setWebsite("");
-    setOpenedAt(Date.now());
-
     const previousBodyOverflow = document.body.style.overflow;
     const previousHtmlOverflow = document.documentElement.style.overflow;
     document.body.style.overflow = "hidden";
@@ -98,7 +80,7 @@ function PartnerModal({
       window.clearTimeout(t);
       window.removeEventListener("keydown", onKeyDown);
     };
-  }, [open, onClose]);
+  }, [onClose]);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -140,8 +122,6 @@ function PartnerModal({
       );
     }
   }
-
-  if (!open) return null;
 
   const inputClass =
     "h-12 w-full rounded-full border border-white/15 bg-white/[0.03] px-5 text-base text-white outline-none transition-colors placeholder:text-white/30 focus:border-accent focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent";

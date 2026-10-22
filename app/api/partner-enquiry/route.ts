@@ -197,7 +197,6 @@ export async function POST(request: Request) {
     const from =
       process.env.RESEND_FROM_EMAIL ||
       "Dublin Golf Show <onboarding@resend.dev>";
-    const fullName = `${firstName} ${lastName}`;
     const delivered = await deliverNotifyEmails(NOTIFY_EMAIL, (to) =>
       resend.emails.send({
         from,
