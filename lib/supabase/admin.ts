@@ -1,5 +1,9 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 
+// Server-only service-role client. Never expose this client or its key to the browser.
+// Enquiry APIs and the public booking-invite flow use it after validating input or
+// a hashed single-use token. Admin booking UI must use lib/supabase/server.ts so RLS applies.
+
 let adminClient: SupabaseClient | null = null;
 
 function normalizeSupabaseUrl(url: string) {
